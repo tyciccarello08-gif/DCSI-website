@@ -25,6 +25,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.dcsisecurity.com"),
   title: "DCSI Inc. – Security & Sound | Tampa, FL",
   description:
     "Residential & commercial security systems, cameras, sound, and smart systems serving Hillsborough County, FL and surrounding areas.",
