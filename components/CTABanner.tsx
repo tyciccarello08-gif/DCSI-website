@@ -21,18 +21,64 @@ export default function CTABanner({
   secondaryCtaHref,
 }: CTABannerProps) {
   return (
-    <section className="relative overflow-hidden bg-accent">
+    <section className="relative overflow-hidden bg-accent dcsi-glow-pulse">
+      {/* Edge glow effects */}
+      <div
+        className="absolute inset-x-0 top-0 h-px pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)",
+        }}
+      />
+      <div
+        className="absolute inset-x-0 bottom-0 h-px pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)",
+        }}
+      />
+
+      {/* Left and right edge glow */}
+      <div
+        className="absolute left-0 inset-y-0 w-px pointer-events-none"
+        style={{ background: "rgba(255,255,255,0.15)" }}
+      />
+      <div
+        className="absolute right-0 inset-y-0 w-px pointer-events-none"
+        style={{ background: "rgba(255,255,255,0.15)" }}
+      />
+
       {/* Subtle diagonal stripe texture */}
       <div
-        className="absolute inset-0 opacity-[0.07]"
+        className="absolute inset-0 opacity-[0.07] pointer-events-none"
         style={{
           backgroundImage:
             "repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(0,0,0,0.5) 20px, rgba(0,0,0,0.5) 21px)",
         }}
       />
+
       {/* Radial highlight */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[600px] h-[400px] bg-white/5 rounded-full blur-3xl -translate-y-1/2" />
+        <div
+          className="absolute rounded-full blur-3xl -translate-y-1/2"
+          style={{
+            top: 0,
+            left: "25%",
+            width: "600px",
+            height: "400px",
+            background: "rgba(255,255,255,0.06)",
+          }}
+        />
+        <div
+          className="absolute rounded-full blur-3xl translate-y-1/2"
+          style={{
+            bottom: 0,
+            right: "20%",
+            width: "400px",
+            height: "300px",
+            background: "rgba(0,0,0,0.15)",
+          }}
+        />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
@@ -53,10 +99,11 @@ export default function CTABanner({
               </p>
             )}
           </div>
+
           <div className="flex flex-wrap gap-4 flex-shrink-0">
             <Link
               href={ctaHref}
-              className="bg-white text-accent hover:bg-gray-100 font-inter font-bold uppercase tracking-wider px-8 py-4 rounded-lg text-sm transition-colors whitespace-nowrap shadow-xl"
+              className="dcsi-btn-pulse bg-white text-accent hover:bg-gray-100 font-inter font-bold uppercase tracking-wider px-8 py-4 rounded-lg text-sm transition-colors whitespace-nowrap shadow-xl"
             >
               {ctaText}
             </Link>
@@ -64,6 +111,7 @@ export default function CTABanner({
               <a
                 href={secondaryCtaHref}
                 className="border-2 border-white/50 hover:border-white text-white font-inter font-semibold uppercase tracking-wider px-8 py-4 rounded-lg text-sm transition-colors whitespace-nowrap"
+                style={{ backdropFilter: "blur(4px)" }}
               >
                 {secondaryCtaText}
               </a>

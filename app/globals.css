@@ -6,12 +6,13 @@
   --bg-primary: #0A0A0A;
   --bg-secondary: #111111;
   --bg-card: #1A1A1A;
-  --accent: #DC2626;
-  --accent-light: #EF4444;
+  --accent: #E3000F;
+  --accent-light: #FF1A2A;
   --text-primary: #F9FAFB;
   --text-secondary: #9CA3AF;
   --border: #222222;
   --success: #10B981;
+  --glow: rgba(227, 0, 15, 0.4);
 }
 
 html {
@@ -26,24 +27,104 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ── Keyframes (only run when motion is OK) ── */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes dcsi-pulse-glow {
+    0%, 100% {
+      box-shadow:
+        0 0 0 1px rgba(227, 0, 15, 0.2),
+        0 0 12px rgba(227, 0, 15, 0.15),
+        0 0 30px rgba(227, 0, 15, 0.05);
+    }
+    50% {
+      box-shadow:
+        0 0 0 1px rgba(227, 0, 15, 0.5),
+        0 0 24px rgba(227, 0, 15, 0.35),
+        0 0 60px rgba(227, 0, 15, 0.15);
+    }
+  }
+
+  @keyframes dcsi-scanline-move {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100vh);
+    }
+  }
+
+  @keyframes dcsi-spark {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    10% {
+      opacity: 1;
+      transform: scale(1.4);
+    }
+    40% {
+      opacity: 0.8;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.2);
+    }
+  }
+
+  @keyframes dcsi-float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+
+  @keyframes dcsi-intro-slash {
+    0% {
+      width: 0%;
+      opacity: 1;
+    }
+    100% {
+      width: 100%;
+      opacity: 1;
+    }
+  }
+
+  @keyframes dcsi-btn-ring {
+    0% {
+      box-shadow: 0 0 0 0 rgba(227, 0, 15, 0.6);
+    }
+    70% {
+      box-shadow: 0 0 0 14px rgba(227, 0, 15, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(227, 0, 15, 0);
+    }
+  }
+}
+
 @layer utilities {
+  /* ── Existing utilities (preserved) ── */
   .text-balance {
     text-wrap: balance;
   }
 
   .grid-bg {
-    background-image: linear-gradient(rgba(220, 38, 38, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(220, 38, 38, 0.03) 1px, transparent 1px);
+    background-image:
+      linear-gradient(rgba(227, 0, 15, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(227, 0, 15, 0.04) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 
   .glow-red {
-    box-shadow: 0 0 60px rgba(220, 38, 38, 0.15);
+    box-shadow: 0 0 60px rgba(227, 0, 15, 0.15);
   }
 
   .border-glow {
-    border-color: rgba(220, 38, 38, 0.4);
-    box-shadow: 0 0 20px rgba(220, 38, 38, 0.1);
+    border-color: rgba(227, 0, 15, 0.4);
+    box-shadow: 0 0 20px rgba(227, 0, 15, 0.1);
   }
 
   .scanline {
@@ -68,5 +149,163 @@ body {
     width: 2.5rem;
     height: 1px;
     background-color: var(--accent);
+  }
+
+  /* ── Bebas Neue font utility ── */
+  .font-bebas {
+    font-family: var(--font-bebas), Impact, "Arial Narrow", sans-serif;
+  }
+
+  /* ── Film grain + scanline hero overlay ── */
+  .dcsi-scanline-hero {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    overflow: hidden;
+  }
+
+  .dcsi-scanline-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(0, 0, 0, 0.06) 3px,
+      rgba(0, 0, 0, 0.06) 4px
+    );
+    pointer-events: none;
+  }
+
+  .dcsi-scanline-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  /* ── Pulsing red glow on element ── */
+  .dcsi-glow-pulse {
+    position: relative;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .dcsi-glow-pulse {
+      animation: dcsi-pulse-glow 3s ease-in-out infinite;
+    }
+  }
+
+  /* ── Bento card hover glow ── */
+  .dcsi-bento-glow {
+    transition:
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .dcsi-bento-glow:hover {
+    border-color: rgba(227, 0, 15, 0.45) !important;
+    box-shadow:
+      0 0 0 1px rgba(227, 0, 15, 0.2),
+      0 0 20px rgba(227, 0, 15, 0.12),
+      inset 0 0 30px rgba(227, 0, 15, 0.04);
+  }
+
+  /* ── CTA button pulse ring ── */
+  .dcsi-btn-pulse {
+    position: relative;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .dcsi-btn-pulse {
+      animation: dcsi-btn-ring 2.4s ease-out infinite;
+    }
+  }
+
+  /* ── Cinematic intro overlay — hidden by default, GSAP enables it ── */
+  .dcsi-intro-overlay {
+    position: fixed;
+    inset: 0;
+    background: #000000;
+    z-index: 999;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  /* ── Intro slash line ── */
+  .dcsi-slash-line {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 2px;
+    width: 0;
+    background: linear-gradient(90deg, transparent, var(--accent), var(--accent-light), var(--accent), transparent);
+    transform: translateY(-50%);
+    box-shadow: 0 0 20px rgba(227, 0, 15, 0.8), 0 0 40px rgba(227, 0, 15, 0.4);
+  }
+
+  /* ── Intro logo stamp ── */
+  .dcsi-intro-logo {
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    text-align: center;
+    color: #ffffff;
+    letter-spacing: 0.08em;
+    text-shadow: 0 0 60px rgba(227, 0, 15, 0.5);
+  }
+
+  /* ── Scroll reveal — GSAP sets initial state via gsap.set(), not CSS ── */
+  .dcsi-reveal-up {}
+
+  /* ── Stat counter element ── */
+  .dcsi-stat-counter {
+    font-variant-numeric: tabular-nums;
+    display: inline-block;
+    min-width: 2ch;
+  }
+
+  /* ── Float animation helper ── */
+  @media (prefers-reduced-motion: no-preference) {
+    .dcsi-float {
+      animation: dcsi-float 4s ease-in-out infinite;
+    }
+  }
+
+  /* ── Spark flash ── */
+  @media (prefers-reduced-motion: no-preference) {
+    .dcsi-spark {
+      animation: dcsi-spark 1.2s ease-out forwards;
+    }
+  }
+
+  /* ── Gallery track — hide scrollbar visually ── */
+  #dcsi-gallery-track::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ── Prefers-reduced-motion global override ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .dcsi-intro-overlay {
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
 }

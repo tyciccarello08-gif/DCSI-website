@@ -154,7 +154,7 @@ export async function POST(req: NextRequest) {
   ]);
 
   if (dbError) {
-    console.error("[contact] Supabase insert failed:", dbError.code);
+    console.error("[contact] Supabase insert failed:", dbError?.code ?? dbError?.message ?? "unknown");
     // Return error — don't send emails if we couldn't record the submission
     return NextResponse.json({ error: "Failed to save submission. Please try again." }, { status: 500 });
   }

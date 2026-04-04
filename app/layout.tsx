@@ -1,14 +1,21 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Outfit } from "next/font/google";
+import { Barlow_Condensed, Bebas_Neue, Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import GlobalBackground from "@/components/GlobalBackground";
 
-const playfairDisplay = Playfair_Display({
+const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
-  variable: "--font-montserrat",
-  weight: ["400", "700", "800", "900"],
+  variable: "--font-montserrat", // keeps existing font-montserrat class working
+  weight: ["400", "600", "700", "800", "900"],
   style: ["normal", "italic"],
+});
+
+const bebasNeue = Bebas_Neue({
+  subsets: ["latin"],
+  variable: "--font-bebas",
+  weight: ["400"],
 });
 
 const outfit = Outfit({
@@ -33,8 +40,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${playfairDisplay.variable} ${outfit.variable} antialiased bg-bg-primary text-text-primary font-inter`}
+        className={`${barlowCondensed.variable} ${bebasNeue.variable} ${outfit.variable} antialiased bg-bg-primary text-text-primary font-inter`}
       >
+        {/* Fixed particle canvas — sits behind every page */}
+        <GlobalBackground />
         <Navbar />
         <main>{children}</main>
         <Footer />

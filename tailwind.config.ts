@@ -13,20 +13,21 @@ const config: Config = {
         "bg-primary": "#0A0A0A",
         "bg-secondary": "#111111",
         "bg-card": "#1A1A1A",
-        accent: "#DC2626",
-        "accent-light": "#EF4444",
+        accent: "#E3000F",
+        "accent-light": "#FF1A2A",
         "text-primary": "#F9FAFB",
         "text-secondary": "#9CA3AF",
         border: "#222222",
         success: "#10B981",
       },
       fontFamily: {
-        montserrat: ["var(--font-montserrat)", "Georgia", "serif"],
+        montserrat: ["var(--font-montserrat)", "Impact", "sans-serif"],
         inter: ["var(--font-inter)", "system-ui", "sans-serif"],
+        bebas: ["var(--font-bebas)", "Impact", "Arial Narrow", "sans-serif"],
       },
       backgroundImage: {
         "grid-pattern":
-          "linear-gradient(rgba(220,38,38,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(220,38,38,0.04) 1px, transparent 1px)",
+          "linear-gradient(rgba(227,0,15,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(227,0,15,0.04) 1px, transparent 1px)",
       },
       backgroundSize: {
         grid: "60px 60px",

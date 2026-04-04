@@ -40,10 +40,11 @@ export default function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      if (!res.ok) throw new Error("Submission failed");
+      if (!res.ok) throw new Error(`Submission failed: ${res.status}`);
       setStatus("success");
       reset();
-    } catch {
+    } catch (err) {
+      console.error("[ContactForm]", err instanceof Error ? err.message : err);
       setStatus("error");
     }
   };
