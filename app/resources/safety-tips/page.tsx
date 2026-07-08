@@ -100,8 +100,8 @@ export default function SafetyTipsPage() {
         body="The most effective way to protect your home is a professionally installed, monitored security system. Contact DCSI Inc. for a free consultation."
         ctaText="Get a Free Quote"
         ctaHref="/contact"
-        secondaryCtaText={`Call ${CONTACT.tollFree}`}
-        secondaryCtaHref={CONTACT.tollFreeHref}
+        secondaryCtaText={`Call ${CONTACT.phone}`}
+        secondaryCtaHref={CONTACT.phoneHref}
       />
     </>
   );

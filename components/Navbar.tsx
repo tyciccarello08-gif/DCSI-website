@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -176,11 +176,11 @@ export default function Navbar() {
 
           {/* CTA Phone */}
           <a
-            href={CONTACT.tollFreeHref}
+            href={CONTACT.phoneHref}
             className="hidden md:flex items-center gap-2 bg-accent hover:bg-accent-light text-white px-5 py-2.5 rounded-lg font-inter font-semibold text-sm transition-colors shadow-lg shadow-accent/25"
           >
             <Phone size={13} />
-            {CONTACT.tollFree}
+            {CONTACT.phone}
           </a>
 
           {/* Mobile hamburger */}
@@ -256,11 +256,11 @@ export default function Navbar() {
               Contact
             </Link>
             <a
-              href="tel:8663909686"
+              href={CONTACT.phoneHref}
               className="flex items-center gap-2 bg-accent text-white px-5 py-3.5 rounded-lg font-inter font-semibold text-sm mt-4 shadow-lg shadow-accent/25"
             >
               <Phone size={14} />
-              Call (866) 390-9686
+              Call {CONTACT.phone}
             </a>
           </div>
         </div>

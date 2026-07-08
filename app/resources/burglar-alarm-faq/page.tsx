@@ -76,8 +76,8 @@ export default function BurglarAlarmFAQPage() {
         body="Call us directly or send a message — we're happy to walk you through your options."
         ctaText="Contact Us"
         ctaHref="/contact"
-        secondaryCtaText={`Call ${CONTACT.tollFree}`}
-        secondaryCtaHref={CONTACT.tollFreeHref}
+        secondaryCtaText={`Call ${CONTACT.phone}`}
+        secondaryCtaHref={CONTACT.phoneHref}
       />
     </>
   );

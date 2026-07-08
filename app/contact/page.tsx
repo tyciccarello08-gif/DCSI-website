@@ -4,9 +4,9 @@ import ContactForm from "@/components/ContactForm";
 import { CONTACT, COMPANY } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Contact DCSI Inc. | Lutz, FL — (866) 390-9686",
+  title: "Contact DCSI Inc. | Lutz, FL — (813) 949-6500",
   description:
-    "Contact DCSI Inc. Security & Sound in Lutz, FL. Call (866) 390-9686 or send us a message for a free security consultation.",
+    "Contact DCSI Inc. Security & Sound in Lutz, FL. Call (813) 949-6500 or send us a message for a free security consultation.",
 };
 
 const CONTACT_ITEMS = [
@@ -19,16 +19,9 @@ const CONTACT_ITEMS = [
   },
   {
     icon: Phone,
-    label: "Toll Free",
-    value: CONTACT.tollFree,
-    href: CONTACT.tollFreeHref,
-    external: false,
-  },
-  {
-    icon: Phone,
-    label: "Local",
-    value: CONTACT.local,
-    href: CONTACT.localHref,
+    label: "Phone",
+    value: CONTACT.phone,
+    href: CONTACT.phoneHref,
     external: false,
   },
   {

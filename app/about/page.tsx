@@ -164,10 +164,10 @@ export default function AboutPage() {
                 Serving <strong className="text-text-primary">Hillsborough County, FL</strong> and surrounding areas.
               </p>
               <a
-                href={`tel:${CONTACT.tollFree.replace(/\D/g, "")}`}
+                href={`tel:${CONTACT.phone.replace(/\D/g, "")}`}
                 className="mt-4 flex items-center gap-2 text-accent font-montserrat font-semibold uppercase tracking-wide text-xs"
               >
-                Call {CONTACT.tollFree} →
+                Call {CONTACT.phone} →
               </a>
             </div>
           </div>
@@ -238,8 +238,8 @@ export default function AboutPage() {
         body="Contact DCSI Inc. for a free consultation and custom security quote."
         ctaText="Get a Free Quote"
         ctaHref="/contact"
-        secondaryCtaText={`Call ${CONTACT.tollFree}`}
-        secondaryCtaHref={CONTACT.tollFreeHref}
+        secondaryCtaText={`Call ${CONTACT.phone}`}
+        secondaryCtaHref={CONTACT.phoneHref}
       />
     </>
   );

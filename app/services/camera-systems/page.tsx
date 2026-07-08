@@ -41,8 +41,8 @@ export default function CameraSystemsPage() {
         subtitle="Custom camera installations for homes and businesses across Tampa Bay — with professional walkthrough, training, and ongoing support included."
         ctaText="Get a Custom Quote"
         ctaHref="/contact"
-        secondaryCtaText={`Call ${CONTACT.tollFree}`}
-        secondaryCtaHref={CONTACT.tollFreeHref}
+        secondaryCtaText={`Call ${CONTACT.phone}`}
+        secondaryCtaHref={CONTACT.phoneHref}
       />
 
       {/* Overview */}
@@ -66,7 +66,7 @@ export default function CameraSystemsPage() {
               or residential need — we work with your layout, budget, and security goals.
             </p>
             <a
-              href={CONTACT.tollFreeHref}
+              href={CONTACT.phoneHref}
               className="inline-block bg-accent hover:bg-accent-light text-white font-montserrat font-semibold uppercase tracking-wide px-8 py-4 rounded-lg text-sm transition-colors"
             >
               Call for a Free Quote
@@ -154,8 +154,8 @@ export default function CameraSystemsPage() {
         body="Tell us about your property and we'll design the perfect camera solution for you."
         ctaText="Request a Quote"
         ctaHref="/contact"
-        secondaryCtaText={`Call ${CONTACT.tollFree}`}
-        secondaryCtaHref={CONTACT.tollFreeHref}
+        secondaryCtaText={`Call ${CONTACT.phone}`}
+        secondaryCtaHref={CONTACT.phoneHref}
       />
     </>
   );

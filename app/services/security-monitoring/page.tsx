@@ -58,8 +58,8 @@ export default function SecurityMonitoringPage() {
         subtitle="Custom residential and commercial security solutions with in-house monitoring — protecting Tampa Bay families and businesses around the clock."
         ctaText="Get a Free Quote"
         ctaHref="/contact"
-        secondaryCtaText={`Call ${CONTACT.tollFree}`}
-        secondaryCtaHref={CONTACT.tollFreeHref}
+        secondaryCtaText={`Call ${CONTACT.phone}`}
+        secondaryCtaHref={CONTACT.phoneHref}
       />
 
       {/* Family & Home Hero Image */}
@@ -127,10 +127,10 @@ export default function SecurityMonitoringPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
-                  href={CONTACT.tollFreeHref}
+                  href={CONTACT.phoneHref}
                   className="inline-flex items-center justify-center bg-accent hover:bg-accent-light text-white font-montserrat font-semibold uppercase tracking-wide px-8 py-4 rounded-lg text-sm transition-colors"
                 >
-                  Call {CONTACT.tollFree}
+                  Call {CONTACT.phone}
                 </a>
                 <a
                   href="/contact"
@@ -195,10 +195,10 @@ export default function SecurityMonitoringPage() {
                 system design to installation, training, and ongoing support — all under one roof.
               </p>
               <a
-                href={CONTACT.tollFreeHref}
+                href={CONTACT.phoneHref}
                 className="inline-block bg-accent hover:bg-accent-light text-white font-montserrat font-semibold uppercase tracking-wide px-8 py-4 rounded-lg text-sm transition-colors"
               >
-                Call {CONTACT.tollFree}
+                Call {CONTACT.phone}
               </a>
             </div>
             <div className="space-y-6">
@@ -239,8 +239,8 @@ export default function SecurityMonitoringPage() {
         body="Contact us for a free no-pressure consultation. We'll design the right solution for your property."
         ctaText="Get a Free Quote"
         ctaHref="/contact"
-        secondaryCtaText={`Call ${CONTACT.tollFree}`}
-        secondaryCtaHref={CONTACT.tollFreeHref}
+        secondaryCtaText={`Call ${CONTACT.phone}`}
+        secondaryCtaHref={CONTACT.phoneHref}
       />
     </>
   );

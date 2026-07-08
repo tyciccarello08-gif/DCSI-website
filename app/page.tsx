@@ -204,7 +204,7 @@ export default function HomePage() {
                 Get a Free Quote
               </Link>
               <a
-                href={CONTACT.tollFreeHref}
+                href={CONTACT.phoneHref}
                 className="flex items-center gap-2 border border-border hover:border-accent text-text-primary hover:text-accent font-inter font-semibold uppercase tracking-wider px-8 py-4 rounded-lg text-sm transition-all"
                 style={{
                   backdropFilter: "blur(8px)",
@@ -212,7 +212,7 @@ export default function HomePage() {
                 }}
               >
                 <Phone size={14} />
-                Call {CONTACT.tollFree}
+                Call {CONTACT.phone}
               </a>
             </motion.div>
           </div>
@@ -577,8 +577,8 @@ export default function HomePage() {
         body="24/7 in-house monitoring, professional installation, and white glove service from a team that cares."
         ctaText="Get a Free Quote"
         ctaHref="/contact"
-        secondaryCtaText={`Call ${CONTACT.tollFree}`}
-        secondaryCtaHref={CONTACT.tollFreeHref}
+        secondaryCtaText={`Call ${CONTACT.phone}`}
+        secondaryCtaHref={CONTACT.phoneHref}
       />
     </>
   );

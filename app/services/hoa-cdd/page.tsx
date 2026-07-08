@@ -69,8 +69,8 @@ export default function HoaCddPage() {
         subtitle="Protecting Tampa Bay communities from the gate in — gate access, common area cameras, amenity security, and 24/7 in-house monitoring for homeowner associations and community development districts."
         ctaText="Request Community Pricing"
         ctaHref="/contact"
-        secondaryCtaText={`Call ${CONTACT.tollFree}`}
-        secondaryCtaHref={CONTACT.tollFreeHref}
+        secondaryCtaText={`Call ${CONTACT.phone}`}
+        secondaryCtaHref={CONTACT.phoneHref}
       />
 
       {/* Intro with gate photo */}
@@ -105,10 +105,10 @@ export default function HoaCddPage() {
                   Request Community Pricing
                 </a>
                 <a
-                  href={CONTACT.tollFreeHref}
+                  href={CONTACT.phoneHref}
                   className="inline-flex items-center justify-center border border-border hover:border-accent text-text-secondary hover:text-accent font-montserrat font-semibold uppercase tracking-wide px-8 py-4 rounded-lg text-sm transition-colors"
                 >
-                  Call {CONTACT.tollFree}
+                  Call {CONTACT.phone}
                 </a>
               </div>
             </div>
@@ -258,8 +258,8 @@ export default function HoaCddPage() {
         body="Contact DCSI Inc. for community pricing, a site walkthrough, and a custom security plan tailored to your HOA or CDD."
         ctaText="Request Community Pricing"
         ctaHref="/contact"
-        secondaryCtaText={`Call ${CONTACT.tollFree}`}
-        secondaryCtaHref={CONTACT.tollFreeHref}
+        secondaryCtaText={`Call ${CONTACT.phone}`}
+        secondaryCtaHref={CONTACT.phoneHref}
       />
     </>
   );

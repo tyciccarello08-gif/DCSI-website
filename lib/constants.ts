@@ -1,9 +1,7 @@
 export const CONTACT = {
   address: "128 W. Lutz Lake Fern Rd, Lutz, FL 33548",
-  tollFree: "(866) 390-9686",
-  tollFreeHref: "tel:8663909686",
-  local: "(813) 949-6500",
-  localHref: "tel:8139496500",
+  phone: "(813) 949-6500",
+  phoneHref: "tel:8139496500",
   fax: "(813) 949-6599",
   email: "info@dcsisecurity.com",
   serviceArea: "Hillsborough County, FL and surrounding areas",

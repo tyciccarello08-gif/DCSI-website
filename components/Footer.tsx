@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { Phone, Mail, MapPin, PhoneCall } from "lucide-react";
 import { CONTACT, COMPANY, NAV_SERVICES, NAV_RESOURCES } from "@/lib/constants";
 
@@ -139,19 +139,10 @@ export default function Footer() {
               <li className="flex items-center gap-2.5 text-text-secondary text-sm font-inter">
                 <Phone size={14} className="text-accent flex-shrink-0" />
                 <a
-                  href={CONTACT.tollFreeHref}
+                  href={CONTACT.phoneHref}
                   className="hover:text-accent transition-colors"
                 >
-                  Toll Free: {CONTACT.tollFree}
-                </a>
-              </li>
-              <li className="flex items-center gap-2.5 text-text-secondary text-sm font-inter">
-                <Phone size={14} className="text-accent flex-shrink-0" />
-                <a
-                  href={CONTACT.localHref}
-                  className="hover:text-accent transition-colors"
-                >
-                  Local: {CONTACT.local}
+                  Phone: {CONTACT.phone}
                 </a>
               </li>
               <li className="flex items-center gap-2.5 text-text-secondary text-sm font-inter">

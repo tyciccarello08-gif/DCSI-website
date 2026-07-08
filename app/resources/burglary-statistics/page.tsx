@@ -72,8 +72,8 @@ export default function BurglaryStatisticsPage() {
         body="A monitored security system from DCSI Inc. is one of the most effective deterrents against burglary. Call us today for a free consultation."
         ctaText="Protect Your Home Today"
         ctaHref="/contact"
-        secondaryCtaText={`Call ${CONTACT.tollFree}`}
-        secondaryCtaHref={CONTACT.tollFreeHref}
+        secondaryCtaText={`Call ${CONTACT.phone}`}
+        secondaryCtaHref={CONTACT.phoneHref}
       />
     </>
   );

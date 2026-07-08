@@ -28,8 +28,8 @@ export default function NewConstructionPage() {
         subtitle="Partnering with builders and developers across Hillsborough County to deliver complete low voltage pre-wire for residential and commercial new construction."
         ctaText="Contact Us for Builder Pricing"
         ctaHref="/contact"
-        secondaryCtaText={`Call ${CONTACT.tollFree}`}
-        secondaryCtaHref={CONTACT.tollFreeHref}
+        secondaryCtaText={`Call ${CONTACT.phone}`}
+        secondaryCtaHref={CONTACT.phoneHref}
       />
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
@@ -87,8 +87,8 @@ export default function NewConstructionPage() {
         body="Contact us for volume pricing on new construction low voltage projects in Hillsborough County and surrounding areas."
         ctaText="Get in Touch"
         ctaHref="/contact"
-        secondaryCtaText={`Call ${CONTACT.tollFree}`}
-        secondaryCtaHref={CONTACT.tollFreeHref}
+        secondaryCtaText={`Call ${CONTACT.phone}`}
+        secondaryCtaHref={CONTACT.phoneHref}
       />
     </>
   );

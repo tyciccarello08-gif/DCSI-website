@@ -189,7 +189,7 @@ export async function POST(req: NextRequest) {
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #0A0E1A; color: #F9FAFB; border-radius: 12px;">
           <h2 style="color: #DC2626; font-size: 20px; margin-bottom: 16px;">Thanks for reaching out, ${eName}!</h2>
           <p style="color: #9CA3AF; font-size: 14px; line-height: 1.7;">We&apos;ve received your message and will be in touch shortly. If you need immediate assistance, please call us directly:</p>
-          <a href="tel:8663909686" style="display: inline-block; margin: 16px 0; background: #DC2626; color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none;">(866) 390-9686</a>
+          <a href="tel:8139496500" style="display: inline-block; margin: 16px 0; background: #DC2626; color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none;">(813) 949-6500</a>
           <p style="color: #9CA3AF; font-size: 13px; margin-top: 24px;">— The DCSI, Inc. Team<br />Security &amp; Sound | Lutz, FL</p>
         </div>
       `,
