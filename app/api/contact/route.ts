@@ -173,12 +173,12 @@ export async function POST(req: NextRequest) {
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #0A0E1A; color: #F9FAFB; border-radius: 12px;">
           <h2 style="color: #DC2626; font-size: 20px; margin-bottom: 24px;">New Contact Form Submission</h2>
           <table style="width: 100%; border-collapse: collapse;">
-            <tr><td style="padding: 8px 0; color: #9CA3AF; font-size: 13px; width: 120px;">Name</td><td style="padding: 8px 0; font-size: 14px;">${eName}</td></tr>
+            <tr><td style="padding: 8px 0; color: #9CA3AF; font-size: 13px; width: 120px;">Name</td><td style="padding: 8px 0; font-size: 14px; color: #EF4444;">${eName}</td></tr>
             <tr><td style="padding: 8px 0; color: #9CA3AF; font-size: 13px;">Phone</td><td style="padding: 8px 0; font-size: 14px;"><a href="tel:${phoneDigits}" style="color: #EF4444;">${ePhone}</a></td></tr>
             <tr><td style="padding: 8px 0; color: #9CA3AF; font-size: 13px;">Email</td><td style="padding: 8px 0; font-size: 14px;"><a href="mailto:${eEmail}" style="color: #EF4444;">${eEmail}</a></td></tr>
-            <tr><td style="padding: 8px 0; color: #9CA3AF; font-size: 13px;">Service</td><td style="padding: 8px 0; font-size: 14px;">${eService}</td></tr>
+            <tr><td style="padding: 8px 0; color: #9CA3AF; font-size: 13px;">Service</td><td style="padding: 8px 0; font-size: 14px; color: #EF4444;">${eService}</td></tr>
           </table>
-          ${eMessage ? `<div style="margin-top: 16px; padding: 16px; background: #1A2235; border-radius: 8px; border-left: 3px solid #DC2626;"><p style="color: #9CA3AF; font-size: 12px; margin: 0 0 8px;">Message</p><p style="font-size: 14px; margin: 0; line-height: 1.6;">${eMessage}</p></div>` : ""}
+          ${eMessage ? `<div style="margin-top: 16px; padding: 16px; background: #1A2235; border-radius: 8px; border-left: 3px solid #DC2626;"><p style="color: #9CA3AF; font-size: 12px; margin: 0 0 8px;">Message</p><p style="font-size: 14px; margin: 0; line-height: 1.6; color: #EF4444;">${eMessage}</p></div>` : ""}
         </div>
       `,
     });
@@ -200,7 +200,7 @@ export async function POST(req: NextRequest) {
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #0A0E1A; color: #F9FAFB; border-radius: 12px;">
           <h2 style="color: #DC2626; font-size: 20px; margin-bottom: 16px;">Thanks for reaching out, ${eName}!</h2>
-          <p style="color: #9CA3AF; font-size: 14px; line-height: 1.7;">We&apos;ve received your message and will be in touch shortly. If you need immediate assistance, please call us directly:</p>
+          <p style="color: #9CA3AF; font-size: 14px; line-height: 1.7;">We&apos;ve received your message and will be in touch as soon as possible. If you need immediate assistance, please call us directly:</p>
           <a href="tel:8139496500" style="display: inline-block; margin: 16px 0; background: #DC2626; color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none;">(813) 949-6500</a>
           <p style="color: #9CA3AF; font-size: 13px; margin-top: 24px;">— The DCSI, Inc. Team<br />Security &amp; Sound | Lutz, FL</p>
         </div>
