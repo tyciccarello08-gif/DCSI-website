@@ -30,7 +30,7 @@ const nextConfig = {
             value: "camera=(), microphone=(), geolocation=(), payment=()",
           },
           // Content Security Policy
-          // - Allows Google Fonts, Unsplash images, and Supabase API calls
+          // - Allows Google Fonts and Unsplash images
           // - 'unsafe-inline' needed for Tailwind + Framer Motion inline styles
           {
             key: "Content-Security-Policy",
@@ -40,7 +40,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: blob: https://images.unsplash.com",
-              "connect-src 'self' https://*.supabase.co",
+              "connect-src 'self'",
               "frame-ancestors 'self'",
               "base-uri 'self'",
               "form-action 'self'",

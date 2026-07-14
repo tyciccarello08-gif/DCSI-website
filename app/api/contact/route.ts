@@ -1,14 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
 
-// ── Supabase & Resend clients (server-side only) ─────────────────────────────
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+// ── Resend client (server-side only) ─────────────────────────────────────────
+// Built lazily: `new Resend(undefined)` throws, and at module scope that would
+// crash the whole route at import time (and break `next build`) instead of
+// failing one request with a loggable error.
+function getResend(): Resend | null {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) return null;
+  return new Resend(apiKey);
+}
 
 // ── Rate limiting (in-memory, per function instance) ─────────────────────────
 // Limits each IP to 3 submissions per 10-minute window.
@@ -142,29 +143,31 @@ export async function POST(req: NextRequest) {
   // Phone digits only for tel: href
   const phoneDigits = safePhone.replace(/\D/g, "");
 
-  // ── Save to Supabase ────────────────────────────────────────────────────────
-  const { error: dbError } = await supabase.from("contact_submissions").insert([
-    {
-      name: safeName,
-      phone: safePhone,
-      email: safeEmail,
-      service: safeService,
-      message: safeMessage,
-    },
-  ]);
+  // ── Notify DCSI ─────────────────────────────────────────────────────────────
+  // This email IS the submission — there is no database behind it, so a failure
+  // here loses the lead and must be surfaced to the visitor.
+  //
+  // resend.emails.send() resolves with { error } on API failures rather than
+  // throwing — it only throws on network faults, so both must be handled.
+  const resend = getResend();
+  const notificationEmail = process.env.NOTIFICATION_EMAIL;
 
-  if (dbError) {
-    console.error("[contact] Supabase insert failed:", dbError?.code ?? dbError?.message ?? "unknown");
-    // Return error — don't send emails if we couldn't record the submission
-    return NextResponse.json({ error: "Failed to save submission. Please try again." }, { status: 500 });
+  if (!resend || !notificationEmail) {
+    console.error(
+      "[contact] Misconfigured:",
+      !resend ? "RESEND_API_KEY missing" : "NOTIFICATION_EMAIL missing"
+    );
+    return NextResponse.json(
+      { error: "Failed to send your message. Please call us at (813) 949-6500." },
+      { status: 500 }
+    );
   }
 
-  // ── Send emails ─────────────────────────────────────────────────────────────
+  let emailOk = false;
   try {
-    // Notification to DCSI
-    await resend.emails.send({
+    const { error: notifyError } = await resend.emails.send({
       from: "DCSI Website <info@dcsisecurity.com>",
-      to: process.env.NOTIFICATION_EMAIL!,
+      to: notificationEmail,
       subject: `New Contact Form Submission`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #0A0E1A; color: #F9FAFB; border-radius: 12px;">
@@ -179,9 +182,18 @@ export async function POST(req: NextRequest) {
         </div>
       `,
     });
+    if (notifyError) {
+      console.error("[contact] Notification email rejected:", notifyError);
+    } else {
+      emailOk = true;
+    }
+  } catch (emailErr) {
+    console.error("[contact] Notification email threw:", emailErr);
+  }
 
-    // Confirmation to submitter
-    await resend.emails.send({
+  // ── Confirmation to submitter (cosmetic — never fails the request) ──────────
+  try {
+    const { error: confirmError } = await resend.emails.send({
       from: "DCSI Inc. Security & Sound <info@dcsisecurity.com>",
       to: safeEmail,
       subject: "We received your message — DCSI Inc.",
@@ -194,9 +206,20 @@ export async function POST(req: NextRequest) {
         </div>
       `,
     });
+    if (confirmError) {
+      console.error("[contact] Confirmation email rejected:", confirmError);
+    }
   } catch (emailErr) {
-    // Submission is saved — log email failure but don't surface to user
-    console.error("[contact] Email send failed:", emailErr instanceof Error ? emailErr.message : "unknown");
+    console.error("[contact] Confirmation email threw:", emailErr);
+  }
+
+  // If the notification never went out, the lead is gone — tell the visitor
+  // rather than showing a false "Message Sent!".
+  if (!emailOk) {
+    return NextResponse.json(
+      { error: "Failed to send your message. Please call us at (813) 949-6500." },
+      { status: 500 }
+    );
   }
 
   return NextResponse.json({ success: true });
