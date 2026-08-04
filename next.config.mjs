@@ -32,6 +32,8 @@ const nextConfig = {
           // Content Security Policy
           // - Allows Google Fonts and Unsplash images
           // - 'unsafe-inline' needed for Tailwind + Framer Motion inline styles
+          // - The contact form's bot check is self-hosted (see lib/form-token.ts),
+          //   so no third-party origin needs allowing here.
           {
             key: "Content-Security-Policy",
             value: [

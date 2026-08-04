@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Send, CheckCircle, AlertCircle } from "lucide-react";
 
@@ -20,10 +20,44 @@ interface FormData {
   email: string;
   service: string;
   message: string;
+  /** Honeypot — hidden from humans, so any value means a bot filled it. */
+  company: string;
 }
+
+const GENERIC_ERROR =
+  "Something went wrong. Please try again or call us directly at (813) 949-6500.";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState(GENERIC_ERROR);
+
+  // ── Signed form token ───────────────────────────────────────────────────────
+  // Proves this submission came from a browser that actually loaded the page.
+  // Fetched on mount so its server-side age also tells the API how long the
+  // form was open.
+  const tokenRef = useRef<string | null>(null);
+
+  const fetchToken = useCallback(async (): Promise<string | null> => {
+    try {
+      const res = await fetch("/api/contact-token", { cache: "no-store" });
+      if (!res.ok) return null;
+      const data = await res.json();
+      tokenRef.current = typeof data.token === "string" ? data.token : null;
+    } catch {
+      // Non-fatal: the API flags an unverifiable submission rather than
+      // rejecting it, so the visitor still gets through.
+      tokenRef.current = null;
+    }
+    return tokenRef.current;
+  }, []);
+
+  useEffect(() => {
+    void fetchToken();
+  }, [fetchToken]);
+
+  // Client-side fallback timer, used by the API only when no token could be
+  // verified. Spoofable, which is why it can only ever produce a flag.
+  const mountedAt = useRef(Date.now());
 
   const {
     register,
@@ -32,20 +66,51 @@ export default function ContactForm() {
     formState: { errors },
   } = useForm<FormData>();
 
+  const postSubmission = (data: FormData, formToken: string | null) =>
+    fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...data,
+        formToken,
+        elapsedMs: Date.now() - mountedAt.current,
+      }),
+    });
+
   const onSubmit = async (data: FormData) => {
     setStatus("submitting");
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (!res.ok) throw new Error(`Submission failed: ${res.status}`);
+      // The mount-time fetch may still be in flight, or may have failed.
+      const activeToken = tokenRef.current ?? (await fetchToken());
+
+      let res = await postSubmission(data, activeToken);
+      let body = await res.json().catch(() => null);
+
+      // The tab was open past the token's lifetime. Get a fresh one and resend
+      // once, silently — the visitor shouldn't have to retype anything.
+      if (!res.ok && body?.code === "token_expired") {
+        res = await postSubmission(data, await fetchToken());
+        body = await res.json().catch(() => null);
+      }
+
+      if (!res.ok) {
+        // The route returns a specific, user-facing `error` for rate limits and
+        // failed verification — show it rather than collapsing everything into
+        // the generic banner.
+        throw new Error(body?.error || GENERIC_ERROR);
+      }
+
       setStatus("success");
       reset();
+      mountedAt.current = Date.now();
     } catch (err) {
       console.error("[ContactForm]", err instanceof Error ? err.message : err);
+      setErrorMessage(err instanceof Error ? err.message : GENERIC_ERROR);
       setStatus("error");
+    } finally {
+      // Tokens aren't single-use, but a fresh one keeps the next send well
+      // inside the expiry window and re-arms the fill timer.
+      void fetchToken();
     }
   };
 
@@ -75,13 +140,27 @@ export default function ContactForm() {
       {status === "error" && (
         <div className="flex items-center gap-3 bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-3 mb-6">
           <AlertCircle size={16} className="text-red-400 flex-shrink-0" />
-          <p className="font-inter text-red-400 text-sm">
-            Something went wrong. Please try again or call us directly at (813) 949-6500.
-          </p>
+          <p className="font-inter text-red-400 text-sm">{errorMessage}</p>
         </div>
       )}
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        {/*
+          Honeypot. Hidden from sighted users and from screen readers, and
+          unreachable by keyboard — but present in the DOM, so form-filling bots
+          take the bait. Positioned off-screen rather than display:none, which
+          some bots know to skip.
+        */}
+        <div aria-hidden="true" className="absolute left-[-9999px] w-px h-px overflow-hidden">
+          <input
+            {...register("company")}
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            placeholder="Company"
+          />
+        </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {/* Name */}
           <div>

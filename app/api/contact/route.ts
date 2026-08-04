@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+import { verifyFormToken } from "@/lib/form-token";
 
 // ── Resend client (server-side only) ─────────────────────────────────────────
 // Built lazily: `new Resend(undefined)` throws, and at module scope that would
@@ -54,6 +55,65 @@ function escapeHtml(str: string): string {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#x27;");
+}
+
+// ── Spam heuristics ───────────────────────────────────────────────────────────
+// These produce *flags*, never rejections. A flagged submission is still
+// delivered, with a [POSSIBLE SPAM] subject prefix and a reasons block, so a
+// false positive costs the owner a glance rather than a lead.
+const MIN_FILL_MS = 3000;
+const MAX_LINKS = 2;
+// Two variants so the global one's `lastIndex` state can never leak into a
+// `.test()` call: `countLinks` uses the global form, `hasLink` the plain one.
+const LINK_REGEX_GLOBAL = /(https?:\/\/|www\.)/gi;
+const LINK_REGEX = /(https?:\/\/|www\.)/i;
+const SPAM_KEYWORDS = [
+  "backlink",
+  "guest post",
+  "seo services",
+  "rank your website",
+  "crypto",
+  "bitcoin",
+  "casino",
+  "viagra",
+  "payday loan",
+];
+
+function buildSpamFlags(
+  name: string,
+  phone: string,
+  message: string | null,
+  fillMs: number | null,
+  botCheckUnavailable: boolean
+): string[] {
+  const flags: string[] = [];
+
+  if (botCheckUnavailable) {
+    flags.push("bot check unavailable (CONTACT_TOKEN_SECRET not configured)");
+  }
+
+  if (fillMs !== null && fillMs < MIN_FILL_MS) {
+    flags.push(`submitted in ${(fillMs / 1000).toFixed(1)}s`);
+  }
+
+  if (message) {
+    const linkCount = message.match(LINK_REGEX_GLOBAL)?.length ?? 0;
+    if (linkCount > MAX_LINKS) {
+      flags.push(`${linkCount} links in message`);
+    }
+    const haystack = message.toLowerCase();
+    for (const keyword of SPAM_KEYWORDS) {
+      if (haystack.includes(keyword)) {
+        flags.push(`spam keyword: ${keyword}`);
+      }
+    }
+  }
+
+  // Bots routinely stuff URLs into fields that should never hold one.
+  if (LINK_REGEX.test(name)) flags.push("URL in name field");
+  if (LINK_REGEX.test(phone)) flags.push("URL in phone field");
+
+  return flags;
 }
 
 // ── Validation helper ─────────────────────────────────────────────────────────
@@ -118,12 +178,50 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const { name, phone, email, service, message } = body as Record<string, unknown>;
+  const { name, phone, email, service, message, company, elapsedMs, formToken } =
+    body as Record<string, unknown>;
+
+  // ── Honeypot ────────────────────────────────────────────────────────────────
+  // `company` is an off-screen, aria-hidden, tabindex="-1" input. A human can
+  // neither see nor tab to it, so any value means a bot filled the form blind.
+  // Answer 200 with no email: the bot books a success and moves on instead of
+  // retrying with a different payload.
+  if (typeof company === "string" && company.trim().length > 0) {
+    console.warn("[contact] Honeypot triggered from", ip);
+    return NextResponse.json({ success: true });
+  }
 
   // Validate all fields
   const validationError = validateFields(name, phone, email, service, message);
   if (validationError) {
     return NextResponse.json({ error: validationError }, { status: 400 });
+  }
+
+  // ── Signed-token bot check ──────────────────────────────────────────────────
+  // The one hard block in this route. A token is only obtainable by GETting
+  // /api/contact-token, so a script POSTing straight here has nothing to send
+  // and cannot forge one without CONTACT_TOKEN_SECRET.
+  const tokenResult = verifyFormToken(formToken);
+
+  if (tokenResult.status === "invalid") {
+    console.warn("[contact] Rejected submission with missing/invalid token from", ip);
+    return NextResponse.json(
+      { error: "Verification failed. Please refresh the page and try again." },
+      { status: 403 }
+    );
+  }
+
+  // Expired is called out separately so the form can silently fetch a fresh
+  // token and resubmit — a visitor who left the tab open must not lose their
+  // message.
+  if (tokenResult.status === "expired") {
+    return NextResponse.json(
+      {
+        error: "This form was open too long. Please try again.",
+        code: "token_expired",
+      },
+      { status: 403 }
+    );
   }
 
   // Sanitize for use in DB and emails
@@ -132,6 +230,29 @@ export async function POST(req: NextRequest) {
   const safeEmail = (email as string).trim().toLowerCase();
   const safeService = service && typeof service === "string" ? service : null;
   const safeMessage = message && typeof message === "string" ? message.trim() : null;
+
+  // How long the form was open. The token's age comes off the server clock and
+  // can't be faked, so prefer it; the client-reported value is only a fallback
+  // for when no token could be verified.
+  const fillMs =
+    tokenResult.status === "valid"
+      ? tokenResult.ageMs
+      : typeof elapsedMs === "number" && Number.isFinite(elapsedMs) && elapsedMs >= 0
+        ? elapsedMs
+        : null;
+
+  // Soft signals — these never block, they only annotate the email.
+  const spamFlags = buildSpamFlags(
+    safeName,
+    safePhone,
+    safeMessage,
+    fillMs,
+    tokenResult.status === "unavailable"
+  );
+  const isFlagged = spamFlags.length > 0;
+  if (isFlagged) {
+    console.warn("[contact] Flagged submission from", ip, "-", spamFlags.join("; "));
+  }
 
   // Escaped values for HTML emails
   const eName = escapeHtml(safeName);
@@ -168,10 +289,22 @@ export async function POST(req: NextRequest) {
     const { error: notifyError } = await resend.emails.send({
       from: "DCSI Website <info@dcsisecurity.com>",
       to: notificationEmail,
-      subject: `New Contact Form Submission`,
+      subject: isFlagged
+        ? `[POSSIBLE SPAM] New Contact Form Submission`
+        : `New Contact Form Submission`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #0A0E1A; color: #F9FAFB; border-radius: 12px;">
           <h2 style="color: #DC2626; font-size: 20px; margin-bottom: 24px;">New Contact Form Submission</h2>
+          ${
+            isFlagged
+              ? `<div style="margin-bottom: 24px; padding: 16px; background: #2A2010; border-radius: 8px; border-left: 3px solid #F59E0B;">
+                   <p style="color: #F59E0B; font-size: 13px; font-weight: 600; margin: 0 0 8px;">Possible spam &mdash; delivered anyway so you can decide</p>
+                   <ul style="color: #D1D5DB; font-size: 13px; margin: 0; padding-left: 18px; line-height: 1.6;">
+                     ${spamFlags.map((f) => `<li>${escapeHtml(f)}</li>`).join("")}
+                   </ul>
+                 </div>`
+              : ""
+          }
           <table style="width: 100%; border-collapse: collapse;">
             <tr><td style="padding: 8px 0; color: #9CA3AF; font-size: 13px; width: 120px;">Name</td><td style="padding: 8px 0; font-size: 14px; color: #EF4444;">${eName}</td></tr>
             <tr><td style="padding: 8px 0; color: #9CA3AF; font-size: 13px;">Phone</td><td style="padding: 8px 0; font-size: 14px;"><a href="tel:${phoneDigits}" style="color: #EF4444;">${ePhone}</a></td></tr>
@@ -192,12 +325,16 @@ export async function POST(req: NextRequest) {
   }
 
   // ── Confirmation to submitter (cosmetic — never fails the request) ──────────
-  try {
-    const { error: confirmError } = await resend.emails.send({
-      from: "DCSI Inc. Security & Sound <info@dcsisecurity.com>",
-      to: safeEmail,
-      subject: "We received your message — DCSI Inc.",
-      html: `
+  // Skipped for flagged submissions: those addresses are often harvested or
+  // forged, and auto-replying to them is backscatter that would put the
+  // sending domain's Resend reputation at risk.
+  if (!isFlagged) {
+    try {
+      const { error: confirmError } = await resend.emails.send({
+        from: "DCSI Inc. Security & Sound <info@dcsisecurity.com>",
+        to: safeEmail,
+        subject: "We received your message — DCSI Inc.",
+        html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #0A0E1A; color: #F9FAFB; border-radius: 12px;">
           <h2 style="color: #DC2626; font-size: 20px; margin-bottom: 16px;">Thanks for reaching out, ${eName}!</h2>
           <p style="color: #9CA3AF; font-size: 14px; line-height: 1.7;">We&apos;ve received your message and will be in touch as soon as possible. If you need immediate assistance, please call us directly:</p>
@@ -205,12 +342,13 @@ export async function POST(req: NextRequest) {
           <p style="color: #9CA3AF; font-size: 13px; margin-top: 24px;">— The DCSI, Inc. Team<br />Security &amp; Sound | Lutz, FL</p>
         </div>
       `,
-    });
-    if (confirmError) {
-      console.error("[contact] Confirmation email rejected:", confirmError);
+      });
+      if (confirmError) {
+        console.error("[contact] Confirmation email rejected:", confirmError);
+      }
+    } catch (emailErr) {
+      console.error("[contact] Confirmation email threw:", emailErr);
     }
-  } catch (emailErr) {
-    console.error("[contact] Confirmation email threw:", emailErr);
   }
 
   // If the notification never went out, the lead is gone — tell the visitor
