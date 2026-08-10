@@ -1,15 +1,20 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import { Shield, Clock, Radio, Lock, Bell, Eye } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import JsonLd from "@/components/JsonLd";
 import { CONTACT } from "@/lib/constants";
+import { pageMetadata, serviceSchema } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Security Systems & 24/7 Monitoring | DCSI Inc. Tampa",
+const PATH = "/services/security-monitoring";
+
+export const metadata = pageMetadata({
+  title: "Security System Installation & 24/7 Monitoring",
   description:
-    "Custom residential and commercial security systems with 24/7 in-house monitoring. Protecting Tampa Bay families and businesses since 2004.",
-};
+    "Custom residential and commercial burglar alarm systems with 24/7 in-house monitoring — not an outsourced call center. Hillsborough & Pasco, FL.",
+  path: PATH,
+});
 
 const FEATURES = [
   {
@@ -53,8 +58,10 @@ const FEATURES = [
 export default function SecurityMonitoringPage() {
   return (
     <>
+      <JsonLd data={serviceSchema(PATH)} />
       <HeroBanner
-        title="Security Systems & 24/7 Monitoring"
+        breadcrumbs={<Breadcrumbs trail={[{ name: "Security & Monitoring", path: PATH }]} />}
+        title="Security Systems & 24/7 Monitoring in Tampa Bay"
         subtitle="Custom residential and commercial security solutions with in-house monitoring — protecting Tampa Bay families and businesses around the clock."
         ctaText="Get a Free Quote"
         ctaHref="/contact"
@@ -66,7 +73,7 @@ export default function SecurityMonitoringPage() {
       <section className="relative overflow-hidden">
         <div className="relative w-full h-64 sm:h-80 lg:h-96">
           <Image
-            src="/images/13-residential-home-exterior.png"
+            src="/images/13-residential-home-exterior.webp"
             alt="Beautiful Tampa Bay home protected by DCSI security"
             fill
             sizes="100vw"
@@ -92,8 +99,8 @@ export default function SecurityMonitoringPage() {
             {/* Family image */}
             <div className="relative overflow-hidden rounded-2xl border border-border shadow-xl order-2 lg:order-1 aspect-[3/4]">
               <Image
-                src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80&auto=format&fit=crop"
-                alt="Family protected by DCSI home security"
+                src="/images/01-family-home-security.webp"
+                alt="Family at home protected by a DCSI Inc. monitored security system"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover object-top"
@@ -121,7 +128,7 @@ export default function SecurityMonitoringPage() {
                 a system that gives you real peace of mind, not just a sales package.
               </p>
               <p className="font-inter text-text-secondary leading-relaxed mb-8">
-                From families in Lutz and Hillsborough County who want to feel safe at night, to
+                From families in Lutz, Wesley Chapel, and Land O&apos; Lakes who want to feel safe at night, to
                 parents who want to know their kids got home from school safely — DCSI Inc. is
                 the neighbor you can count on.
               </p>
@@ -204,7 +211,7 @@ export default function SecurityMonitoringPage() {
             <div className="space-y-6">
               <div className="relative aspect-video overflow-hidden rounded-xl border border-border">
                 <Image
-                  src="/images/05-dcsi-honeywell-touchscreen-panel.png"
+                  src="/images/05-dcsi-honeywell-touchscreen-panel.webp"
                   alt="DCSI Honeywell touchscreen security panel"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"

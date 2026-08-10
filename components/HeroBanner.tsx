@@ -11,6 +11,8 @@ interface HeroBannerProps {
   secondaryCtaText?: string;
   secondaryCtaHref?: string;
   tall?: boolean;
+  /** Optional breadcrumb trail, rendered above the eyebrow inside the hero container. */
+  breadcrumbs?: React.ReactNode;
 }
 
 export default function HeroBanner({
@@ -21,6 +23,7 @@ export default function HeroBanner({
   secondaryCtaText,
   secondaryCtaHref,
   tall = false,
+  breadcrumbs,
 }: HeroBannerProps) {
   return (
     <section
@@ -44,6 +47,8 @@ export default function HeroBanner({
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="max-w-4xl"
         >
+          {breadcrumbs && <div className="mb-6">{breadcrumbs}</div>}
+
           {/* Eyebrow */}
           <div className="flex items-center gap-4 mb-7">
             <div className="w-10 h-px bg-accent" />

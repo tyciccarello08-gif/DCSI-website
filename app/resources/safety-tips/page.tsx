@@ -1,14 +1,20 @@
-import type { Metadata } from "next";
 import { Lock, Eye, Lightbulb, Users, Bell, Camera, Home, Smartphone } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import JsonLd from "@/components/JsonLd";
 import { CONTACT } from "@/lib/constants";
+import { ORG_ID, abs, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Home Security Safety Tips | DCSI Inc. Tampa",
+const PATH = "/resources/safety-tips";
+
+export const metadata = pageMetadata({
+  title: "8 Home Security Tips You Can Act On Today",
   description:
-    "Practical home security tips from DCSI Inc. — Tampa Bay's security experts since 2013. Protect your home and family today.",
-};
+    "Practical, no-cost steps to make your home a harder target — lighting, locks, sliding doors, and what actually deters burglars.",
+  path: PATH,
+  type: "article",
+});
 
 const TIPS = [
   {
@@ -61,10 +67,32 @@ const TIPS = [
   },
 ];
 
+/**
+ * ItemList markup lets search and AI assistants lift the eight tips as a numbered
+ * answer rather than paraphrasing the page.
+ */
+const tipsSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "@id": `${abs(PATH)}#tips`,
+  name: "8 Ways to Improve Your Home Security Right Now",
+  numberOfItems: TIPS.length,
+  itemListOrder: "https://schema.org/ItemListUnordered",
+  publisher: { "@id": ORG_ID },
+  itemListElement: TIPS.map((tip, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: tip.title,
+    description: tip.description,
+  })),
+};
+
 export default function SafetyTipsPage() {
   return (
     <>
+      <JsonLd data={tipsSchema} />
       <HeroBanner
+        breadcrumbs={<Breadcrumbs trail={[{ name: "Safety Tips", path: PATH }]} />}
         title="Home Security Safety Tips"
         subtitle="Simple, actionable steps you can take today to protect your home, family, and belongings."
       />

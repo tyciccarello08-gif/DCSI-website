@@ -8,6 +8,9 @@ import {
   Building2,
   Users,
   Wifi,
+  Projector,
+  Speaker,
+  Network,
   LucideIcon,
 } from "lucide-react";
 
@@ -17,9 +20,12 @@ const ICONS: Record<string, LucideIcon> = {
   Building2,
   Users,
   Wifi,
+  Projector,
+  Speaker,
+  Network,
 };
 
-const NUMS = ["01", "02", "03", "04", "05"];
+const NUMS = ["01", "02", "03", "04", "05", "06", "07", "08"];
 
 interface ServiceCardProps {
   icon: string;

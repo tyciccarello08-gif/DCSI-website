@@ -118,6 +118,14 @@ export default function Navbar() {
             </div>
 
             <Link
+              href="/service-areas"
+              className="relative px-4 py-2 text-text-secondary hover:text-text-primary text-sm font-inter font-medium transition-colors group"
+            >
+              Service Areas
+              <span className="absolute bottom-0 left-4 right-4 h-px bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left" />
+            </Link>
+
+            <Link
               href="/about"
               className="relative px-4 py-2 text-text-secondary hover:text-text-primary text-sm font-inter font-medium transition-colors group"
             >
@@ -226,6 +234,13 @@ export default function Navbar() {
                 </Link>
               ))}
             </div>
+            <Link
+              href="/service-areas"
+              className="block py-2.5 text-text-primary font-inter font-medium"
+              onClick={() => setMobileOpen(false)}
+            >
+              Service Areas
+            </Link>
             <Link
               href="/about"
               className="block py-2.5 text-text-primary font-inter font-medium"

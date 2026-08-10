@@ -1,15 +1,20 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import { Camera, Smartphone, Eye, Users } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import JsonLd from "@/components/JsonLd";
 import { CONTACT } from "@/lib/constants";
+import { pageMetadata, serviceSchema } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "CCTV Camera Systems | DCSI Inc. Tampa Bay",
+const PATH = "/services/camera-systems";
+
+export const metadata = pageMetadata({
+  title: "CCTV & Security Camera Installation in Tampa, FL",
   description:
-    "Professional CCTV and DVR camera system installation for homes and businesses in Tampa Bay. Remote mobile viewing, custom quotes.",
-};
+    "CCTV, DVR, and IP camera installation for homes and businesses across Hillsborough & Pasco Counties, FL. Remote viewing and free on-site quotes.",
+  path: PATH,
+});
 
 const ADVANTAGES = [
   "Use as video confirmation to an alarm event",
@@ -36,8 +41,10 @@ const CATEGORIES = [
 export default function CameraSystemsPage() {
   return (
     <>
+      <JsonLd data={serviceSchema(PATH)} />
       <HeroBanner
-        title="Professional CCTV Camera Systems"
+        breadcrumbs={<Breadcrumbs trail={[{ name: "Camera Systems", path: PATH }]} />}
+        title="CCTV & Security Camera Systems"
         subtitle="Custom camera installations for homes and businesses across Tampa Bay — with professional walkthrough, training, and ongoing support included."
         ctaText="Get a Custom Quote"
         ctaHref="/contact"

@@ -1,12 +1,28 @@
-import type { Metadata } from "next";
+import Link from "next/link";
 import { Phone, Mail, MapPin, PhoneCall, Clock } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
-import { CONTACT, COMPANY } from "@/lib/constants";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import JsonLd from "@/components/JsonLd";
+import BusinessHours from "@/components/BusinessHours";
+import { CITIES, CONTACT, COMPANY, SERVICE_AREAS } from "@/lib/constants";
+import { ORG_ID, abs, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact DCSI Inc. | Lutz, FL — (813) 949-6500",
+const PATH = "/contact";
+
+export const metadata = pageMetadata({
+  title: "Contact Us — Lutz, FL | (813) 949-6500",
   description:
-    "Contact DCSI Inc. Security & Sound in Lutz, FL. Call (813) 949-6500 or send us a message for a free security consultation.",
+    "Call (813) 949-6500 or message DCSI Inc. at 128 W. Lutz Lake Fern Rd, Lutz, FL 33548 for a free, no-obligation security consultation and quote.",
+  path: PATH,
+});
+
+const contactSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "@id": `${abs(PATH)}#webpage`,
+  url: abs(PATH),
+  name: "Contact DCSI Inc. — Lutz, FL",
+  mainEntity: { "@id": ORG_ID },
 };
 
 const CONTACT_ITEMS = [
@@ -50,12 +66,15 @@ const CONTACT_ITEMS = [
 export default function ContactPage() {
   return (
     <>
+      <JsonLd data={contactSchema} />
+
       {/* Hero */}
       <section className="relative grid-bg pt-32 pb-16">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-accent/8 rounded-full blur-3xl" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Breadcrumbs trail={[{ name: "Contact", path: PATH }]} className="mb-6" />
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-0.5 bg-accent" />
             <span className="text-accent text-xs font-montserrat uppercase tracking-widest">
@@ -63,7 +82,7 @@ export default function ContactPage() {
             </span>
           </div>
           <h1 className="font-montserrat font-extrabold text-4xl sm:text-5xl text-text-primary mb-4">
-            Contact Us
+            Contact DCSI Inc. — Lutz, FL
           </h1>
           <p className="font-inter text-text-secondary text-lg max-w-xl">
             Request a free quote, ask a question, or schedule a consultation. We respond promptly.
@@ -115,6 +134,52 @@ export default function ContactPage() {
               <p className="font-inter text-text-secondary text-sm mt-3">
                 We offer free consultations — no pressure, no obligation.
               </p>
+            </div>
+
+            <BusinessHours />
+
+            {/* Naming the cities we cover in visible copy is what lets local and
+                AI search match us to "near me" queries in each one. Cities with a
+                dedicated page link to it. */}
+            <div>
+              <h2 className="font-montserrat font-bold text-sm text-text-primary uppercase tracking-wider mb-4">
+                Areas We Serve
+              </h2>
+              <ul className="flex flex-wrap gap-2">
+                {SERVICE_AREAS.map((area) => {
+                  const city = CITIES.find((c) => c.name === area);
+                  const label = `${area}, FL`;
+                  return (
+                    <li key={area}>
+                      {city ? (
+                        <Link
+                          href={`/service-areas/${city.slug}`}
+                          className="inline-block font-inter text-text-secondary hover:text-accent text-xs border border-border hover:border-accent/40 rounded-full px-3 py-1.5 transition-colors"
+                        >
+                          {label}
+                        </Link>
+                      ) : (
+                        <span className="inline-block font-inter text-text-secondary text-xs border border-border rounded-full px-3 py-1.5">
+                          {label}
+                        </span>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+
+            {/* Embedded map — keyless, and lazy so it never blocks LCP. */}
+            <div className="overflow-hidden rounded-xl border border-border">
+              <iframe
+                src={CONTACT.mapEmbedUrl}
+                title={`Map to ${COMPANY.name} at ${CONTACT.address}`}
+                width="100%"
+                height="280"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                style={{ border: 0, display: "block" }}
+              />
             </div>
 
             <a

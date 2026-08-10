@@ -1,13 +1,18 @@
-import type { Metadata } from "next";
 import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import JsonLd from "@/components/JsonLd";
 import { CONTACT } from "@/lib/constants";
+import { faqSchema, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Burglar Alarm FAQ | DCSI Inc. Tampa",
+const PATH = "/resources/burglar-alarm-faq";
+
+export const metadata = pageMetadata({
+  title: "Burglar Alarm FAQ — How Alarm Systems Work",
   description:
-    "Answers to common questions about burglar alarms, security system monitoring, and home protection from DCSI Inc. in Tampa Bay.",
-};
+    "How burglar alarms work, what happens when one is triggered, what 24/7 monitoring covers, and whether Florida requires an alarm permit.",
+  path: PATH,
+});
 
 const FAQS = [
   {
@@ -47,7 +52,9 @@ const FAQS = [
 export default function BurglarAlarmFAQPage() {
   return (
     <>
+      <JsonLd data={faqSchema(FAQS, PATH)} />
       <HeroBanner
+        breadcrumbs={<Breadcrumbs trail={[{ name: "Burglar Alarm FAQ", path: PATH }]} />}
         title="Burglar Alarm FAQ"
         subtitle="Answers to the most common questions about security systems, monitoring, and home protection."
       />
@@ -60,7 +67,7 @@ export default function BurglarAlarmFAQPage() {
               className="group bg-bg-card border border-border rounded-xl overflow-hidden"
             >
               <summary className="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
-                <span className="font-montserrat font-bold text-text-primary text-base">{faq.q}</span>
+                <h2 className="font-montserrat font-bold text-text-primary text-base">{faq.q}</h2>
                 <span className="text-accent font-montserrat text-xl flex-shrink-0 group-open:rotate-45 transition-transform">+</span>
               </summary>
               <div className="px-6 pb-6">

@@ -1,15 +1,20 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import { Building2, Wifi, Shield, Camera, Speaker, Plug } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import JsonLd from "@/components/JsonLd";
 import { CONTACT } from "@/lib/constants";
+import { pageMetadata, serviceSchema } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "New Construction Low Voltage Services | DCSI Inc. Tampa",
+const PATH = "/services/new-construction";
+
+export const metadata = pageMetadata({
+  title: "New Construction Low Voltage Pre-Wire",
   description:
-    "Low voltage pre-wire for new construction in Hillsborough County. Security, cameras, structured wiring, home theater pre-wire, and more.",
-};
+    "Low voltage pre-wire for builders across Hillsborough & Pasco Counties, FL — security and camera rough-in, CAT6 wiring, and home theater pre-wire.",
+  path: PATH,
+});
 
 const SERVICES = [
   { icon: Shield, title: "Security System Pre-Wire", description: "Complete alarm and sensor pre-wire roughed in before drywall." },
@@ -23,9 +28,11 @@ const SERVICES = [
 export default function NewConstructionPage() {
   return (
     <>
+      <JsonLd data={serviceSchema(PATH)} />
       <HeroBanner
+        breadcrumbs={<Breadcrumbs trail={[{ name: "New Construction", path: PATH }]} />}
         title="New Construction Low Voltage Services"
-        subtitle="Partnering with builders and developers across Hillsborough County to deliver complete low voltage pre-wire for residential and commercial new construction."
+        subtitle="Partnering with builders and developers across Hillsborough and Pasco Counties — including the Wesley Chapel and Land O' Lakes growth corridor — to deliver complete low voltage pre-wire for residential and commercial new construction."
         ctaText="Contact Us for Builder Pricing"
         ctaHref="/contact"
         secondaryCtaText={`Call ${CONTACT.phone}`}
@@ -102,7 +109,7 @@ export default function NewConstructionPage() {
 
       <CTABanner
         headline="Builder & Developer Pricing Available"
-        body="Contact us for volume pricing on new construction low voltage projects in Hillsborough County and surrounding areas."
+        body="Contact us for volume pricing on new construction low voltage projects across Hillsborough and Pasco Counties."
         ctaText="Get in Touch"
         ctaHref="/contact"
         secondaryCtaText={`Call ${CONTACT.phone}`}

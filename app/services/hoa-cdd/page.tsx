@@ -1,15 +1,20 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import { Camera, Shield, Key, Bell, Users, Wrench } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import JsonLd from "@/components/JsonLd";
 import { CONTACT } from "@/lib/constants";
+import { pageMetadata, serviceSchema } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "HOA & CDD Security Services | DCSI Inc. Tampa Bay",
+const PATH = "/services/hoa-cdd";
+
+export const metadata = pageMetadata({
+  title: "HOA & CDD Security, Gate Access & Cameras",
   description:
-    "Professional security systems for homeowner associations and community development districts in Hillsborough County. Gate access, cameras, monitoring, and more.",
-};
+    "Gate access control, common area and amenity cameras, and 24/7 monitoring for HOAs and CDDs across Hillsborough & Pasco Counties, FL.",
+  path: PATH,
+});
 
 const SERVICES = [
   {
@@ -54,7 +59,7 @@ const WHY_DCSI = [
   "Volume & bulk pricing for community-wide contracts",
   "Single point of contact for the entire HOA or CDD",
   "24/7 in-house monitoring — no third-party dispatch",
-  "Local Hillsborough County company since 2004",
+  "Local Hillsborough & Pasco company since 2004",
   "Experience with both residential communities and commercial CDDs",
   "Ongoing maintenance and service contracts available",
   "Fast response — we're in your backyard, not across the country",
@@ -64,7 +69,9 @@ const WHY_DCSI = [
 export default function HoaCddPage() {
   return (
     <>
+      <JsonLd data={serviceSchema(PATH)} />
       <HeroBanner
+        breadcrumbs={<Breadcrumbs trail={[{ name: "HOA & CDD Services", path: PATH }]} />}
         title="HOA & CDD Security Services"
         subtitle="Protecting Tampa Bay communities from the gate in — gate access, common area cameras, amenity security, and 24/7 in-house monitoring for homeowner associations and community development districts."
         ctaText="Request Community Pricing"
@@ -92,7 +99,8 @@ export default function HoaCddPage() {
                 doesn&apos;t work for communities.
               </p>
               <p className="font-inter text-text-secondary leading-relaxed mb-8">
-                DCSI Inc. has been working with communities across Hillsborough County since 2004.
+                DCSI Inc. has been working with communities across Hillsborough and Pasco Counties since 2004 —
+                including the CDD-governed communities of Wesley Chapel, Land O&apos; Lakes, and New Tampa.
                 We understand the dynamics of HOA and CDD management, and we design security
                 solutions that are practical for board members, transparent for residents, and
                 effective against real threats.

@@ -1,15 +1,21 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import HeroBanner from "@/components/HeroBanner";
 import TestimonialCard from "@/components/TestimonialCard";
 import CTABanner from "@/components/CTABanner";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import JsonLd from "@/components/JsonLd";
+import ReviewCta from "@/components/ReviewCta";
 import { CONTACT } from "@/lib/constants";
+import { ORG_ID, abs, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "About DCSI Inc. | Tampa Bay Security Experts",
+const PATH = "/about";
+
+export const metadata = pageMetadata({
+  title: "About Us — Tampa Bay Security Since 2004",
   description:
-    "Learn about DCSI Inc., Tampa Bay's trusted source for residential and commercial security systems, cameras, and sound since 2004.",
-};
+    "A security and sound company in Lutz, FL since 2004. We design, install, and monitor alarm and camera systems across Hillsborough & Pasco — in house.",
+  path: PATH,
+});
 
 const ALL_TESTIMONIALS = [
   {
@@ -43,10 +49,31 @@ const ALL_TESTIMONIALS = [
   },
 ];
 
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "@id": `${abs(PATH)}#webpage`,
+  url: abs(PATH),
+  name: "About DCSI Inc. — Tampa Bay Security Company Since 2004",
+  mainEntity: { "@id": ORG_ID },
+  isPartOf: { "@id": ORG_ID },
+};
+
+/** Testimonials, marked up so review text is attributable to the business entity. */
+const reviewSchema = ALL_TESTIMONIALS.map((t) => ({
+  "@context": "https://schema.org",
+  "@type": "Review",
+  itemReviewed: { "@id": ORG_ID },
+  author: { "@type": "Person", name: t.name },
+  reviewBody: t.quote,
+}));
+
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={[aboutSchema, ...reviewSchema]} />
       <HeroBanner
+        breadcrumbs={<Breadcrumbs trail={[{ name: "About", path: PATH }]} />}
         title="About DCSI, Inc."
         subtitle="Tampa Bay's trusted source for security solutions — protecting families and businesses since 2004."
       />
@@ -55,8 +82,8 @@ export default function AboutPage() {
       <section className="relative overflow-hidden">
         <div className="relative w-full h-56 sm:h-72">
           <Image
-            src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1600&q=80&auto=format&fit=crop"
-            alt="Tampa Bay neighborhood protected by DCSI Inc."
+            src="/images/13-residential-home-exterior.webp"
+            alt="Residential home in the Tampa Bay area protected by a DCSI Inc. security system"
             fill
             sizes="100vw"
             className="object-cover object-center"
@@ -95,8 +122,8 @@ export default function AboutPage() {
                 — and that hasn&apos;t changed in over 20 years.
               </p>
               <p className="font-inter text-text-secondary leading-relaxed text-base">
-                We are a full-service security and sound company serving Hillsborough County,
-                Florida and surrounding areas. From alarm systems and camera installations to
+                We are a full-service security and sound company serving Hillsborough and Pasco
+                Counties, Florida. From alarm systems and camera installations to
                 access control and structured wiring — we handle it all under one roof.
               </p>
             </div>
@@ -131,7 +158,7 @@ export default function AboutPage() {
           <div className="space-y-6">
             <div className="relative overflow-hidden rounded-2xl border border-border shadow-xl">
               <Image
-                src="/images/01-family-home-security.png"
+                src="/images/01-family-home-security.webp"
                 alt="Family protected by DCSI home security system"
                 width={400}
                 height={600}
@@ -161,7 +188,8 @@ export default function AboutPage() {
 
             <div className="bg-accent/10 border border-accent/20 rounded-xl p-6">
               <p className="font-inter text-text-secondary text-sm leading-relaxed">
-                Serving <strong className="text-text-primary">Hillsborough County, FL</strong> and surrounding areas.
+                Serving <strong className="text-text-primary">Hillsborough &amp; Pasco Counties, FL</strong> — Lutz, Wesley Chapel,
+                Land O&apos; Lakes, Odessa, Carrollwood, Westchase, New Tampa, and Brandon.
               </p>
               <a
                 href={`tel:${CONTACT.phone.replace(/\D/g, "")}`}
@@ -186,10 +214,10 @@ export default function AboutPage() {
           </h2>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              { src: "/images/03-dcsi-truck-branding.png", caption: "DCSI Inc. — Serving Tampa Bay" },
-              { src: "/images/05-dcsi-honeywell-touchscreen-panel.png", caption: "Smart Home Security Panel" },
-              { src: "/images/12-gym-commercial-av-install.png", caption: "Commercial AV Installation" },
-              { src: "/images/11-home-theater-projector-surround.png", caption: "Home Theater Build" },
+              { src: "/images/03-dcsi-truck-branding.webp", caption: "DCSI Inc. — Serving Tampa Bay" },
+              { src: "/images/05-dcsi-honeywell-touchscreen-panel.webp", caption: "Smart Home Security Panel" },
+              { src: "/images/12-gym-commercial-av-install.webp", caption: "Commercial AV Installation" },
+              { src: "/images/11-home-theater-projector-surround.webp", caption: "Home Theater Build" },
               { src: "/images/new-construction-framing-prewire.jpg", caption: "New Construction Pre-Wire" },
               { src: "/images/new-construction-structured-wiring.jpg", caption: "Structured Wiring Installation" },
             ].map((item) => (
@@ -230,6 +258,8 @@ export default function AboutPage() {
               <TestimonialCard key={t.name} {...t} index={i} />
             ))}
           </div>
+
+          <ReviewCta className="mt-10 max-w-xl" />
         </div>
       </section>
 

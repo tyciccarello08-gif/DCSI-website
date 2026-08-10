@@ -1,6 +1,13 @@
 ﻿import Link from "next/link";
-import { Phone, Mail, MapPin, PhoneCall } from "lucide-react";
-import { CONTACT, COMPANY, NAV_SERVICES, NAV_RESOURCES } from "@/lib/constants";
+import { Phone, Mail, MapPin, PhoneCall, BadgeCheck } from "lucide-react";
+import {
+  CITIES,
+  CONTACT,
+  COMPANY,
+  LICENSE,
+  NAV_SERVICES,
+  NAV_RESOURCES,
+} from "@/lib/constants";
 
 export default function Footer() {
   return (
@@ -26,7 +33,7 @@ export default function Footer() {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-5">
@@ -48,6 +55,19 @@ export default function Footer() {
               Tampa Bay&apos;s trusted source for residential &amp; commercial
               security, cameras, and sound systems since {COMPANY.founded}.
             </p>
+
+            {/* Florida expects the contractor license on advertising, and it is a
+                direct trust signal. Renders only once a real number is set. */}
+            {LICENSE.number && (
+              <div className="mt-5 flex items-start gap-2.5">
+                <BadgeCheck size={14} className="text-accent mt-0.5 flex-shrink-0" />
+                <span className="text-text-secondary text-xs font-inter leading-relaxed">
+                  {LICENSE.label}
+                  <br />
+                  <strong className="text-text-primary">{LICENSE.number}</strong>
+                </span>
+              </div>
+            )}
           </div>
 
           {/* Services */}
@@ -107,6 +127,37 @@ export default function Footer() {
                   className="text-text-secondary hover:text-accent text-sm font-inter transition-colors"
                 >
                   Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Service areas — internal links to every city page */}
+          <div>
+            <h3 className="font-inter font-semibold text-text-primary uppercase tracking-[0.15em] text-[11px] mb-5 flex items-center gap-2">
+              <span
+                className="inline-block w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0"
+                style={{ boxShadow: "0 0 6px rgba(227,0,15,0.8)" }}
+              />
+              Service Areas
+            </h3>
+            <ul className="space-y-2.5">
+              {CITIES.map((c) => (
+                <li key={c.slug}>
+                  <Link
+                    href={`/service-areas/${c.slug}`}
+                    className="text-text-secondary hover:text-accent text-sm font-inter transition-colors"
+                  >
+                    {c.name}, FL
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link
+                  href="/service-areas"
+                  className="text-accent hover:text-accent-light text-sm font-inter transition-colors"
+                >
+                  All service areas →
                 </Link>
               </li>
             </ul>
@@ -175,6 +226,7 @@ export default function Footer() {
           </p>
           <p className="text-text-secondary text-xs font-inter">
             Serving {CONTACT.serviceArea}
+            {LICENSE.number ? ` · ${LICENSE.label} ${LICENSE.number}` : ""}
           </p>
         </div>
       </div>

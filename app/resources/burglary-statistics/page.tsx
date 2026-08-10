@@ -1,13 +1,19 @@
-import type { Metadata } from "next";
 import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import JsonLd from "@/components/JsonLd";
 import { CONTACT } from "@/lib/constants";
+import { ORG_ID, abs, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Burglary Statistics | DCSI Inc. — Why Home Security Matters",
+const PATH = "/resources/burglary-statistics";
+
+export const metadata = pageMetadata({
+  title: "Burglary Statistics — Why Home Security Matters",
   description:
-    "National and Florida burglary statistics that show why a monitored home security system is one of the smartest investments you can make.",
-};
+    "How often U.S. homes are burglarized, average losses, when break-ins happen, and how much a monitored alarm changes the odds — with sources.",
+  path: PATH,
+  type: "article",
+});
 
 const STATS = [
   { value: "1 in 36", label: "U.S. homes burglarized each year", source: "FBI UCR" },
@@ -27,10 +33,45 @@ const TIPS = [
   "Most burglars spend less than 60 seconds attempting to enter — alarms stop them",
 ];
 
+/**
+ * Each figure is published with its source, so it is marked up as a cited Claim.
+ * Attributed statistics are what AI answer engines are willing to quote back.
+ */
+const statsSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": `${abs(PATH)}#article`,
+  headline: "Burglary Statistics — Why Home Security Systems Matter",
+  description:
+    "National and Florida burglary statistics, with sources, showing how a monitored security system changes a home's risk profile.",
+  url: abs(PATH),
+  publisher: { "@id": ORG_ID },
+  author: { "@id": ORG_ID },
+  inLanguage: "en-US",
+  about: { "@type": "Thing", name: "Residential burglary and home security" },
+  mainEntity: {
+    "@type": "ItemList",
+    name: "The Reality of Property Crime in America",
+    numberOfItems: STATS.length,
+    itemListElement: STATS.map((stat, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "Claim",
+        name: `${stat.value} — ${stat.label}`,
+        text: `${stat.value}: ${stat.label}.`,
+        citation: stat.source,
+      },
+    })),
+  },
+};
+
 export default function BurglaryStatisticsPage() {
   return (
     <>
+      <JsonLd data={statsSchema} />
       <HeroBanner
+        breadcrumbs={<Breadcrumbs trail={[{ name: "Burglary Statistics", path: PATH }]} />}
         title="Burglary Statistics"
         subtitle="Understanding the risk is the first step to protecting your home or business."
       />

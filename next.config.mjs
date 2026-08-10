@@ -1,16 +1,29 @@
+// Vercel preview/branch deploys get their own hostnames. Without an explicit
+// noindex they can be indexed as a duplicate of the whole production site.
+// robots.txt alone is not sufficient — Google can index a disallowed URL it finds
+// linked, and only an X-Robots-Tag header reliably keeps it out.
+const isPreview =
+  process.env.VERCEL_ENV === "preview" || process.env.VERCEL_ENV === "development";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
-    ],
+    // All imagery is self-hosted in /public/images — no remote patterns needed.
+    formats: ["image/avif", "image/webp"],
   },
 
   async headers() {
     return [
+      ...(isPreview
+        ? [
+            {
+              source: "/(.*)",
+              headers: [
+                { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
+              ],
+            },
+          ]
+        : []),
       {
         source: "/(.*)",
         headers: [
@@ -30,7 +43,7 @@ const nextConfig = {
             value: "camera=(), microphone=(), geolocation=(), payment=()",
           },
           // Content Security Policy
-          // - Allows Google Fonts and Unsplash images
+          // - Allows Google Fonts
           // - 'unsafe-inline' needed for Tailwind + Framer Motion inline styles
           // - The contact form's bot check is self-hosted (see lib/form-token.ts),
           //   so no third-party origin needs allowing here.
@@ -41,8 +54,10 @@ const nextConfig = {
               "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // Next.js requires these
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
-              "img-src 'self' data: blob: https://images.unsplash.com",
+              "img-src 'self' data: blob:",
               "connect-src 'self'",
+              // Keyless Google Maps embed on the contact page.
+              "frame-src https://maps.google.com https://www.google.com",
               "frame-ancestors 'self'",
               "base-uri 'self'",
               "form-action 'self'",

@@ -1,0 +1,53 @@
+import type { MetadataRoute } from "next";
+import { CITIES, SITE_URL } from "@/lib/constants";
+
+type Entry = {
+  path: string;
+  priority: number;
+  changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
+};
+
+const ROUTES: Entry[] = [
+  { path: "/", priority: 1.0, changeFrequency: "monthly" },
+
+  // Services
+  { path: "/services/security-monitoring", priority: 0.9, changeFrequency: "monthly" },
+  { path: "/services/camera-systems", priority: 0.9, changeFrequency: "monthly" },
+  { path: "/services/hoa-cdd", priority: 0.9, changeFrequency: "monthly" },
+  { path: "/services/new-construction", priority: 0.9, changeFrequency: "monthly" },
+  { path: "/services/home-theater", priority: 0.9, changeFrequency: "monthly" },
+  { path: "/services/whole-home-audio", priority: 0.9, changeFrequency: "monthly" },
+  { path: "/services/structured-wiring", priority: 0.9, changeFrequency: "monthly" },
+
+  // Service areas
+  { path: "/service-areas", priority: 0.8, changeFrequency: "monthly" },
+  ...CITIES.map((c) => ({
+    path: `/service-areas/${c.slug}`,
+    priority: 0.8,
+    changeFrequency: "monthly" as const,
+  })),
+
+  { path: "/contact", priority: 0.8, changeFrequency: "yearly" },
+  { path: "/about", priority: 0.7, changeFrequency: "yearly" },
+
+  // Resources — the cost guide targets the highest-intent query on the site.
+  { path: "/resources/security-system-cost", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/resources/choosing-a-monitoring-company", priority: 0.7, changeFrequency: "yearly" },
+  { path: "/resources/hoa-board-security-guide", priority: 0.7, changeFrequency: "yearly" },
+  { path: "/resources/builder-prewire-guide", priority: 0.7, changeFrequency: "yearly" },
+  { path: "/resources/burglar-alarm-faq", priority: 0.6, changeFrequency: "yearly" },
+  { path: "/resources/safety-tips", priority: 0.6, changeFrequency: "yearly" },
+  { path: "/resources/burglary-statistics", priority: 0.5, changeFrequency: "yearly" },
+];
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const lastModified = new Date();
+  return ROUTES.map(({ path, priority, changeFrequency }) => ({
+    // Next emits canonicals without a trailing slash; match that exactly so the
+    // sitemap and the canonical tags never disagree about the home page.
+    url: path === "/" ? SITE_URL : new URL(path, SITE_URL).toString(),
+    lastModified,
+    changeFrequency,
+    priority,
+  }));
+}
