@@ -421,12 +421,20 @@ export default function HomePage() {
         >
           {[
             {
-              src: "/images/04-security-camera-dome-commercial.png",
-              alt: "Commercial security camera installation",
+              src: "/images/amenity-center-camera.jpg",
+              alt: "Security camera covering a community amenity center",
             },
             {
-              src: "/images/14-gate-security-camera.png",
-              alt: "Gate security camera system",
+              src: "/images/gate-access-control.jpg",
+              alt: "Access-controlled community gate installation",
+            },
+            {
+              src: "/images/camera-dome-soffit-install.jpg",
+              alt: "Dome security camera installed under a home soffit",
+            },
+            {
+              src: "/images/new-construction-framing-prewire.jpg",
+              alt: "Low-voltage pre-wire during new home construction",
             },
             {
               src: "/images/09-home-theater-wall-mount.png",

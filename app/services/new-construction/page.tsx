@@ -60,22 +60,40 @@ export default function NewConstructionPage() {
 
       {/* Construction photos */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="relative aspect-video overflow-hidden rounded-xl border border-border">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-border">
             <Image
-              src="/images/17-pre-wire-soffit-camera.png"
-              alt="Pre-wire camera mount in soffit during construction"
+              src="/images/porch-ceiling-prewire.jpg"
+              alt="Camera and speaker rough-in in a porch ceiling during construction"
               fill
-              sizes="(max-width: 640px) 100vw, 50vw"
+              sizes="(max-width: 1024px) 50vw, 25vw"
               className="object-cover"
             />
           </div>
-          <div className="relative aspect-video overflow-hidden rounded-xl border border-border">
+          <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-border">
             <Image
-              src="/images/06-structured-wiring-installation.png"
-              alt="Structured wiring installation in new construction"
+              src="/images/new-construction-structured-wiring.jpg"
+              alt="Structured wiring run through new construction framing"
               fill
-              sizes="(max-width: 640px) 100vw, 50vw"
+              sizes="(max-width: 1024px) 50vw, 25vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-border">
+            <Image
+              src="/images/underground-conduit-trenching.jpg"
+              alt="Underground conduit trenching at a new development"
+              fill
+              sizes="(max-width: 1024px) 50vw, 25vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-border">
+            <Image
+              src="/images/conduit-trench-fence-line.jpg"
+              alt="Conduit trenched in along a property fence line"
+              fill
+              sizes="(max-width: 1024px) 50vw, 25vw"
               className="object-cover"
             />
           </div>

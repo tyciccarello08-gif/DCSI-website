@@ -190,12 +190,12 @@ export default function AboutPage() {
               { src: "/images/05-dcsi-honeywell-touchscreen-panel.png", caption: "Smart Home Security Panel" },
               { src: "/images/12-gym-commercial-av-install.png", caption: "Commercial AV Installation" },
               { src: "/images/11-home-theater-projector-surround.png", caption: "Home Theater Build" },
-              { src: "/images/02-luxury-home-construction.png", caption: "New Construction Project" },
-              { src: "/images/06-structured-wiring-installation.png", caption: "Structured Wiring Installation" },
+              { src: "/images/new-construction-framing-prewire.jpg", caption: "New Construction Pre-Wire" },
+              { src: "/images/new-construction-structured-wiring.jpg", caption: "Structured Wiring Installation" },
             ].map((item) => (
               <div
                 key={item.caption}
-                className="relative aspect-video overflow-hidden rounded-xl border border-border group"
+                className="relative aspect-square overflow-hidden rounded-xl border border-border group"
               >
                 <Image
                   src={item.src}

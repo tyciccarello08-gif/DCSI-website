@@ -116,8 +116,8 @@ export default function HoaCddPage() {
             <div className="space-y-4">
               <div className="relative aspect-video overflow-hidden rounded-xl border border-border">
                 <Image
-                  src="/images/14-gate-security-camera.png"
-                  alt="Gate security camera for HOA community"
+                  src="/images/gate-access-control.jpg"
+                  alt="Access-controlled community gate with push-to-exit hardware"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
@@ -125,8 +125,8 @@ export default function HoaCddPage() {
               </div>
               <div className="relative aspect-video overflow-hidden rounded-xl border border-border">
                 <Image
-                  src="/images/04-security-camera-dome-commercial.png"
-                  alt="Dome PTZ camera for common area surveillance"
+                  src="/images/amenity-center-camera.jpg"
+                  alt="Dome camera covering a community amenity center and pool deck"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
@@ -191,22 +191,31 @@ export default function HoaCddPage() {
               </ul>
             </div>
 
-            <div className="space-y-4">
-              <div className="relative aspect-video overflow-hidden rounded-xl border border-border">
+            <div className="grid grid-cols-3 gap-4">
+              <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-border">
                 <Image
-                  src="/images/08-blueprints-planning.png"
-                  alt="Community security planning and design"
+                  src="/images/gate-lock-hardware.jpg"
+                  alt="Electronic gate lock hardware installed at a community entrance"
                   fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  sizes="(max-width: 1024px) 33vw, 17vw"
                   className="object-cover"
                 />
               </div>
-              <div className="relative aspect-video overflow-hidden rounded-xl border border-border">
+              <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-border">
                 <Image
-                  src="/images/15-mansion-construction.png"
-                  alt="Large community development project"
+                  src="/images/gate-operator-control-board.jpg"
+                  alt="Gate operator control board wired and programmed by DCSI"
                   fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  sizes="(max-width: 1024px) 33vw, 17vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-border">
+                <Image
+                  src="/images/gate-post-conduit-cabling.jpg"
+                  alt="Cabling run to a community gate operator post"
+                  fill
+                  sizes="(max-width: 1024px) 33vw, 17vw"
                   className="object-cover"
                 />
               </div>
@@ -240,10 +249,10 @@ export default function HoaCddPage() {
                 Talk to Our Team
               </a>
             </div>
-            <div className="relative aspect-video overflow-hidden rounded-xl border border-border">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border">
               <Image
-                src="/images/16-luxury-home-construction-2.png"
-                alt="Luxury community development project"
+                src="/images/new-construction-speaker-rough-in.jpg"
+                alt="Low-voltage rough-in during new community construction"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"

@@ -93,19 +93,19 @@ export default function CameraSystemsPage() {
       {/* Installation photo */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="relative aspect-video overflow-hidden rounded-xl border border-border">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border">
             <Image
-              src="/images/04-security-camera-dome-commercial.png"
-              alt="Dome security camera on commercial building"
+              src="/images/amenity-center-camera.jpg"
+              alt="Dome security camera covering a community clubhouse and pool deck"
               fill
               sizes="(max-width: 640px) 100vw, 50vw"
               className="object-cover"
             />
           </div>
-          <div className="relative aspect-video overflow-hidden rounded-xl border border-border">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border">
             <Image
-              src="/images/07-security-camera-hidden-landscaping.png"
-              alt="Discreet security camera hidden in landscaping"
+              src="/images/camera-dome-soffit-install.jpg"
+              alt="Discreet dome camera mounted under a residential soffit"
               fill
               sizes="(max-width: 640px) 100vw, 50vw"
               className="object-cover"
