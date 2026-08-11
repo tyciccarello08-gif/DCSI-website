@@ -17,6 +17,17 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Lock page scroll while the mobile drawer is open so touch gestures
+  // scroll the menu itself instead of the content behind it.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [mobileOpen]);
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
@@ -205,10 +216,12 @@ export default function Navbar() {
       {/* Mobile drawer */}
       {mobileOpen && (
         <div
-          className="lg:hidden border-t border-border"
+          className="lg:hidden border-t border-border overflow-y-auto overscroll-contain"
           style={{
             background: "rgba(17,17,17,0.98)",
             backdropFilter: "blur(20px)",
+            maxHeight: `calc(100dvh - ${scrolled ? "3.5rem" : "4rem"})`,
+            WebkitOverflowScrolling: "touch",
           }}
         >
           <div className="px-4 py-5 space-y-1">
