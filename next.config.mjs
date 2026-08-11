@@ -5,6 +5,13 @@
 const isPreview =
   process.env.VERCEL_ENV === "preview" || process.env.VERCEL_ENV === "development";
 
+// In production, @vercel/analytics is served first-party from /_vercel/insights/*
+// and needs no CSP exception. Only the local dev build pulls its debug script
+// from va.vercel-scripts.com, so that host is allowed in dev alone rather than
+// loosening script-src for real visitors.
+const isDev = process.env.NODE_ENV !== "production";
+const analyticsScriptSrc = isDev ? " https://va.vercel-scripts.com" : "";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -51,7 +58,7 @@ const nextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // Next.js requires these
+              `script-src 'self' 'unsafe-inline' 'unsafe-eval'${analyticsScriptSrc}`, // Next.js requires these
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: blob:",

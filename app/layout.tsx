@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Barlow_Condensed, Bebas_Neue, Outfit } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -99,6 +100,10 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <Footer />
+
+        {/* Served from /_vercel/insights/* — first-party, so it survives ad
+            blockers and needs no CSP exception in production. */}
+        <Analytics />
       </body>
     </html>
   );
