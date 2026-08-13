@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import GlobalBackground from "@/components/GlobalBackground";
 import JsonLd from "@/components/JsonLd";
-import { BUSINESS, COMPANY, SITE_URL } from "@/lib/constants";
+import { BUSINESS, COMPANY, SEARCH_VERIFICATION, SITE_URL } from "@/lib/constants";
 import { localBusinessSchema, websiteSchema } from "@/lib/seo";
 
 const barlowCondensed = Barlow_Condensed({
@@ -69,6 +69,14 @@ export const metadata: Metadata = {
       "max-snippet": -1,
       "max-video-preview": -1,
     },
+  },
+  // Only emitted once a real token is set — an empty verification meta tag is
+  // worse than none, since it looks verified while proving nothing.
+  verification: {
+    ...(SEARCH_VERIFICATION.google ? { google: SEARCH_VERIFICATION.google } : {}),
+    ...(SEARCH_VERIFICATION.bing
+      ? { other: { "msvalidate.01": SEARCH_VERIFICATION.bing } }
+      : {}),
   },
   // Phone numbers and addresses are already marked up as links; stop iOS from
   // wrapping bare text in its own styled anchors.
