@@ -281,15 +281,25 @@ export function cityServiceSchema(city: {
   name: string;
   county: string;
   zips: string[];
+  tier?: "core" | "extended";
 }) {
   const path = `/service-areas/${city.slug}`;
+  // Extended markets are monitoring-led — that is both what the page targets and
+  // what DCSI actually delivers there without a scheduled trip.
+  const extended = city.tier === "extended";
   return {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": `${abs(path)}#service`,
-    name: `Security Systems & Camera Installation in ${city.name}, FL`,
-    serviceType: "Security system and camera installation",
-    description: `Alarm systems, CCTV cameras, access control, home theater, and structured wiring installed in ${city.name}, Florida (${city.county}) by DCSI Inc. of Lutz, with 24/7 in-house monitoring.`,
+    name: extended
+      ? `Alarm Monitoring & Security Systems in ${city.name}, FL`
+      : `Security Systems & Camera Installation in ${city.name}, FL`,
+    serviceType: extended
+      ? "Alarm monitoring and security system installation"
+      : "Security system and camera installation",
+    description: extended
+      ? `24/7 alarm monitoring for ${city.name}, Florida (${city.county}), handled in house by DCSI Inc. from its Lutz monitoring center, plus scheduled installation and service of security systems, CCTV cameras, and access control.`
+      : `Alarm systems, CCTV cameras, access control, home theater, and structured wiring installed in ${city.name}, Florida (${city.county}) by DCSI Inc. of Lutz, with 24/7 in-house monitoring.`,
     url: abs(path),
     provider: { "@id": ORG_ID },
     areaServed: {

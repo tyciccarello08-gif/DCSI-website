@@ -19,11 +19,12 @@ const ROUTES: Entry[] = [
   { path: "/services/whole-home-audio", priority: 0.9, changeFrequency: "monthly" },
   { path: "/services/structured-wiring", priority: 0.9, changeFrequency: "monthly" },
 
-  // Service areas
+  // Service areas. Core markets outrank extended ones — priority is a relative
+  // hint about where crawl budget is best spent, and Lutz matters more than Ocala.
   { path: "/service-areas", priority: 0.8, changeFrequency: "monthly" },
   ...CITIES.map((c) => ({
     path: `/service-areas/${c.slug}`,
-    priority: 0.8,
+    priority: c.tier === "core" ? 0.8 : 0.7,
     changeFrequency: "monthly" as const,
   })),
 
