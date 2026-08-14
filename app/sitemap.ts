@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { CITIES, SITE_URL } from "@/lib/constants";
+import { CITIES, DCS_PAGES, SITE_URL } from "@/lib/constants";
 
 type Entry = {
   path: string;
@@ -30,6 +30,18 @@ const ROUTES: Entry[] = [
 
   { path: "/contact", priority: 0.8, changeFrequency: "yearly" },
   { path: "/about", priority: 0.7, changeFrequency: "yearly" },
+
+  // The "DCS" brand cluster. Branded searches are the highest-converting traffic
+  // on any site — the searcher already decided who they want and is only trying
+  // to find them — so the hub sits alongside the home page in priority.
+  { path: "/dcs", priority: 0.9, changeFrequency: "monthly" },
+  ...DCS_PAGES.map((p) => ({
+    path: `/dcs/${p.slug}`,
+    // The contact page carries a phone number someone is actively looking for;
+    // it earns the same weight as a service page.
+    priority: p.slug === "contact" ? 0.8 : 0.7,
+    changeFrequency: "monthly" as const,
+  })),
 
   // Resources — the cost guide targets the highest-intent query on the site.
   { path: "/resources/security-system-cost", priority: 0.8, changeFrequency: "monthly" },
