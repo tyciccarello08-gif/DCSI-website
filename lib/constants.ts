@@ -495,6 +495,122 @@ export const COMPANY = {
     "DCSI, Inc. is a full-service security and sound company based in Lutz, Florida, serving Hillsborough and Pasco Counties. Founded in 2004, DCSI designs and installs residential and commercial alarm systems, CCTV camera systems, gate and access control, home theater and whole-home audio, and structured wiring, backed by 24/7 in-house alarm monitoring.",
 };
 
+/**
+ * Name variants people actually type when they mean this company.
+ *
+ * The legal name is DCSI, Inc., but the four-letter form gets dropped constantly —
+ * on the phone, on referrals, and in search. Someone who half-remembers "the DCS
+ * people in Lutz" needs to land here, not on a competitor. These feed the
+ * LocalBusiness `alternateName` graph and the /dcs brand cluster.
+ *
+ * IMPORTANT: this claims the name only as a variant of DCSI, Inc. of Lutz, FL.
+ * Unrelated companies operate under "DCS" elsewhere, and nothing on the /dcs
+ * pages should read as a claim on their business — see
+ * /dcs/what-does-dcs-stand-for, which says so explicitly.
+ */
+export const DCS_ALIASES = [
+  "DCS",
+  "DCS Security",
+  "DCS Security & Sound",
+  "DCS Alarm",
+  "DCS Inc.",
+  "DCSI",
+  "DCSI Security",
+  "DCSI Security & Sound",
+];
+
+/**
+ * SET THESE once you confirm which app the panels you install actually use
+ * (Total Connect 2.0, Alarm.com, or whatever ships with the current panel line).
+ *
+ * Left blank deliberately. /dcs/app-and-login is the page a locked-out customer
+ * lands on at 11pm, and sending them to the wrong app store listing wastes the
+ * one thing they don't have — time. Blank, the page explains how to identify the
+ * app from the panel and gives them the office number instead.
+ */
+export const CUSTOMER_PORTAL = {
+  /** e.g. "Total Connect 2.0" */
+  appName: "",
+  /** Web login URL for the same platform. */
+  loginUrl: "",
+  appStoreUrl: "",
+  playStoreUrl: "",
+};
+
+export const HAS_PORTAL = Boolean(CUSTOMER_PORTAL.appName);
+
+/**
+ * The /dcs brand cluster. One hub plus nine pages, each answering a distinct
+ * question someone searching the DCS name is actually asking — who the company
+ * is, what it installs, how to reach it, and what to do when the panel beeps.
+ *
+ * Order is the order they render on the hub and in the sitemap.
+ */
+export interface DcsPage {
+  slug: string;
+  /** Short label for the hub grid and cross-links. */
+  label: string;
+  /** One line describing what the page answers. */
+  blurb: string;
+}
+
+export const DCS_PAGES: DcsPage[] = [
+  {
+    slug: "security-systems",
+    label: "DCS Security Systems",
+    blurb:
+      "What a DCS alarm system includes, how an install actually runs, and what the equipment does.",
+  },
+  {
+    slug: "alarm-monitoring",
+    label: "DCS Alarm Monitoring",
+    blurb:
+      "The in-house monitoring center in Lutz — what happens in the first ninety seconds after a signal.",
+  },
+  {
+    slug: "cameras",
+    label: "DCS Camera Systems",
+    blurb:
+      "CCTV and IP cameras, recording and retention, remote viewing, and video verification of alarms.",
+  },
+  {
+    slug: "commercial",
+    label: "DCS Commercial Security",
+    blurb:
+      "Business alarm systems, access control, gates, and community security for HOAs and CDDs.",
+  },
+  {
+    slug: "contact",
+    label: "DCS Phone Number & Office",
+    blurb:
+      "Phone, email, address, hours, and which number to call for a new quote versus an existing system.",
+  },
+  {
+    slug: "customer-service",
+    label: "DCS Customer Service",
+    blurb:
+      "Already have a DCS system: service calls, false alarms, call-list changes, moving, and trouble codes.",
+  },
+  {
+    slug: "app-and-login",
+    label: "DCS App & Remote Access",
+    blurb:
+      "Arming from your phone, finding which app your panel uses, and what to do when a login fails.",
+  },
+  {
+    slug: "reviews",
+    label: "Is DCS Legitimate?",
+    blurb:
+      "How to verify any Florida alarm company — license lookup, physical address, and who answers the alarm.",
+  },
+  {
+    slug: "what-does-dcs-stand-for",
+    label: "What Does DCS Stand For?",
+    blurb:
+      "The name, where it comes from, and the many unrelated things also called DCS.",
+  },
+];
+
 export const NAV_SERVICES = [
   { label: "Security & Monitoring", href: "/services/security-monitoring" },
   { label: "Camera Systems", href: "/services/camera-systems" },
@@ -506,6 +622,10 @@ export const NAV_SERVICES = [
 ];
 
 export const NAV_RESOURCES = [
+  // Sitewide entry point into the /dcs cluster. It leads because someone who
+  // arrived here searching the short name needs to find the explanation without
+  // reading a whole menu.
+  { label: "DCS Security (DCSI)", href: "/dcs" },
   { label: "Security System Cost Guide", href: "/resources/security-system-cost" },
   { label: "Choosing a Monitoring Company", href: "/resources/choosing-a-monitoring-company" },
   { label: "HOA & CDD Board Guide", href: "/resources/hoa-board-security-guide" },

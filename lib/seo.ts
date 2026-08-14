@@ -3,6 +3,7 @@ import {
   BUSINESS,
   COMPANY,
   CONTACT,
+  DCS_ALIASES,
   HAS_AGGREGATE_RATING,
   LICENSE,
   REVIEWS,
@@ -76,7 +77,11 @@ export function localBusinessSchema() {
     "@id": ORG_ID,
     name: COMPANY.name,
     legalName: COMPANY.legalName,
-    alternateName: [COMPANY.fullName, "DCSI Security", "DCSI Security & Sound"],
+    // Every form the business is known by, including the "DCS" short name people
+    // use on the phone and in search. Registering the variants here is what lets
+    // a search engine resolve "DCS security Lutz" to this entity instead of
+    // treating it as a different company.
+    alternateName: [COMPANY.fullName, ...DCS_ALIASES],
     description: COMPANY.description,
     url: SITE_URL,
     telephone: CONTACT.phoneE164,
@@ -316,6 +321,41 @@ export function cityServiceSchema(city: {
         description: "Free on-site consultation and custom quote.",
       },
     },
+  };
+}
+
+/**
+ * Generic WebPage node tied back to the one business entity.
+ *
+ * The /dcs brand pages use this rather than each minting its own Organization —
+ * ten Organization nodes describing the same company is a fragmented graph, and
+ * the whole point of that cluster is to consolidate the "DCS" name onto a single
+ * entity. `about`/`mainEntity` both point at ORG_ID to say so explicitly.
+ */
+export function webPageSchema({
+  path,
+  name,
+  description,
+  type = "WebPage",
+}: {
+  path: string;
+  name: string;
+  description: string;
+  /** e.g. "AboutPage", "ContactPage", "CollectionPage". */
+  type?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": type,
+    "@id": `${abs(path)}#webpage`,
+    url: abs(path),
+    name,
+    description,
+    inLanguage: "en-US",
+    isPartOf: { "@id": WEBSITE_ID },
+    about: { "@id": ORG_ID },
+    mainEntity: { "@id": ORG_ID },
+    publisher: { "@id": ORG_ID },
   };
 }
 
