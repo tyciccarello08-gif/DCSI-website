@@ -209,14 +209,34 @@ export default function SecurityMonitoringPage() {
               </a>
             </div>
             <div className="space-y-6">
-              <div className="relative aspect-video overflow-hidden rounded-xl border border-border">
+              <div className="relative aspect-video overflow-hidden rounded-xl border border-border bg-white">
                 <Image
-                  src="/images/05-dcsi-honeywell-touchscreen-panel.webp"
-                  alt="DCSI Honeywell touchscreen security panel"
+                  src="/images/keypad-honeywell-proseries-touchscreen.png"
+                  alt="Honeywell Home ProSeries wireless touchscreen keypad installed by DCSI"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
+                  className="object-contain p-4"
                 />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border bg-white">
+                  <Image
+                    src="/images/keypad-honeywell-tuxedo-touchscreen.jpg"
+                    alt="Honeywell Tuxedo touchscreen alarm keypad with arming options"
+                    fill
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                    className="object-contain p-3"
+                  />
+                </div>
+                <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border bg-white">
+                  <Image
+                    src="/images/keypad-honeywell-lcd.webp"
+                    alt="Honeywell LCD alarm keypad showing an armed away system"
+                    fill
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                    className="object-contain p-3"
+                  />
+                </div>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 {[
