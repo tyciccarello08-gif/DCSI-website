@@ -141,7 +141,9 @@ export default function Footer() {
               />
               Service Areas
             </h3>
-            <ul className="space-y-2.5">
+            {/* Two columns: with every city linked, one column ran far longer
+                than the rest of the footer. */}
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-2.5">
               {CITIES.map((c) => (
                 <li key={c.slug}>
                   <Link
@@ -152,7 +154,7 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
-              <li>
+              <li className="col-span-2">
                 <Link
                   href="/service-areas"
                   className="text-accent hover:text-accent-light text-sm font-inter transition-colors"

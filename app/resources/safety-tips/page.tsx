@@ -3,10 +3,12 @@ import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
-import { CONTACT } from "@/lib/constants";
-import { ORG_ID, abs, pageMetadata } from "@/lib/seo";
+import RelatedResources from "@/components/RelatedResources";
+import { CONTACT, resourceBySlug } from "@/lib/constants";
+import { articleSchema, ORG_ID, abs, pageMetadata } from "@/lib/seo";
 
 const PATH = "/resources/safety-tips";
+const R = resourceBySlug("safety-tips");
 
 export const metadata = pageMetadata({
   title: "8 Home Security Tips You Can Act On Today",
@@ -90,9 +92,9 @@ const tipsSchema = {
 export default function SafetyTipsPage() {
   return (
     <>
-      <JsonLd data={tipsSchema} />
+      <JsonLd data={[articleSchema({ path: PATH, headline: R.title, description: R.blurb, published: R.published, modified: R.modified }), tipsSchema]} />
       <HeroBanner
-        breadcrumbs={<Breadcrumbs trail={[{ name: "Safety Tips", path: PATH }]} />}
+        breadcrumbs={<Breadcrumbs trail={[{ name: "Resources", path: "/resources" }, { name: "Safety Tips", path: PATH }]} />}
         title="Home Security Safety Tips"
         subtitle="Simple, actionable steps you can take today to protect your home, family, and belongings."
       />
@@ -122,6 +124,8 @@ export default function SafetyTipsPage() {
           ))}
         </div>
       </section>
+
+      <RelatedResources slugs={["vacant-home-security", "hurricane-season-security", "burglary-statistics"]} />
 
       <CTABanner
         headline="Take the Next Step — Get a Professional Security System"

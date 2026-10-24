@@ -5,10 +5,12 @@ import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
-import { CONTACT } from "@/lib/constants";
+import RelatedResources from "@/components/RelatedResources";
+import { CONTACT, resourceBySlug } from "@/lib/constants";
 import { ORG_ID, abs, faqSchema, pageMetadata } from "@/lib/seo";
 
 const PATH = "/resources/hoa-board-security-guide";
+const R = resourceBySlug("hoa-board-security-guide");
 
 export const metadata = pageMetadata({
   title: "HOA & CDD Board Guide to Community Security",
@@ -93,6 +95,10 @@ const articleSchema = {
   url: abs(PATH),
   author: { "@id": ORG_ID },
   publisher: { "@id": ORG_ID },
+  mainEntityOfPage: { "@type": "WebPage", "@id": abs(PATH) },
+  image: abs("/images/gate-access-control.jpg"),
+  datePublished: R.published,
+  dateModified: R.modified,
   inLanguage: "en-US",
   audience: { "@type": "Audience", audienceType: "HOA and CDD board members and property managers" },
 };
@@ -102,7 +108,7 @@ export default function HoaBoardGuidePage() {
     <>
       <JsonLd data={[articleSchema, faqSchema(FAQS, PATH)]} />
       <HeroBanner
-        breadcrumbs={<Breadcrumbs trail={[{ name: "HOA & CDD Board Guide", path: PATH }]} />}
+        breadcrumbs={<Breadcrumbs trail={[{ name: "Resources", path: "/resources" }, { name: "HOA & CDD Board Guide", path: PATH }]} />}
         title="A Board's Guide to Community Security"
         subtitle="Written for HOA and CDD boards deciding how to scope, budget, and award a gate access or camera project — including the questions that are cheaper to ask before the vote than after."
         ctaText="Request Community Pricing"
@@ -229,6 +235,8 @@ export default function HoaBoardGuidePage() {
           </p>
         </div>
       </section>
+
+      <RelatedResources slugs={["builder-prewire-guide", "how-many-security-cameras", "choosing-a-monitoring-company"]} />
 
       <CTABanner
         headline="Board-Ready Proposals"

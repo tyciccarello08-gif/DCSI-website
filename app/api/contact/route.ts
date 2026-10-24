@@ -36,6 +36,8 @@ function isRateLimited(ip: string): boolean {
 // ── Input validation constants ────────────────────────────────────────────────
 const ALLOWED_SERVICES = new Set([
   "Security Systems & Monitoring",
+  "Monitoring Takeover (Existing System)",
+  "Commercial Security",
   "Camera Systems (CCTV)",
   "New Construction Low Voltage",
   "Home Theater",

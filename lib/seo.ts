@@ -234,7 +234,73 @@ export const SERVICE_SCHEMAS = [
     description:
       "CAT6 data cabling, coax, and fiber to a central structured wiring panel, plus whole-home Wi-Fi design and smart home integration for locks, thermostats, lighting, and video doorbells.",
   },
+  {
+    path: "/services/commercial-security",
+    name: "Commercial Security Systems",
+    serviceType: "Commercial burglar alarm, camera, and access control installation",
+    description:
+      "Business alarm systems with open/close reporting, storefront and warehouse camera coverage, employee access control, and 24/7 in-house monitoring on one account.",
+  },
+  {
+    path: "/services/access-control",
+    name: "Access Control & Gate Systems",
+    serviceType: "Access control, gate operator, and intercom installation",
+    description:
+      "Card, fob, keypad, and mobile-credential access control for doors and gates, gate operators and telephone-entry intercoms, and audit logs a manager can run without a service call.",
+  },
+  {
+    path: "/services/alarm-monitoring-takeover",
+    name: "Alarm Monitoring Takeover",
+    serviceType: "Alarm monitoring takeover and communicator upgrade",
+    description:
+      "Move an existing alarm system to DCSI's 24/7 in-house monitoring without replacing working sensors or wiring — panel reprogramming, cellular communicator upgrade, and no long-term contract.",
+  },
 ] as const;
+
+/**
+ * Article markup for the /resources guides.
+ *
+ * Dates are required inputs rather than defaults: Google's Article guidelines
+ * want datePublished/dateModified, and generating "today" at build time would
+ * claim every guide was rewritten on every deploy — which is exactly the kind of
+ * freshness signal engines learn to discount. Bump `modified` when the content
+ * actually changes.
+ */
+export function articleSchema({
+  path,
+  headline,
+  description,
+  published,
+  modified = published,
+  image = "/images/03-dcsi-truck-branding.webp",
+  about,
+}: {
+  path: string;
+  headline: string;
+  description: string;
+  /** ISO date, e.g. "2026-10-24". */
+  published: string;
+  modified?: string;
+  image?: string;
+  about?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${abs(path)}#article`,
+    headline,
+    description,
+    url: abs(path),
+    mainEntityOfPage: { "@type": "WebPage", "@id": abs(path) },
+    image: abs(image),
+    datePublished: published,
+    dateModified: modified,
+    author: { "@id": ORG_ID },
+    publisher: { "@id": ORG_ID },
+    inLanguage: "en-US",
+    ...(about ? { about: { "@type": "Thing", name: about } } : {}),
+  };
+}
 
 export function serviceSchema(path: string) {
   const svc = SERVICE_SCHEMAS.find((s) => s.path === path);

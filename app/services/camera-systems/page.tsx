@@ -1,11 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Camera, Smartphone, Eye, Users } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import FaqAccordion from "@/components/FaqAccordion";
 import JsonLd from "@/components/JsonLd";
 import { CONTACT } from "@/lib/constants";
-import { pageMetadata, serviceSchema } from "@/lib/seo";
+import { faqSchema, pageMetadata, serviceSchema } from "@/lib/seo";
 
 const PATH = "/services/camera-systems";
 
@@ -38,10 +40,33 @@ const CATEGORIES = [
   { icon: Smartphone, title: "Mobile Viewing Apps", description: "View your DVR live from any iPhone, Android, or web browser." },
 ];
 
+const FAQS = [
+  {
+    q: "How many security cameras does my home need?",
+    a: "Count the approaches rather than the walls. Most suburban Tampa Bay homes need four to six cameras — front door, driveway, each side gate, and the rear of the house or lanai. Townhouses often need two or three; acreage with gates and outbuildings can need eight or more.",
+  },
+  {
+    q: "Can I watch my cameras from my phone?",
+    a: "Yes. Every system we install includes remote viewing from an iPhone, Android phone, or web browser, with live view and recorded playback. We set up the app and walk you through it at handover.",
+  },
+  {
+    q: "How long is security camera footage stored?",
+    a: "It depends on the number of cameras, the resolution, and whether they record continuously or on motion, and the recorder's storage is sized to match. For most homes we aim for at least two to four weeks — long enough to notice a problem and go back for it.",
+  },
+  {
+    q: "Do the cameras keep recording if the internet goes down?",
+    a: "Yes. The systems we install record to a local recorder on site, so footage keeps being saved when the internet is out. Remote viewing pauses until the connection returns. With a battery backup on the recorder, recording also continues through short power outages.",
+  },
+  {
+    q: "Can cameras be tied into the alarm system?",
+    a: "Yes. When the alarm and cameras are installed together, the monitoring center can use video to verify an alarm event, and you can see what triggered the alarm from the same app.",
+  },
+];
+
 export default function CameraSystemsPage() {
   return (
     <>
-      <JsonLd data={serviceSchema(PATH)} />
+      <JsonLd data={[serviceSchema(PATH), faqSchema(FAQS, PATH)]} />
       <HeroBanner
         breadcrumbs={<Breadcrumbs trail={[{ name: "Camera Systems", path: PATH }]} />}
         title="CCTV & Security Camera Systems"
@@ -153,6 +178,14 @@ export default function CameraSystemsPage() {
           or trenched, A/C outlets added, internet modems, and networking DVR. All systems come with
           a ninety-day warranty on labor and one year on parts. Extended warranties and service
           contracts are available.
+        </p>
+      </section>
+
+      {/* FAQ */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <FaqAccordion faqs={FAQS} heading="Security Camera Questions" />
+        <p className="font-inter text-text-secondary text-sm leading-relaxed mt-10">
+          Planning a system? Read <Link href="/resources/how-many-security-cameras" className="text-accent hover:underline">how many security cameras a house needs</Link>, or see <Link href="/services/commercial-security" className="text-accent hover:underline">commercial camera systems</Link> for a business.
         </p>
       </section>
 

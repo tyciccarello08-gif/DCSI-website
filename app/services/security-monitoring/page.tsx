@@ -1,16 +1,18 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Shield, Clock, Radio, Lock, Bell, Eye } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import FaqAccordion from "@/components/FaqAccordion";
 import JsonLd from "@/components/JsonLd";
 import { CONTACT } from "@/lib/constants";
-import { pageMetadata, serviceSchema } from "@/lib/seo";
+import { faqSchema, pageMetadata, serviceSchema } from "@/lib/seo";
 
 const PATH = "/services/security-monitoring";
 
 export const metadata = pageMetadata({
-  title: "Security System Installation & 24/7 Monitoring",
+  title: "Security Systems & 24/7 Monitoring in Tampa Bay",
   description:
     "Custom residential and commercial burglar alarm systems with 24/7 in-house monitoring — not an outsourced call center. Hillsborough & Pasco, FL.",
   path: PATH,
@@ -55,10 +57,37 @@ const FEATURES = [
   },
 ];
 
+const FAQS = [
+  {
+    q: "Who monitors DCSI alarm systems?",
+    a: "Our own team, from our monitoring center in Lutz. Many companies that sell alarm monitoring in Florida resell a third-party wholesale center; we don't. The people who answer your alarm work for the company that installed it and can see your account history.",
+  },
+  {
+    q: "Do I have to sign a long-term monitoring contract?",
+    a: "No. DCSI does not require long-term monitoring contracts. You own the equipment we install, and we would rather keep the account by answering the phone than by holding you to a multi-year term.",
+  },
+  {
+    q: "How does the alarm reach the monitoring center?",
+    a: "We use cellular communicators as standard, with the panel's standby battery keeping them running through a power outage. Landlines can be cut outside the house and internet-only reporting fails whenever the internet does, which in Florida includes most storms.",
+  },
+  {
+    q: "Can you monitor the alarm system I already have?",
+    a: "Usually, yes. Most industry-standard panels can be reprogrammed to report to our center, keeping the existing sensors and wiring. That is called a takeover and it is typically far cheaper than a new system.",
+  },
+  {
+    q: "Can the security system also monitor for fire, water, and medical emergencies?",
+    a: "Yes. Smoke, heat, and carbon monoxide detectors, water and temperature sensors, and medical or panic pendants can all report through the same panel and the same 24/7 center as the burglar alarm, on one account.",
+  },
+  {
+    q: "Where do you install security systems?",
+    a: "Throughout Hillsborough and Pasco Counties from our office in Lutz, with monitoring and scheduled installation across Central Florida from Venice and Bradenton north to Ocala and east to Lakeland and Winter Haven.",
+  },
+];
+
 export default function SecurityMonitoringPage() {
   return (
     <>
-      <JsonLd data={serviceSchema(PATH)} />
+      <JsonLd data={[serviceSchema(PATH), faqSchema(FAQS, PATH)]} />
       <HeroBanner
         breadcrumbs={<Breadcrumbs trail={[{ name: "Security & Monitoring", path: PATH }]} />}
         title="Security Systems & 24/7 Monitoring in Tampa Bay"
@@ -259,6 +288,14 @@ export default function SecurityMonitoringPage() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <FaqAccordion faqs={FAQS} heading="Security System & Monitoring Questions" />
+        <p className="font-inter text-text-secondary text-sm leading-relaxed mt-10">
+          More detail: <Link href="/resources/security-system-cost" className="text-accent hover:underline">what a security system costs</Link>, <Link href="/resources/choosing-a-monitoring-company" className="text-accent hover:underline">how to choose a monitoring company</Link>, and <Link href="/services/alarm-monitoring-takeover" className="text-accent hover:underline">taking over an existing system</Link>.
+        </p>
       </section>
 
       <CTABanner

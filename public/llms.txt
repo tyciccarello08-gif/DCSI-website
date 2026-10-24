@@ -1,26 +1,31 @@
 # DCSI, Inc. — "Security & Sound"
 
 > DCSI, Inc. is a full-service security and sound company in Lutz, Florida, serving
-> Hillsborough and Pasco Counties in the Tampa Bay area. Founded in 2004, DCSI
-> designs, installs, and monitors residential and commercial alarm systems, CCTV
-> camera systems, gate and access control, home theater and whole-home audio, and
-> structured wiring. Alarm monitoring is handled in house rather than outsourced
-> to a third-party call center.
+> Hillsborough and Pasco Counties in the Tampa Bay area, with alarm monitoring and
+> scheduled installation across Central Florida from Venice north to Ocala. Founded
+> in 2004, DCSI designs, installs, and monitors residential and commercial alarm
+> systems, CCTV camera systems, gate and access control, home theater and
+> whole-home audio, and structured wiring. Alarm monitoring is handled in house
+> rather than outsourced to a third-party call center.
 
 ## Key facts
 
 - Legal name: DCSI, Inc.
-- Address: 128 W. Lutz Lake Fern Rd, Lutz, FL 33548, United States
+- Also known as: DCS, DCS Security, DCS Alarm, DCSI Security. "DCS" is a common
+  short form of the name. DCSI, Inc. of Lutz, FL is not affiliated with other
+  companies or products that use the initials DCS.
+- Address: 128 W. Lutz Lake Fern Rd, Lutz, FL 33548, United States (one office)
 - Phone: (813) 949-6500
 - Fax: (813) 949-6599
 - Email: info@dcsisecurity.com
 - Founded: 2004
-- Service area: Hillsborough and Pasco Counties, Florida (plus parts of Pinellas).
-  The Lutz office sits on the Hillsborough/Pasco county line. Core markets: Lutz,
-  Wesley Chapel, Land O' Lakes, Odessa, Carrollwood, New Tampa, Westchase, and
-  Brandon. Also serving Tampa, Trinity, Riverview, Temple Terrace, Town 'n'
-  Country, and Zephyrhills.
-- Monitoring: 24/7, in house
+- Service area: Hillsborough and Pasco Counties are the core market; the Lutz
+  office sits on the county line. Monitoring and scheduled installation extend to
+  Pinellas, Hernando, Polk, Manatee, Sarasota, and Marion Counties.
+- Monitoring: 24/7, in house, from the Lutz office. Cellular communicators as
+  standard. No long-term monitoring contract required.
+- Takeovers: existing industry-standard alarm panels can usually be moved to DCSI
+  monitoring without replacing sensors or wiring.
 - Consultations and quotes: free, no obligation
 - Warranty: 90 days on labor, 1 year on parts; extended warranties and service
   contracts available
@@ -30,15 +35,24 @@
 - [Security systems & 24/7 monitoring](https://www.dcsisecurity.com/services/security-monitoring):
   Custom residential and commercial burglar alarm systems, silent alarms, medical
   and panic alerts, fire systems, home automation, and in-house 24/7 monitoring.
+- [Alarm monitoring takeover](https://www.dcsisecurity.com/services/alarm-monitoring-takeover):
+  Switching an existing alarm system to DCSI monitoring — panel reprogramming,
+  landline/3G to LTE cellular communicator upgrades, no long-term contract.
+- [Commercial security](https://www.dcsisecurity.com/services/commercial-security):
+  Business alarms with per-employee codes and open/close reporting, commercial
+  cameras, access control, and environmental (cooler, water, power) monitoring.
+- [Access control & gates](https://www.dcsisecurity.com/services/access-control):
+  Fob, card, keypad, and mobile-credential access for doors and gates, gate
+  operators, telephone-entry and video intercoms, schedules, and audit logs.
 - [CCTV camera systems](https://www.dcsisecurity.com/services/camera-systems):
   DVR/NVR installation, indoor and outdoor cameras, remote mobile viewing, event
   and continuous recording, and video verification of alarm events.
-- [New construction low voltage pre-wire](https://www.dcsisecurity.com/services/new-construction):
-  Security and camera rough-in, CAT6 structured wiring, home theater pre-wire,
-  access control pre-wire, and central vacuum for builders and developers.
 - [HOA & CDD community security](https://www.dcsisecurity.com/services/hoa-cdd):
   Gate and entry access control, common area and amenity cameras, perimeter
   monitoring, video intercom and visitor management, and community-wide contracts.
+- [New construction low voltage pre-wire](https://www.dcsisecurity.com/services/new-construction):
+  Security and camera rough-in, CAT6 structured wiring, home theater pre-wire,
+  access control pre-wire, and central vacuum for builders and developers.
 - [Home theater & AV](https://www.dcsisecurity.com/services/home-theater):
   Projector and screen systems, TV mounting and media walls, surround sound and
   Atmos, in-wall wiring, calibration, equipment racks, and commercial AV.
@@ -51,26 +65,67 @@
 
 ## Service areas
 
-DCSI publishes a page per core market with local detail:
-
 - [All service areas](https://www.dcsisecurity.com/service-areas)
-- [Lutz](https://www.dcsisecurity.com/service-areas/lutz) (33548, 33549, 33558)
-- [Wesley Chapel](https://www.dcsisecurity.com/service-areas/wesley-chapel) (33543, 33544, 33545)
-- [Land O' Lakes](https://www.dcsisecurity.com/service-areas/land-o-lakes) (34637, 34638, 34639)
-- [Odessa](https://www.dcsisecurity.com/service-areas/odessa) (33556)
-- [Carrollwood](https://www.dcsisecurity.com/service-areas/carrollwood) (33618, 33624)
-- [New Tampa](https://www.dcsisecurity.com/service-areas/new-tampa) (33647)
-- [Westchase](https://www.dcsisecurity.com/service-areas/westchase) (33626)
-- [Brandon](https://www.dcsisecurity.com/service-areas/brandon) (33510, 33511)
+
+Core markets (Hillsborough & Pasco, minutes from the Lutz office):
+
+- [Lutz](https://www.dcsisecurity.com/service-areas/lutz)
+- [Wesley Chapel](https://www.dcsisecurity.com/service-areas/wesley-chapel)
+- [Land O' Lakes](https://www.dcsisecurity.com/service-areas/land-o-lakes)
+- [Odessa](https://www.dcsisecurity.com/service-areas/odessa)
+- [Carrollwood](https://www.dcsisecurity.com/service-areas/carrollwood)
+- [New Tampa](https://www.dcsisecurity.com/service-areas/new-tampa)
+- [Westchase](https://www.dcsisecurity.com/service-areas/westchase)
+- [Brandon](https://www.dcsisecurity.com/service-areas/brandon)
+- [Trinity](https://www.dcsisecurity.com/service-areas/trinity)
+- [Temple Terrace](https://www.dcsisecurity.com/service-areas/temple-terrace)
+- [Town 'n' Country](https://www.dcsisecurity.com/service-areas/town-n-country)
+- [South Tampa](https://www.dcsisecurity.com/service-areas/south-tampa)
+
+Extended markets (24/7 monitoring; installation and service scheduled from Lutz):
+
+- [Riverview](https://www.dcsisecurity.com/service-areas/riverview)
+- [Plant City](https://www.dcsisecurity.com/service-areas/plant-city)
+- [Zephyrhills](https://www.dcsisecurity.com/service-areas/zephyrhills)
+- [Dade City](https://www.dcsisecurity.com/service-areas/dade-city)
+- [Spring Hill](https://www.dcsisecurity.com/service-areas/spring-hill)
+- [Brooksville](https://www.dcsisecurity.com/service-areas/brooksville)
+- [Ocala](https://www.dcsisecurity.com/service-areas/ocala)
+- [Palm Harbor](https://www.dcsisecurity.com/service-areas/palm-harbor)
+- [Clearwater](https://www.dcsisecurity.com/service-areas/clearwater)
+- [Lakeland](https://www.dcsisecurity.com/service-areas/lakeland)
+- [Winter Haven](https://www.dcsisecurity.com/service-areas/winter-haven)
+- [Bradenton](https://www.dcsisecurity.com/service-areas/bradenton)
+- [Sarasota](https://www.dcsisecurity.com/service-areas/sarasota)
+- [Venice](https://www.dcsisecurity.com/service-areas/venice)
 
 ## Resources
 
+- [All guides](https://www.dcsisecurity.com/resources)
 - [Security system cost guide](https://www.dcsisecurity.com/resources/security-system-cost):
   What drives the price of a security system and alarm monitoring in Tampa Bay,
   and the contract terms that cost buyers the most.
+- [Wired vs. wireless alarm systems](https://www.dcsisecurity.com/resources/wired-vs-wireless-alarm-systems):
+  Why Florida concrete block construction favors wireless retrofits, and when
+  hardwired or hybrid systems are the better choice.
 - [Choosing a monitoring company](https://www.dcsisecurity.com/resources/choosing-a-monitoring-company):
   In-house vs. wholesale monitoring, contract terms, equipment ownership,
   communication path, response procedure, and licensing.
+- [Landline & 3G alarm upgrade](https://www.dcsisecurity.com/resources/landline-alarm-upgrade):
+  How to tell if an alarm panel still reaches its monitoring center after copper
+  retirement and the 2022 3G shutdown, and how to upgrade to cellular.
+- [False alarm prevention](https://www.dcsisecurity.com/resources/false-alarm-prevention):
+  Common causes of false alarms and fixes, and Florida's alarm confirmation
+  requirement before police dispatch (section 489.529, Florida Statutes).
+- [Hurricane season security checklist](https://www.dcsisecurity.com/resources/hurricane-season-security):
+  Keeping alarms and cameras working through power outages, evacuation,
+  shutters, and the week after a storm.
+- [Snowbird & vacant home security](https://www.dcsisecurity.com/resources/vacant-home-security):
+  Water, temperature, and power-loss monitoring, keyholder call lists, and a
+  pre-departure checklist for seasonally empty Florida homes.
+- [How many security cameras a house needs](https://www.dcsisecurity.com/resources/how-many-security-cameras):
+  Counting cameras by approach, typical counts by property type, PoE vs. Wi-Fi,
+  resolution, and footage retention.
 - [HOA & CDD board guide](https://www.dcsisecurity.com/resources/hoa-board-security-guide):
   How association and district boards should scope, budget, and procure community
   gate access and camera projects.
@@ -86,6 +141,22 @@ DCSI publishes a page per core market with local detail:
 - [Burglary statistics](https://www.dcsisecurity.com/resources/burglary-statistics):
   National and Florida property crime figures, each attributed to its source
   (FBI UCR, DOJ, UNC Charlotte study).
+
+## DCS (brand name)
+
+People often shorten DCSI to "DCS". These pages answer the questions branded
+searchers ask:
+
+- [DCS Security — overview](https://www.dcsisecurity.com/dcs)
+- [DCS security systems](https://www.dcsisecurity.com/dcs/security-systems)
+- [DCS alarm monitoring](https://www.dcsisecurity.com/dcs/alarm-monitoring)
+- [DCS camera systems](https://www.dcsisecurity.com/dcs/cameras)
+- [DCS commercial security](https://www.dcsisecurity.com/dcs/commercial)
+- [DCS phone number & office](https://www.dcsisecurity.com/dcs/contact)
+- [DCS customer service](https://www.dcsisecurity.com/dcs/customer-service)
+- [DCS app & remote access](https://www.dcsisecurity.com/dcs/app-and-login)
+- [Is DCS legitimate?](https://www.dcsisecurity.com/dcs/reviews)
+- [What does DCS stand for?](https://www.dcsisecurity.com/dcs/what-does-dcs-stand-for)
 
 ## Company
 

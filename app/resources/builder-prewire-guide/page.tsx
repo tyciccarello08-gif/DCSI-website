@@ -5,10 +5,12 @@ import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
-import { CONTACT } from "@/lib/constants";
+import RelatedResources from "@/components/RelatedResources";
+import { CONTACT, resourceBySlug } from "@/lib/constants";
 import { ORG_ID, abs, faqSchema, pageMetadata } from "@/lib/seo";
 
 const PATH = "/resources/builder-prewire-guide";
+const R = resourceBySlug("builder-prewire-guide");
 
 export const metadata = pageMetadata({
   title: "Builder's Guide to Low Voltage Pre-Wire",
@@ -108,6 +110,10 @@ const articleSchema = {
   url: abs(PATH),
   author: { "@id": ORG_ID },
   publisher: { "@id": ORG_ID },
+  mainEntityOfPage: { "@type": "WebPage", "@id": abs(PATH) },
+  image: abs("/images/new-construction-framing-prewire.jpg"),
+  datePublished: R.published,
+  dateModified: R.modified,
   inLanguage: "en-US",
   audience: { "@type": "Audience", audienceType: "Home builders, developers, and superintendents" },
 };
@@ -117,7 +123,7 @@ export default function BuilderPrewireGuidePage() {
     <>
       <JsonLd data={[articleSchema, faqSchema(FAQS, PATH)]} />
       <HeroBanner
-        breadcrumbs={<Breadcrumbs trail={[{ name: "Builder Pre-Wire Guide", path: PATH }]} />}
+        breadcrumbs={<Breadcrumbs trail={[{ name: "Resources", path: "/resources" }, { name: "Builder Pre-Wire Guide", path: PATH }]} />}
         title="Builder's Guide to Low Voltage Pre-Wire"
         subtitle="When to schedule rough-in, what belongs in a base package, which upgrades sell, and the coordination details that decide whether you get callbacks in year one."
         ctaText="Request Builder Pricing"
@@ -243,6 +249,8 @@ export default function BuilderPrewireGuidePage() {
           </p>
         </div>
       </section>
+
+      <RelatedResources slugs={["wired-vs-wireless-alarm-systems", "hoa-board-security-guide", "security-system-cost"]} />
 
       <CTABanner
         headline="Builder & Developer Pricing"

@@ -1,16 +1,18 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Camera, Shield, Key, Bell, Users, Wrench } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import FaqAccordion from "@/components/FaqAccordion";
 import JsonLd from "@/components/JsonLd";
 import { CONTACT } from "@/lib/constants";
-import { pageMetadata, serviceSchema } from "@/lib/seo";
+import { faqSchema, pageMetadata, serviceSchema } from "@/lib/seo";
 
 const PATH = "/services/hoa-cdd";
 
 export const metadata = pageMetadata({
-  title: "HOA & CDD Security, Gate Access & Cameras",
+  title: "HOA & CDD Gate Access & Cameras in Tampa Bay",
   description:
     "Gate access control, common area and amenity cameras, and 24/7 monitoring for HOAs and CDDs across Hillsborough & Pasco Counties, FL.",
   path: PATH,
@@ -66,10 +68,33 @@ const WHY_DCSI = [
   "Board-friendly reporting and documentation",
 ];
 
+const FAQS = [
+  {
+    q: "Do you work directly with HOA and CDD boards?",
+    a: "Yes. We work with boards, management companies, and district staff, and we provide the documented proposals and scope a board needs in hand before it votes.",
+  },
+  {
+    q: "Can you replace or upgrade our community gate system?",
+    a: "Yes. We install and service gate operators, resident credentials, telephone-entry and video intercoms, and the cameras covering entry and exit lanes — including the trenching and conduit gate work usually requires.",
+  },
+  {
+    q: "Who manages resident gate credentials after installation?",
+    a: "Usually the management company or a designated board member. We set the system up so credentials can be issued and revoked from software without a service call, and we train whoever will run it.",
+  },
+  {
+    q: "Do you cover amenity centers and pools?",
+    a: "Yes. Amenity centers, pools, fitness rooms, and playgrounds are some of the most common community camera and access control projects we do, including after-hours access schedules for residents.",
+  },
+  {
+    q: "What areas do you serve for community security?",
+    a: "Communities across Hillsborough and Pasco Counties, including Wesley Chapel, Land O' Lakes, Lutz, New Tampa, and Riverview, and master-planned communities from Lakewood Ranch north to Ocala on a scheduled basis.",
+  },
+];
+
 export default function HoaCddPage() {
   return (
     <>
-      <JsonLd data={serviceSchema(PATH)} />
+      <JsonLd data={[serviceSchema(PATH), faqSchema(FAQS, PATH)]} />
       <HeroBanner
         breadcrumbs={<Breadcrumbs trail={[{ name: "HOA & CDD Services", path: PATH }]} />}
         title="HOA & CDD Security Services"
@@ -268,6 +293,14 @@ export default function HoaCddPage() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <FaqAccordion faqs={FAQS} heading="HOA & CDD Security Questions" />
+        <p className="font-inter text-text-secondary text-sm leading-relaxed mt-10">
+          Board members: our <Link href="/resources/hoa-board-security-guide" className="text-accent hover:underline">HOA &amp; CDD board guide</Link> covers scoping, budgeting, and procurement. Gate hardware and credentials are covered on <Link href="/services/access-control" className="text-accent hover:underline">access control &amp; gates</Link>.
+        </p>
       </section>
 
       <CTABanner

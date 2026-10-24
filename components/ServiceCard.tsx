@@ -11,6 +11,9 @@ import {
   Projector,
   Speaker,
   Network,
+  Store,
+  KeyRound,
+  RefreshCw,
   LucideIcon,
 } from "lucide-react";
 
@@ -23,9 +26,12 @@ const ICONS: Record<string, LucideIcon> = {
   Projector,
   Speaker,
   Network,
+  Store,
+  KeyRound,
+  RefreshCw,
 };
 
-const NUMS = ["01", "02", "03", "04", "05", "06", "07", "08"];
+const NUMS = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"];
 
 interface ServiceCardProps {
   icon: string;

@@ -1,16 +1,18 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Building2, Wifi, Shield, Camera, Speaker, Plug } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import FaqAccordion from "@/components/FaqAccordion";
 import JsonLd from "@/components/JsonLd";
 import { CONTACT } from "@/lib/constants";
-import { pageMetadata, serviceSchema } from "@/lib/seo";
+import { faqSchema, pageMetadata, serviceSchema } from "@/lib/seo";
 
 const PATH = "/services/new-construction";
 
 export const metadata = pageMetadata({
-  title: "New Construction Low Voltage Pre-Wire",
+  title: "New Construction Low Voltage Pre-Wire, Tampa",
   description:
     "Low voltage pre-wire for builders across Hillsborough & Pasco Counties, FL — security and camera rough-in, CAT6 wiring, and home theater pre-wire.",
   path: PATH,
@@ -25,10 +27,33 @@ const SERVICES = [
   { icon: Plug, title: "Central Vacuum", description: "Central vac rough-in for convenient whole-home vacuuming." },
 ];
 
+const FAQS = [
+  {
+    q: "When should low voltage pre-wire happen during construction?",
+    a: "After framing, rough plumbing, and rough electrical, and before insulation and drywall. That window is the only time cable can be run cleanly to every location, so it is worth scheduling low voltage rough-in as a fixed step rather than squeezing it in.",
+  },
+  {
+    q: "What should be pre-wired in a new home?",
+    a: "At minimum: alarm contacts on exterior doors and accessible windows, keypad and motion locations, camera locations at the soffits, CAT6 to each room and TV location, and a structured wiring panel. Many owners add speaker wire for a living room, lanai, or theater room.",
+  },
+  {
+    q: "Is it worth pre-wiring if I'm not installing a system yet?",
+    a: "Usually, yes. Running cable while the walls are open costs a fraction of retrofitting later, and an unused cable in the wall costs nothing to keep. Pre-wire now and the system can be installed whenever you are ready.",
+  },
+  {
+    q: "Do you work with builders on multiple homes?",
+    a: "Yes. We pre-wire for builders and developers across Hillsborough and Pasco Counties, with base packages, buyer upgrade options, and scheduling coordinated with the superintendent.",
+  },
+  {
+    q: "Can you pre-wire a custom home or a remodel?",
+    a: "Yes. Custom homes and remodels with open walls get the same rough-in, planned room by room with the owner, and we can coordinate directly with your builder or general contractor.",
+  },
+];
+
 export default function NewConstructionPage() {
   return (
     <>
-      <JsonLd data={serviceSchema(PATH)} />
+      <JsonLd data={[serviceSchema(PATH), faqSchema(FAQS, PATH)]} />
       <HeroBanner
         breadcrumbs={<Breadcrumbs trail={[{ name: "New Construction", path: PATH }]} />}
         title="New Construction Low Voltage Services"
@@ -105,6 +130,14 @@ export default function NewConstructionPage() {
             />
           </div>
         </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <FaqAccordion faqs={FAQS} heading="New Construction Pre-Wire Questions" />
+        <p className="font-inter text-text-secondary text-sm leading-relaxed mt-10">
+          Builders and superintendents: see our <Link href="/resources/builder-prewire-guide" className="text-accent hover:underline">builder&apos;s guide to low voltage pre-wire</Link>. Homeowners: <Link href="/resources/wired-vs-wireless-alarm-systems" className="text-accent hover:underline">why pre-wiring beats wireless</Link> when the walls are open.
+        </p>
       </section>
 
       <CTABanner

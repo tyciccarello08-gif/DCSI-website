@@ -10,7 +10,7 @@ import { faqSchema, pageMetadata, serviceSchema } from "@/lib/seo";
 const PATH = "/services/whole-home-audio";
 
 export const metadata = pageMetadata({
-  title: "Whole-Home & Outdoor Audio Installation",
+  title: "Whole-Home & Outdoor Audio Installation, Tampa",
   description:
     "Multi-room audio with in-ceiling speakers, patio and pool-deck outdoor audio, and independent zone control from your phone. Hillsborough & Pasco.",
   path: PATH,
