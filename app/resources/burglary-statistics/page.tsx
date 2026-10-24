@@ -2,10 +2,12 @@ import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
-import { CONTACT } from "@/lib/constants";
+import RelatedResources from "@/components/RelatedResources";
+import { CONTACT, resourceBySlug } from "@/lib/constants";
 import { ORG_ID, abs, pageMetadata } from "@/lib/seo";
 
 const PATH = "/resources/burglary-statistics";
+const R = resourceBySlug("burglary-statistics");
 
 export const metadata = pageMetadata({
   title: "Burglary Statistics — Why Home Security Matters",
@@ -47,6 +49,10 @@ const statsSchema = {
   url: abs(PATH),
   publisher: { "@id": ORG_ID },
   author: { "@id": ORG_ID },
+  mainEntityOfPage: { "@type": "WebPage", "@id": abs(PATH) },
+  image: abs("/images/13-residential-home-exterior.webp"),
+  datePublished: R.published,
+  dateModified: R.modified,
   inLanguage: "en-US",
   about: { "@type": "Thing", name: "Residential burglary and home security" },
   mainEntity: {
@@ -71,7 +77,7 @@ export default function BurglaryStatisticsPage() {
     <>
       <JsonLd data={statsSchema} />
       <HeroBanner
-        breadcrumbs={<Breadcrumbs trail={[{ name: "Burglary Statistics", path: PATH }]} />}
+        breadcrumbs={<Breadcrumbs trail={[{ name: "Resources", path: "/resources" }, { name: "Burglary Statistics", path: PATH }]} />}
         title="Burglary Statistics"
         subtitle="Understanding the risk is the first step to protecting your home or business."
       />
@@ -107,6 +113,8 @@ export default function BurglaryStatisticsPage() {
           </ul>
         </div>
       </section>
+
+      <RelatedResources slugs={["safety-tips", "security-system-cost", "choosing-a-monitoring-company"]} />
 
       <CTABanner
         headline="Don't Become a Statistic"

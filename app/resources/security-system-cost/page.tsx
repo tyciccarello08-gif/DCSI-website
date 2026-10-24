@@ -4,10 +4,12 @@ import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
-import { CONTACT, HAS_PRICING, PRICING } from "@/lib/constants";
+import RelatedResources from "@/components/RelatedResources";
+import { CONTACT, HAS_PRICING, PRICING, resourceBySlug } from "@/lib/constants";
 import { ORG_ID, abs, faqSchema, pageMetadata } from "@/lib/seo";
 
 const PATH = "/resources/security-system-cost";
+const R = resourceBySlug("security-system-cost");
 
 export const metadata = pageMetadata({
   title: "How Much Does a Home Security System Cost in Tampa?",
@@ -89,6 +91,10 @@ const articleSchema = {
   url: abs(PATH),
   author: { "@id": ORG_ID },
   publisher: { "@id": ORG_ID },
+  mainEntityOfPage: { "@type": "WebPage", "@id": abs(PATH) },
+  image: abs("/images/05-dcsi-honeywell-touchscreen-panel.webp"),
+  datePublished: R.published,
+  dateModified: R.modified,
   inLanguage: "en-US",
   about: { "@type": "Thing", name: "Home security system pricing" },
 };
@@ -98,7 +104,7 @@ export default function SecuritySystemCostPage() {
     <>
       <JsonLd data={[articleSchema, faqSchema(FAQS, PATH)]} />
       <HeroBanner
-        breadcrumbs={<Breadcrumbs trail={[{ name: "Security System Cost", path: PATH }]} />}
+        breadcrumbs={<Breadcrumbs trail={[{ name: "Resources", path: "/resources" }, { name: "Security System Cost", path: PATH }]} />}
         title="What Does a Security System Actually Cost?"
         subtitle="A straight answer about what moves the price in Tampa Bay — and about the contract terms that end up costing people far more than the equipment ever did."
         ctaText="Get a Free On-Site Quote"
@@ -276,6 +282,8 @@ export default function SecuritySystemCostPage() {
           ))}
         </div>
       </section>
+
+      <RelatedResources slugs={["choosing-a-monitoring-company", "wired-vs-wireless-alarm-systems", "how-many-security-cameras"]} />
 
       <CTABanner
         headline="Get a Real Number, Free"

@@ -6,6 +6,8 @@ import { Send, CheckCircle, AlertCircle } from "lucide-react";
 
 const SERVICES = [
   "Security Systems & Monitoring",
+  "Monitoring Takeover (Existing System)",
+  "Commercial Security",
   "Camera Systems (CCTV)",
   "New Construction Low Voltage",
   "Home Theater",

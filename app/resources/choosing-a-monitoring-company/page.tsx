@@ -4,10 +4,12 @@ import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
-import { CONTACT } from "@/lib/constants";
+import RelatedResources from "@/components/RelatedResources";
+import { CONTACT, resourceBySlug } from "@/lib/constants";
 import { ORG_ID, abs, faqSchema, pageMetadata } from "@/lib/seo";
 
 const PATH = "/resources/choosing-a-monitoring-company";
+const R = resourceBySlug("choosing-a-monitoring-company");
 
 export const metadata = pageMetadata({
   title: "How to Choose an Alarm Monitoring Company",
@@ -89,6 +91,10 @@ const articleSchema = {
   url: abs(PATH),
   author: { "@id": ORG_ID },
   publisher: { "@id": ORG_ID },
+  mainEntityOfPage: { "@type": "WebPage", "@id": abs(PATH) },
+  image: abs("/images/keypad-honeywell-tuxedo-touchscreen.jpg"),
+  datePublished: R.published,
+  dateModified: R.modified,
   inLanguage: "en-US",
 };
 
@@ -97,7 +103,7 @@ export default function ChoosingMonitoringPage() {
     <>
       <JsonLd data={[articleSchema, faqSchema(FAQS, PATH)]} />
       <HeroBanner
-        breadcrumbs={<Breadcrumbs trail={[{ name: "Choosing a Monitoring Company", path: PATH }]} />}
+        breadcrumbs={<Breadcrumbs trail={[{ name: "Resources", path: "/resources" }, { name: "Choosing a Monitoring Company", path: PATH }]} />}
         title="How to Choose a Monitoring Company"
         subtitle="Six questions that separate alarm companies — and the answers worth walking away from. Written to be useful even if you hire someone else."
         ctaText="Get a Free Quote"
@@ -192,6 +198,8 @@ export default function ChoosingMonitoringPage() {
           </div>
         </div>
       </section>
+
+      <RelatedResources slugs={["landline-alarm-upgrade", "security-system-cost", "false-alarm-prevention"]} />
 
       <CTABanner
         headline="Ask Us the Six Questions"

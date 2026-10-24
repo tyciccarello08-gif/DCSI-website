@@ -10,7 +10,7 @@ import { faqSchema, pageMetadata, serviceSchema } from "@/lib/seo";
 const PATH = "/services/structured-wiring";
 
 export const metadata = pageMetadata({
-  title: "Structured Wiring & Smart Home Installation",
+  title: "Structured Wiring & Smart Home in Tampa Bay",
   description:
     "CAT6 cabling to a central panel, whole-home Wi-Fi design, and smart home integration for locks, thermostats, and lighting. Hillsborough & Pasco.",
   path: PATH,

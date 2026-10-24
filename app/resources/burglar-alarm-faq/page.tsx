@@ -2,10 +2,12 @@ import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
-import { CONTACT } from "@/lib/constants";
-import { faqSchema, pageMetadata } from "@/lib/seo";
+import RelatedResources from "@/components/RelatedResources";
+import { CONTACT, resourceBySlug } from "@/lib/constants";
+import { articleSchema, faqSchema, pageMetadata } from "@/lib/seo";
 
 const PATH = "/resources/burglar-alarm-faq";
+const R = resourceBySlug("burglar-alarm-faq");
 
 export const metadata = pageMetadata({
   title: "Burglar Alarm FAQ — How Alarm Systems Work",
@@ -52,9 +54,9 @@ const FAQS = [
 export default function BurglarAlarmFAQPage() {
   return (
     <>
-      <JsonLd data={faqSchema(FAQS, PATH)} />
+      <JsonLd data={[articleSchema({ path: PATH, headline: R.title, description: R.blurb, published: R.published, modified: R.modified }), faqSchema(FAQS, PATH)]} />
       <HeroBanner
-        breadcrumbs={<Breadcrumbs trail={[{ name: "Burglar Alarm FAQ", path: PATH }]} />}
+        breadcrumbs={<Breadcrumbs trail={[{ name: "Resources", path: "/resources" }, { name: "Burglar Alarm FAQ", path: PATH }]} />}
         title="Burglar Alarm FAQ"
         subtitle="Answers to the most common questions about security systems, monitoring, and home protection."
       />
@@ -77,6 +79,8 @@ export default function BurglarAlarmFAQPage() {
           ))}
         </div>
       </section>
+
+      <RelatedResources slugs={["false-alarm-prevention", "landline-alarm-upgrade", "choosing-a-monitoring-company"]} />
 
       <CTABanner
         headline="Still Have Questions?"

@@ -296,6 +296,50 @@ export const CITIES: City[] = [
     proximity: "East of Tampa",
     tier: "core",
   },
+  {
+    slug: "trinity",
+    name: "Trinity",
+    county: "Pasco County",
+    zips: ["34655"],
+    communities: ["Heritage Springs", "Trinity Oaks", "Champions Club", "Thousand Oaks", "Longleaf", "Fox Wood"],
+    marketNote:
+      "Trinity is mostly gated golf and planned communities built along SR-54 and Little Road from the late 1990s on, which means a lot of houses with an alarm panel the builder put in a closet twenty-odd years ago. Those systems were wired properly at the time and the sensors usually still work — what has aged out is the communicator. Panels that reported over a landline or a 3G radio are frequently not reporting to anyone at all, and the homeowner finds out only when something happens.",
+    proximity: "About 25 minutes west",
+    tier: "core",
+  },
+  {
+    slug: "temple-terrace",
+    name: "Temple Terrace",
+    county: "Hillsborough County",
+    zips: ["33617", "33637"],
+    communities: ["Historic Temple Terrace", "Temple Terrace Golf & Country Club", "Riverhills", "Lettuce Lake", "Hillsborough River frontage"],
+    marketNote:
+      "Temple Terrace packs three different housing stocks into a small city: 1920s Mediterranean Revival homes in the historic core, mid-century ranch houses on the river, and a large rental market around the University of South Florida. The historic homes need wiring run without opening plaster. The rentals need something else entirely — a system a landlord can re-key between tenants by changing user codes rather than calling a technician, and cameras on entrances that respect a tenant's privacy inside.",
+    proximity: "About 25 minutes southeast",
+    tier: "core",
+  },
+  {
+    slug: "town-n-country",
+    name: "Town 'n' Country",
+    county: "Hillsborough County",
+    zips: ["33615", "33634", "33635"],
+    communities: ["Bay Port Colony", "Rocky Point", "Sweetwater", "Memorial Highway corridor", "Hillsborough Avenue corridor"],
+    marketNote:
+      "Town 'n' Country is one of the largest unincorporated communities in Florida, and most of it is 1960s-to-1980s concrete block housing with no low voltage wiring in the walls. That makes wireless sensors the practical choice for most retrofits here, with a hardwired panel location chosen for cellular signal rather than convenience. Bay Port Colony and the Rocky Point waterfront add docks and seawalls to cover, and the office and light-industrial parks near the airport are a steady source of commercial camera and access control work.",
+    proximity: "About 25 minutes southwest",
+    tier: "core",
+  },
+  {
+    slug: "south-tampa",
+    name: "South Tampa",
+    county: "Hillsborough County",
+    zips: ["33606", "33609", "33611", "33629"],
+    communities: ["Hyde Park", "Palma Ceia", "Davis Islands", "Bayshore Beautiful", "Ballast Point", "Sunset Park", "Harbour Island"],
+    marketNote:
+      "South Tampa is two markets at once. Hyde Park and the older parts of Palma Ceia are early-1900s bungalows and revival homes where wiring has to be fished without damaging plaster or trim, and where visible exterior hardware is worth being deliberate about. Meanwhile teardowns across Palma Ceia, Sunset Park, and Bayshore Beautiful are replacing those houses with new construction — the one moment when pre-wiring security, cameras, audio, and data costs a fraction of retrofitting. On Davis Islands and along Bayshore, storm surge is a design input: panels, recorders, and power supplies belong above the flood line, not on a garage floor.",
+    proximity: "About 35 minutes south",
+    tier: "core",
+  },
 
   // ---------------------------------------------------------------------------
   // Extended markets — the Venice ⇄ Winter Haven ⇄ Ocala footprint.
@@ -435,6 +479,58 @@ export const CITIES: City[] = [
     proximity: "About 90 minutes south",
     tier: "extended",
   },
+  {
+    slug: "dade-city",
+    name: "Dade City",
+    county: "Pasco County",
+    zips: ["33523", "33525"],
+    communities: ["Historic Downtown Dade City", "Lake Jovita", "San Antonio", "St. Leo", "Richland", "Lacoochee"],
+    marketNote:
+      "East Pasco is the county's rural side — ranches, former citrus groves, and homes on acreage along the ridge, with a small historic downtown and the golf community at Lake Jovita. On acreage the house is rarely the only thing worth protecting: equipment barns, workshops, and a gate at the road all need coverage, and long distances between buildings mean the cabling plan matters as much as the camera choice.",
+    monitoringNote:
+      "Rural Dade City properties are where communication path decides whether monitoring works at all. Copper lines out here are being retired, power drops in summer storms, and cellular signal varies from one end of a property to the other. We test signal at the actual panel location before specifying a communicator, and every account is supervised, so our center in Lutz knows within minutes if a Dade City system has stopped checking in — instead of finding out after a break-in.",
+    proximity: "About 40 minutes northeast",
+    tier: "extended",
+  },
+  {
+    slug: "palm-harbor",
+    name: "Palm Harbor",
+    county: "Pinellas County",
+    zips: ["34683", "34684", "34685"],
+    communities: ["Lansbrook", "Highland Lakes", "Crystal Beach", "Ozona", "Innisbrook", "Lake Tarpon shoreline"],
+    marketNote:
+      "Palm Harbor is north Pinellas built out mostly between the 1970s and the 1990s, so the typical home has an alarm panel that is old enough to have outlived its original company. Lake Tarpon frontage in Lansbrook and the Gulf side at Crystal Beach and Ozona put open water at the back of the lot, and the golf condos at Innisbrook have a large share of part-time owners — both cases where cameras on the front door miss the approach that matters.",
+    monitoringNote:
+      "Most Palm Harbor monitoring work starts with a panel that is already on the wall. Many were installed by companies that have since been bought out, merged, or left the area, and the account was passed to a monitoring center the homeowner has never spoken to. We can usually take those panels over, replace an aging landline or 3G communicator with LTE cellular, and move the account to our own 24/7 center in Lutz with no long-term contract.",
+    proximity: "About 35 minutes west",
+    tier: "extended",
+  },
+  {
+    slug: "clearwater",
+    name: "Clearwater",
+    county: "Pinellas County",
+    zips: ["33755", "33756", "33759", "33761", "33763", "33764", "33765", "33767"],
+    communities: ["Countryside", "Clearwater Beach", "Island Estates", "Sand Key", "Morningside", "Downtown Clearwater"],
+    marketNote:
+      "Clearwater runs from beachfront condos and vacation rentals on Clearwater Beach and Sand Key to established inland neighborhoods like Countryside and a long commercial corridor on US-19. The beach side has two specific problems: salt air that destroys outdoor hardware not rated for it, and short-term rentals where the owner needs coverage of entrances and parking without any camera inside the unit — which the major rental platforms prohibit anyway. Inland, the work looks like the rest of Tampa Bay: retrofits of older panels and camera systems for small businesses.",
+    monitoringNote:
+      "For Clearwater rental and second-home owners, the useful features are the ones you can run from somewhere else: user codes issued and revoked per guest from a phone, arming reports that show the unit was actually locked up at checkout, and water and power-loss sensors that catch the failures that cost money between bookings. All of it reports to our own center in Lutz, staffed 24/7, on the same account as the cameras.",
+    proximity: "About 45 minutes southwest",
+    tier: "extended",
+  },
+  {
+    slug: "sarasota",
+    name: "Sarasota",
+    county: "Sarasota County",
+    zips: ["34231", "34232", "34233", "34236", "34238", "34239", "34240", "34242"],
+    communities: ["Downtown Sarasota", "Siesta Key", "Lido Key", "Bird Key", "Palmer Ranch", "The Meadows", "Gulf Gate"],
+    marketNote:
+      "Sarasota mixes downtown high-rise condominiums, barrier-island homes on Siesta, Lido, and Bird Key, and large inland developments like Palmer Ranch. Condo towers are association work — lobby and garage access control, elevator and amenity cameras, and proposals that go before a board — while the islands bring the same salt-air and storm-surge constraints as the rest of the coast. A high share of homes in every part of the market are seasonal.",
+    monitoringNote:
+      "In Sarasota the monitored system is often the only thing watching the house for half the year. We build those accounts around cellular reporting with supervised check-ins, environmental sensors for water, low temperature, and power loss, and a call list that reaches a local keyholder before it reaches an owner who is out of state. Signals reach our 24/7 center in Lutz in seconds, and installation and service are scheduled from Lutz by our own technicians.",
+    proximity: "About 75 minutes south",
+    tier: "extended",
+  },
 ];
 
 /** Home markets — minutes from the Lutz office. */
@@ -452,12 +548,8 @@ export const SERVICE_AREAS = Array.from(
   new Set([
     ...CITIES.map((c) => c.name),
     "Tampa",
-    "Trinity",
-    "Temple Terrace",
-    "Town 'n' Country",
     "Valrico",
-    "Dade City",
-    "Sarasota",
+    "Oldsmar",
     "North Port",
     "Bartow",
     "Auburndale",
@@ -619,20 +711,157 @@ export const NAV_SERVICES = [
   { label: "Home Theater & AV", href: "/services/home-theater" },
   { label: "Whole-Home Audio", href: "/services/whole-home-audio" },
   { label: "Structured Wiring & Smart Home", href: "/services/structured-wiring" },
+  { label: "Commercial Security", href: "/services/commercial-security" },
+  { label: "Access Control & Gates", href: "/services/access-control" },
+  { label: "Monitoring Takeover", href: "/services/alarm-monitoring-takeover" },
 ];
+
+/**
+ * Every guide under /resources. One list drives the /resources hub and the
+ * sitemap (including each guide's real lastmod), so a new article can't ship
+ * without showing up in both.
+ *
+ * `published`/`modified` are when the content was written and last materially
+ * changed. They feed Article schema and the sitemap; bump `modified` only when
+ * the text actually changes, not on every deploy.
+ */
+export interface Resource {
+  slug: string;
+  title: string;
+  blurb: string;
+  category: "Buying & Cost" | "Monitoring" | "Florida Homes" | "Cameras" | "Boards & Builders" | "Basics";
+  published: string;
+  modified: string;
+}
+
+export const RESOURCES: Resource[] = [
+  {
+    slug: "security-system-cost",
+    title: "How Much Does a Home Security System Cost in Tampa?",
+    blurb: "What drives the price of an alarm system and monitoring, and the contract terms that cost buyers the most.",
+    category: "Buying & Cost",
+    published: "2026-08-10",
+    modified: "2026-08-10",
+  },
+  {
+    slug: "wired-vs-wireless-alarm-systems",
+    title: "Wired vs. Wireless Alarm Systems for Florida Homes",
+    blurb: "Why block construction changes the answer, and when a hybrid system is the right call.",
+    category: "Buying & Cost",
+    published: "2026-10-24",
+    modified: "2026-10-24",
+  },
+  {
+    slug: "choosing-a-monitoring-company",
+    title: "How to Choose an Alarm Monitoring Company",
+    blurb: "In-house vs. wholesale monitoring, contract length, equipment ownership, and communication path.",
+    category: "Monitoring",
+    published: "2026-08-10",
+    modified: "2026-08-10",
+  },
+  {
+    slug: "landline-alarm-upgrade",
+    title: "Is Your Alarm Still on a Landline or 3G? How to Tell",
+    blurb: "Copper retirement and the 3G shutdown left many panels reporting to no one. How to check yours.",
+    category: "Monitoring",
+    published: "2026-10-24",
+    modified: "2026-10-24",
+  },
+  {
+    slug: "false-alarm-prevention",
+    title: "How to Prevent False Alarms (and the Fees That Follow)",
+    blurb: "The handful of causes behind most false alarms, and the settings and habits that stop them.",
+    category: "Monitoring",
+    published: "2026-10-24",
+    modified: "2026-10-24",
+  },
+  {
+    slug: "hurricane-season-security",
+    title: "Hurricane Season Security Checklist for Florida Homes",
+    blurb: "Keeping an alarm and cameras working through an outage, an evacuation, and the week after a storm.",
+    category: "Florida Homes",
+    published: "2026-10-24",
+    modified: "2026-10-24",
+  },
+  {
+    slug: "vacant-home-security",
+    title: "Snowbird & Vacant Home Security Checklist",
+    blurb: "What a seasonally empty Florida house needs beyond a burglar alarm — water, temperature, and power.",
+    category: "Florida Homes",
+    published: "2026-10-24",
+    modified: "2026-10-24",
+  },
+  {
+    slug: "how-many-security-cameras",
+    title: "How Many Security Cameras Does a House Need?",
+    blurb: "Counting cameras by approach rather than by wall, plus PoE vs. Wi-Fi, resolution, and retention.",
+    category: "Cameras",
+    published: "2026-10-24",
+    modified: "2026-10-24",
+  },
+  {
+    slug: "hoa-board-security-guide",
+    title: "HOA & CDD Board Guide to Community Security",
+    blurb: "How association and district boards should scope, budget, and procure gate and camera projects.",
+    category: "Boards & Builders",
+    published: "2026-08-10",
+    modified: "2026-08-10",
+  },
+  {
+    slug: "builder-prewire-guide",
+    title: "Builder's Guide to Low Voltage Pre-Wire",
+    blurb: "When to schedule rough-in, base package scope, buyer upgrades, and fewer warranty callbacks.",
+    category: "Boards & Builders",
+    published: "2026-08-10",
+    modified: "2026-08-10",
+  },
+  {
+    slug: "burglar-alarm-faq",
+    title: "Burglar Alarm FAQ — How Alarm Systems Work",
+    blurb: "What happens when an alarm trips, what monitoring covers, permits, and power-outage behavior.",
+    category: "Basics",
+    published: "2026-03-24",
+    modified: "2026-08-10",
+  },
+  {
+    slug: "safety-tips",
+    title: "8 Home Security Tips You Can Act On Today",
+    blurb: "No-cost steps that make a house a harder target — lighting, locks, sliding doors, and habits.",
+    category: "Basics",
+    published: "2026-03-24",
+    modified: "2026-08-10",
+  },
+  {
+    slug: "burglary-statistics",
+    title: "Burglary Statistics — Why Home Security Matters",
+    blurb: "National and Florida property crime figures, each attributed to its source.",
+    category: "Basics",
+    published: "2026-03-24",
+    modified: "2026-08-10",
+  },
+];
+
+export const resourceBySlug = (slug: string) => {
+  const r = RESOURCES.find((x) => x.slug === slug);
+  if (!r) throw new Error(`No resource registered for ${slug}`);
+  return r;
+};
 
 export const NAV_RESOURCES = [
   // Sitewide entry point into the /dcs cluster. It leads because someone who
   // arrived here searching the short name needs to find the explanation without
   // reading a whole menu.
   { label: "DCS Security (DCSI)", href: "/dcs" },
+  // The hub carries every guide, so the menu can stay short and lead with the
+  // highest-intent ones instead of growing with each new article.
+  { label: "All Guides & Resources", href: "/resources" },
   { label: "Security System Cost Guide", href: "/resources/security-system-cost" },
   { label: "Choosing a Monitoring Company", href: "/resources/choosing-a-monitoring-company" },
+  { label: "Landline & 3G Alarm Upgrade", href: "/resources/landline-alarm-upgrade" },
+  { label: "Hurricane Season Checklist", href: "/resources/hurricane-season-security" },
   { label: "HOA & CDD Board Guide", href: "/resources/hoa-board-security-guide" },
   { label: "Builder Pre-Wire Guide", href: "/resources/builder-prewire-guide" },
   { label: "Burglar Alarm FAQ", href: "/resources/burglar-alarm-faq" },
-  { label: "Burglary Statistics", href: "/resources/burglary-statistics" },
-  { label: "Safety Tips", href: "/resources/safety-tips" },
 ];
 
 export const SERVICES = [
@@ -654,7 +883,7 @@ export const SERVICES = [
     icon: "Building2",
     title: "New Construction",
     description:
-      "Low voltage pre-wire for builders and developers in Hillsborough County.",
+      "Low voltage pre-wire for builders and developers across Hillsborough and Pasco.",
     href: "/services/new-construction",
   },
   {
@@ -684,6 +913,27 @@ export const SERVICES = [
     description:
       "CAT6 to a central panel, whole-home Wi-Fi design, smart locks, and thermostats.",
     href: "/services/structured-wiring",
+  },
+  {
+    icon: "Store",
+    title: "Commercial Security",
+    description:
+      "Business alarms with open/close reporting, storefront and warehouse cameras, and employee access.",
+    href: "/services/commercial-security",
+  },
+  {
+    icon: "KeyRound",
+    title: "Access Control & Gates",
+    description:
+      "Fobs, keypads, and phone credentials for doors and gates — with audit logs you can run yourself.",
+    href: "/services/access-control",
+  },
+  {
+    icon: "RefreshCw",
+    title: "Monitoring Takeover",
+    description:
+      "Keep the sensors already on your walls and move the account to our in-house monitoring.",
+    href: "/services/alarm-monitoring-takeover",
   },
 ];
 

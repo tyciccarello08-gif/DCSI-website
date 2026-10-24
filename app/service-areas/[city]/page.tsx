@@ -260,7 +260,11 @@ export default function CityPage({ params }: { params: { city: string } }) {
             <Link href="/services/security-monitoring" className="text-accent hover:underline">
               security systems &amp; 24/7 monitoring
             </Link>
-            , or read{" "}
+            , how a{" "}
+            <Link href="/services/alarm-monitoring-takeover" className="text-accent hover:underline">
+              monitoring takeover
+            </Link>{" "}
+            works, or read{" "}
             <Link
               href="/resources/choosing-a-monitoring-company"
               className="text-accent hover:underline"
