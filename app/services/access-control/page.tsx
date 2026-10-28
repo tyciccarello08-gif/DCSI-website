@@ -3,6 +3,8 @@ import Link from "next/link";
 import { KeyRound, Smartphone, DoorOpen, Phone, ScrollText, Clock } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
+import AreaLinks from "@/components/AreaLinks";
+import QuoteSection from "@/components/QuoteSection";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FaqAccordion from "@/components/FaqAccordion";
 import JsonLd from "@/components/JsonLd";
@@ -83,7 +85,7 @@ export default function AccessControlPage() {
         title="Access Control & Gate Systems"
         subtitle="Doors and gates that know who opened them. Credentials per person, schedules per door, and audit logs you can pull yourself — installed and serviced by our own technicians."
         ctaText="Get a Free Quote"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />
@@ -164,11 +166,20 @@ export default function AccessControlPage() {
         <FaqAccordion faqs={FAQS} heading="Access Control Questions" />
       </section>
 
+      <AreaLinks service="Access Control & Gates" />
+
+      <QuoteSection
+        heading="Get a Free Access Control Quote"
+        body="Doors, gates, or intercoms: tell us how many openings and who needs in. We'll walk the site and give you a written proposal with the hardware spelled out."
+        defaultService="Access Control / Intercom"
+        testimonialIndex={3}
+      />
+
       <CTABanner
         headline="Every Door, One System"
         body="Tell us how many doors and gates, and who needs to get through them. We'll come out, walk it, and quote it in writing."
         ctaText="Get a Free Quote"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />

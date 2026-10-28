@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Building2, Wifi, Shield, Camera, Speaker, Plug } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
+import AreaLinks from "@/components/AreaLinks";
+import QuoteSection from "@/components/QuoteSection";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FaqAccordion from "@/components/FaqAccordion";
 import JsonLd from "@/components/JsonLd";
@@ -59,7 +61,7 @@ export default function NewConstructionPage() {
         title="New Construction Low Voltage Services"
         subtitle="Partnering with builders and developers across Hillsborough and Pasco Counties — including the Wesley Chapel and Land O' Lakes growth corridor — to deliver complete low voltage pre-wire for residential and commercial new construction."
         ctaText="Contact Us for Builder Pricing"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />
@@ -140,11 +142,20 @@ export default function NewConstructionPage() {
         </p>
       </section>
 
+      <AreaLinks service="New Construction Pre-Wire" />
+
+      <QuoteSection
+        heading="Get a Pre-Wire Quote Before Drywall"
+        body="Send us the build stage and the plans if you have them. Pre-wire has to happen before drywall, so the earlier we hear from you, the more options you keep."
+        defaultService="New Construction Low Voltage"
+        testimonialIndex={6}
+      />
+
       <CTABanner
         headline="Builder & Developer Pricing Available"
         body="Contact us for volume pricing on new construction low voltage projects across Hillsborough and Pasco Counties."
         ctaText="Get in Touch"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />

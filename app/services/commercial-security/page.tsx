@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Bell, Camera, KeyRound, ClipboardList, Flame, Thermometer } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
+import AreaLinks from "@/components/AreaLinks";
+import QuoteSection from "@/components/QuoteSection";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FaqAccordion from "@/components/FaqAccordion";
 import JsonLd from "@/components/JsonLd";
@@ -110,7 +112,7 @@ export default function CommercialSecurityPage() {
         title="Commercial Security Systems for Tampa Bay Businesses"
         subtitle="Alarms, cameras, and access control on one account — designed around how your business actually opens, closes, and runs, and monitored 24/7 by our own team."
         ctaText="Get a Free Quote"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />
@@ -216,11 +218,20 @@ export default function CommercialSecurityPage() {
         </div>
       </section>
 
+      <AreaLinks service="Commercial Security" />
+
+      <QuoteSection
+        heading="Get a Free Commercial Security Quote"
+        body="Storefront, office, warehouse, or multi-site: tell us what you're protecting and we'll walk the site and put a written proposal in front of you."
+        defaultService="Commercial Security"
+        testimonialIndex={2}
+      />
+
       <CTABanner
         headline="Walk the Building With Us"
         body="A free site visit, a conversation about how your business opens and closes, and a fixed written quote."
         ctaText="Get a Free Quote"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />

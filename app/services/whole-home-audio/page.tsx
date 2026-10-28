@@ -2,6 +2,8 @@ import Image from "next/image";
 import { Speaker, Sun, Sliders, Smartphone, Layers, Volume2 } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
+import AreaLinks from "@/components/AreaLinks";
+import QuoteSection from "@/components/QuoteSection";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
 import { CONTACT } from "@/lib/constants";
@@ -87,7 +89,7 @@ export default function WholeHomeAudioPage() {
         title="Whole-Home & Outdoor Audio"
         subtitle="Music in every room and out on the lanai, from speakers you barely notice — with each zone under its own control."
         ctaText="Get a Free Quote"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />
@@ -183,11 +185,20 @@ export default function WholeHomeAudioPage() {
         </div>
       </section>
 
+      <AreaLinks service="Whole-Home Audio" />
+
+      <QuoteSection
+        heading="Get a Free Whole-Home Audio Quote"
+        body="Tell us which rooms and outdoor areas you want covered. We'll plan the zones and speaker placement on site and give you a fixed price."
+        defaultService="Whole-Home Audio"
+        testimonialIndex={8}
+      />
+
       <CTABanner
         headline="Hear It Everywhere"
         body="Free on-site consultation across Hillsborough and Pasco Counties — we'll walk the house, talk through zones, and quote it."
         ctaText="Get a Free Quote"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />

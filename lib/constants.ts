@@ -29,6 +29,13 @@ export const CONTACT = {
    * filled in, every review call-to-action stays hidden rather than linking nowhere.
    */
   googleReviewUrl: "",
+  /**
+   * SET THIS: the public link to the Google Business Profile — the page where
+   * people *read* the reviews (Share → copy link on the Maps listing). Different
+   * from googleReviewUrl above, which opens the "write a review" box. The star
+   * rating badge links here; until it's set, the badge falls back to mapsUrl.
+   */
+  googleProfileUrl: "",
 };
 
 /**
@@ -205,6 +212,18 @@ export interface City {
    * lead with it rather than with install proximity. Rendered when present.
    */
   monitoringNote?: string;
+  /**
+   * Slugs of other city pages that are really neighborhoods of this one. The
+   * Tampa page uses it to link down to South Tampa, New Tampa, and the rest, so
+   * the parent page and its sub-areas reinforce each other instead of competing.
+   */
+  neighborhoodPages?: string[];
+  /**
+   * Overrides the default "<title>" when it would collide with another page.
+   * Tampa needs it: the default matches the home page title word for word, and
+   * two pages with one title split the ranking between them.
+   */
+  seoTitle?: string;
 }
 
 export const CITIES: City[] = [
@@ -338,6 +357,32 @@ export const CITIES: City[] = [
     marketNote:
       "South Tampa is two markets at once. Hyde Park and the older parts of Palma Ceia are early-1900s bungalows and revival homes where wiring has to be fished without damaging plaster or trim, and where visible exterior hardware is worth being deliberate about. Meanwhile teardowns across Palma Ceia, Sunset Park, and Bayshore Beautiful are replacing those houses with new construction — the one moment when pre-wiring security, cameras, audio, and data costs a fraction of retrofitting. On Davis Islands and along Bayshore, storm surge is a design input: panels, recorders, and power supplies belong above the flood line, not on a garage floor.",
     proximity: "About 35 minutes south",
+    tier: "core",
+  },
+  {
+    slug: "tampa",
+    name: "Tampa",
+    county: "Hillsborough County",
+    // City of Tampa ZIPs outside the neighborhoods that already have their own
+    // page (South Tampa, New Tampa, Temple Terrace, Town 'n' Country).
+    zips: ["33602", "33603", "33604", "33605", "33607", "33610", "33612", "33613", "33614"],
+    communities: ["Seminole Heights", "Tampa Heights", "Downtown & Channel District", "Ybor City", "Westshore", "West Tampa", "Forest Hills", "Lowry Park", "USF area"],
+    marketNote:
+      "Tampa itself is several different jobs under one name. Seminole Heights and Tampa Heights are 1910s-to-1920s bungalows, mostly wood frame on a crawlspace, where wiring can usually be run from underneath without opening walls, and where porch and alley approaches matter more than the front door. Downtown, the Channel District, and Westshore are condos and offices, where the building or association controls what can be drilled, which points toward wireless sensors, interior cameras, and access control that ties into the building's own entry system. Ybor City and the commercial corridors along Kennedy, Dale Mabry, and Florida Avenue are storefronts, bars, and restaurants that need cameras covering registers and back doors, alarms with open and close reporting, and recorders that keep footage long enough for an insurance claim.",
+    proximity: "About 30 minutes south",
+    tier: "core",
+    seoTitle: "Tampa Security Systems, Cameras & Alarm Monitoring",
+    neighborhoodPages: ["south-tampa", "new-tampa", "carrollwood", "town-n-country", "temple-terrace", "westchase"],
+  },
+  {
+    slug: "valrico",
+    name: "Valrico",
+    county: "Hillsborough County",
+    zips: ["33594", "33596"],
+    communities: ["Bloomingdale", "River Hills", "Buckhorn", "Diamond Hill"],
+    marketNote:
+      "Valrico sits east of Brandon where the subdivisions start giving way to acreage. The 1980s-to-2000s neighborhoods around Bloomingdale and Buckhorn often have a builder-installed alarm panel whose communicator has aged out, which makes them good candidates for a takeover instead of a new system. Further east the lots get bigger, with detached garages, workshops, and gates set back from the road, and those need cameras with real range at night and wiring run to outbuildings rather than a doorbell camera and a hope.",
+    proximity: "About 40 minutes southeast",
     tier: "core",
   },
 
@@ -547,8 +592,6 @@ export const EXTENDED_CITIES = CITIES.filter((c) => c.tier === "extended");
 export const SERVICE_AREAS = Array.from(
   new Set([
     ...CITIES.map((c) => c.name),
-    "Tampa",
-    "Valrico",
     "Oldsmar",
     "North Port",
     "Bartow",
@@ -876,7 +919,7 @@ export const SERVICES = [
     icon: "Camera",
     title: "Camera Systems",
     description:
-      "CCTV, DVR, and remote mobile viewing — watch your property from anywhere.",
+      "IP cameras, NVR recording, and phone viewing — watch your property from anywhere.",
     href: "/services/camera-systems",
   },
   {
@@ -937,6 +980,25 @@ export const SERVICES = [
   },
 ];
 
+/**
+ * "What do you need?" options on every quote form. The API validates against this
+ * same list, so adding an option here is the only change needed.
+ */
+export const FORM_SERVICES = [
+  "Security Systems & Monitoring",
+  "Monitoring Takeover (Existing System)",
+  "Camera Systems (CCTV)",
+  "Commercial Security",
+  "Access Control / Intercom",
+  "HOA / CDD Community Security",
+  "New Construction Low Voltage",
+  "Home Theater",
+  "Whole-Home Audio",
+  "Structured Wiring / Smart Home",
+  "Flat Panel TV Installation",
+  "Other",
+] as const;
+
 export const TESTIMONIALS = [
   {
     quote:
@@ -952,10 +1014,5 @@ export const TESTIMONIALS = [
     quote:
       "Nelson was extremely knowledgeable and professional. The technician was professional and timely. The system is easy to use and gives my family a feeling of safety and security.",
     name: "Paris",
-  },
-  {
-    quote:
-      "DCSI Security has helped me with my home security needs. They have always been prompt, courteous, professional and reliable. I have referred many of my family and friends.",
-    name: "Verified Customer",
   },
 ];

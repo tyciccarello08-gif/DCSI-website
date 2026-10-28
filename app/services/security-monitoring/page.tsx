@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Shield, Clock, Radio, Lock, Bell, Eye } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
+import AreaLinks from "@/components/AreaLinks";
+import QuoteSection from "@/components/QuoteSection";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FaqAccordion from "@/components/FaqAccordion";
 import JsonLd from "@/components/JsonLd";
@@ -93,7 +95,7 @@ export default function SecurityMonitoringPage() {
         title="Security Systems & 24/7 Monitoring in Tampa Bay"
         subtitle="Custom residential and commercial security solutions with in-house monitoring — protecting Tampa Bay families and businesses around the clock."
         ctaText="Get a Free Quote"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />
@@ -298,11 +300,20 @@ export default function SecurityMonitoringPage() {
         </p>
       </section>
 
+      <AreaLinks service="Security Systems" />
+
+      <QuoteSection
+        heading="Get a Free Security System Quote"
+        body="Tell us about the property and what's on the wall now. We'll come out, walk it with you, and put a fixed price in writing, monitoring rate included."
+        defaultService="Security Systems & Monitoring"
+        testimonialIndex={0}
+      />
+
       <CTABanner
         headline="Ready for a Custom Security System?"
         body="Contact us for a free no-pressure consultation. We'll design the right solution for your property."
         ctaText="Get a Free Quote"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />

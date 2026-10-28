@@ -6,6 +6,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import GlobalBackground from "@/components/GlobalBackground";
 import JsonLd from "@/components/JsonLd";
+import LeadTracking from "@/components/LeadTracking";
+import MobileCallBar from "@/components/MobileCallBar";
 import { BUSINESS, COMPANY, SEARCH_VERIFICATION, SITE_URL } from "@/lib/constants";
 import { localBusinessSchema, websiteSchema } from "@/lib/seo";
 
@@ -108,6 +110,8 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <MobileCallBar />
+        <LeadTracking />
 
         {/* Served from /_vercel/insights/* — first-party, so it survives ad
             blockers and needs no CSP exception in production. */}

@@ -12,6 +12,21 @@ const isPreview =
 const isDev = process.env.NODE_ENV !== "production";
 const analyticsScriptSrc = isDev ? " https://va.vercel-scripts.com" : "";
 
+// Lead tracking (see lib/analytics.ts). Each origin is allowed only when its env
+// var is set, so the CSP stays closed on deploys that don't use it.
+const ga4 = Boolean(process.env.NEXT_PUBLIC_GA4_ID);
+const callTracking = Boolean(process.env.NEXT_PUBLIC_CALL_TRACKING_SCRIPT);
+const trackingScriptSrc =
+  (ga4 ? " https://www.googletagmanager.com" : "") +
+  (callTracking ? " https://cdn.callrail.com" : "");
+const trackingConnectSrc =
+  (ga4
+    ? " https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com"
+    : "") + (callTracking ? " https://*.callrail.com" : "");
+const trackingImgSrc = ga4
+  ? " https://*.google-analytics.com https://*.googletagmanager.com"
+  : "";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -58,11 +73,11 @@ const nextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              `script-src 'self' 'unsafe-inline' 'unsafe-eval'${analyticsScriptSrc}`, // Next.js requires these
+              `script-src 'self' 'unsafe-inline' 'unsafe-eval'${analyticsScriptSrc}${trackingScriptSrc}`, // Next.js requires these
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
-              "img-src 'self' data: blob:",
-              "connect-src 'self'",
+              `img-src 'self' data: blob:${trackingImgSrc}`,
+              `connect-src 'self'${trackingConnectSrc}`,
               // Keyless Google Maps embed on the contact page.
               "frame-src https://maps.google.com https://www.google.com",
               "frame-ancestors 'self'",

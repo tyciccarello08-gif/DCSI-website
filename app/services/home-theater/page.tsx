@@ -2,6 +2,8 @@ import Image from "next/image";
 import { Projector, Tv, Volume2, Cable, Settings, Wrench } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
+import AreaLinks from "@/components/AreaLinks";
+import QuoteSection from "@/components/QuoteSection";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
 import { CONTACT } from "@/lib/constants";
@@ -106,7 +108,7 @@ export default function HomeTheaterPage() {
         title="Home Theater & AV Installation"
         subtitle="The 'Sound' in Security & Sound. Projectors, media walls, surround sound, and wiring you never see — designed for your room and calibrated before we leave."
         ctaText="Get a Free Design Consultation"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />
@@ -231,11 +233,20 @@ export default function HomeTheaterPage() {
         </div>
       </section>
 
+      <AreaLinks service="Home Theater" />
+
+      <QuoteSection
+        heading="Get a Free Home Theater Quote"
+        body="Tell us about the room and how you'll use it. We'll come out, look at the space, and design around it, with a fixed price in writing."
+        defaultService="Home Theater"
+        testimonialIndex={7}
+      />
+
       <CTABanner
         headline="Let's Design Your Theater"
         body="Free on-site consultation across Hillsborough and Pasco Counties. We measure the room, talk through options, and quote it honestly."
         ctaText="Get a Free Quote"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />

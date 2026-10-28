@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Camera, Shield, Key, Bell, Users, Wrench } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
+import AreaLinks from "@/components/AreaLinks";
+import QuoteSection from "@/components/QuoteSection";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FaqAccordion from "@/components/FaqAccordion";
 import JsonLd from "@/components/JsonLd";
@@ -29,7 +31,7 @@ const SERVICES = [
     icon: Camera,
     title: "Common Area Camera Systems",
     description:
-      "CCTV and DVR coverage for pools, clubhouses, playgrounds, mailbox kiosks, and parking areas. Remote viewing available for board members and management.",
+      "IP camera coverage for pools, clubhouses, playgrounds, mailbox kiosks, and parking areas. Remote viewing available for board members and management.",
   },
   {
     icon: Shield,
@@ -100,7 +102,7 @@ export default function HoaCddPage() {
         title="HOA & CDD Security Services"
         subtitle="Protecting Tampa Bay communities from the gate in — gate access, common area cameras, amenity security, and 24/7 in-house monitoring for homeowner associations and community development districts."
         ctaText="Request Community Pricing"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />
@@ -303,11 +305,20 @@ export default function HoaCddPage() {
         </p>
       </section>
 
+      <AreaLinks service="HOA & CDD Security" />
+
+      <QuoteSection
+        heading="Request a Proposal for Your Community"
+        body="Tell us the community and what the board is weighing: gates, amenity cameras, or monitoring. We'll schedule a site walk and prepare the documented proposal a board vote needs."
+        defaultService="HOA / CDD Community Security"
+        testimonialIndex={5}
+      />
+
       <CTABanner
         headline="Ready to Secure Your Community?"
         body="Contact DCSI Inc. for community pricing, a site walkthrough, and a custom security plan tailored to your HOA or CDD."
         ctaText="Request Community Pricing"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />
