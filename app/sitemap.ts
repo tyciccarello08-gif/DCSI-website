@@ -17,7 +17,7 @@ type Entry = {
  */
 const SITE_UPDATED = "2026-10-24";
 const SERVICES_UPDATED = "2026-10-24";
-const CITIES_UPDATED = "2026-10-24";
+const CITIES_UPDATED = "2026-10-28";
 const DCS_UPDATED = "2026-08-14";
 
 const ROUTES: Entry[] = [

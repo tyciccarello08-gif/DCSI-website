@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Camera, Smartphone, Eye, Users } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
+import AreaLinks from "@/components/AreaLinks";
+import QuoteSection from "@/components/QuoteSection";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FaqAccordion from "@/components/FaqAccordion";
 import JsonLd from "@/components/JsonLd";
@@ -14,7 +16,7 @@ const PATH = "/services/camera-systems";
 export const metadata = pageMetadata({
   title: "CCTV & Security Camera Installation in Tampa, FL",
   description:
-    "CCTV, DVR, and IP camera installation for homes and businesses across Hillsborough & Pasco Counties, FL. Remote viewing and free on-site quotes.",
+    "IP security camera and NVR installation for homes and businesses across Tampa, Hillsborough & Pasco Counties, FL. 4K options, phone viewing, free on-site quotes.",
   path: PATH,
 });
 
@@ -29,21 +31,29 @@ const ADVANTAGES = [
   "Keep an eye on your property while traveling",
   "View cameras live from your iPhone or smartphone",
   "Record full time or only when an event is triggered",
-  "Save from days to months of video to your DVR",
+  "Save weeks of video on a recorder sized for your cameras",
   "Get email alerts of events on a custom schedule",
 ];
 
 const CATEGORIES = [
-  { icon: Camera, title: "DVRs & NVRs", description: "Digital and network video recorders storing days to months of footage." },
+  { icon: Camera, title: "IP Cameras & NVRs", description: "High-resolution IP cameras on a single network cable each, recording to a network video recorder (NVR) on site." },
   { icon: Eye, title: "Outdoor Cameras", description: "Weatherproof cameras covering entry points, driveways, and perimeters." },
   { icon: Users, title: "Indoor Cameras", description: "Discreet indoor units for monitoring interior spaces." },
-  { icon: Smartphone, title: "Mobile Viewing Apps", description: "View your DVR live from any iPhone, Android, or web browser." },
+  { icon: Smartphone, title: "Mobile Viewing Apps", description: "Live view, playback, and motion alerts from any iPhone, Android, or web browser." },
 ];
 
 const FAQS = [
   {
     q: "How many security cameras does my home need?",
     a: "Count the approaches rather than the walls. Most suburban Tampa Bay homes need four to six cameras — front door, driveway, each side gate, and the rear of the house or lanai. Townhouses often need two or three; acreage with gates and outbuildings can need eight or more.",
+  },
+  {
+    q: "IP cameras or analog: which do you install?",
+    a: "New systems are designed around IP cameras recording to a network video recorder (NVR). Each camera runs on one network cable that carries both power and video (PoE), resolution goes well past what older analog systems could do, and the recorder is far easier to manage and update. If you already have an older coax camera system, we look at what is there first, because in some cases the existing cable runs can be reused and that changes the price.",
+  },
+  {
+    q: "How much does a security camera system cost?",
+    a: "It mostly comes down to how many cameras, how hard the cable runs are (single-story with attic access versus two-story block, or long runs to a gate or outbuilding), the resolution, and how many weeks of footage you want kept. We don't quote sight-unseen. A free on-site visit gets you a fixed number in writing, and our security system cost guide walks through what moves the price.",
   },
   {
     q: "Can I watch my cameras from my phone?",
@@ -72,7 +82,7 @@ export default function CameraSystemsPage() {
         title="CCTV & Security Camera Systems"
         subtitle="Custom camera installations for homes and businesses across Tampa Bay — with professional walkthrough, training, and ongoing support included."
         ctaText="Get a Custom Quote"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />
@@ -175,7 +185,7 @@ export default function CameraSystemsPage() {
         <p className="font-inter text-text-secondary text-xs leading-relaxed border border-border rounded-lg p-6 bg-bg-card">
           <strong className="text-text-primary">Note:</strong> Some restrictions may apply. Additional fees may apply to wire
           runs over one hundred feet, inaccessible attics, conduit or piping that needs to be secured
-          or trenched, A/C outlets added, internet modems, and networking DVR. All systems come with
+          or trenched, A/C outlets added, internet modems, and networking the recorder. All systems come with
           a ninety-day warranty on labor and one year on parts. Extended warranties and service
           contracts are available.
         </p>
@@ -185,15 +195,24 @@ export default function CameraSystemsPage() {
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <FaqAccordion faqs={FAQS} heading="Security Camera Questions" />
         <p className="font-inter text-text-secondary text-sm leading-relaxed mt-10">
-          Planning a system? Read <Link href="/resources/how-many-security-cameras" className="text-accent hover:underline">how many security cameras a house needs</Link>, or see <Link href="/services/commercial-security" className="text-accent hover:underline">commercial camera systems</Link> for a business.
+          Planning a system? Read <Link href="/resources/how-many-security-cameras" className="text-accent hover:underline">how many security cameras a house needs</Link> and <Link href="/resources/security-system-cost" className="text-accent hover:underline">what a security system costs</Link>, or see <Link href="/services/commercial-security" className="text-accent hover:underline">commercial camera systems</Link> for a business.
         </p>
       </section>
+
+      <AreaLinks service="Security Cameras" />
+
+      <QuoteSection
+        heading="Get a Free Camera System Quote"
+        body="Tell us what you want to see and where. We'll plan camera placement on site, size the recorder for the retention you need, and give you a fixed price in writing."
+        defaultService="Camera Systems (CCTV)"
+        testimonialIndex={1}
+      />
 
       <CTABanner
         headline="Get a Custom Camera System Quote"
         body="Tell us about your property and we'll design the perfect camera solution for you."
         ctaText="Request a Quote"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { verifyFormToken } from "@/lib/form-token";
+import { FORM_SERVICES } from "@/lib/constants";
 
 // ── Resend client (server-side only) ─────────────────────────────────────────
 // Built lazily: `new Resend(undefined)` throws, and at module scope that would
@@ -34,17 +35,7 @@ function isRateLimited(ip: string): boolean {
 }
 
 // ── Input validation constants ────────────────────────────────────────────────
-const ALLOWED_SERVICES = new Set([
-  "Security Systems & Monitoring",
-  "Monitoring Takeover (Existing System)",
-  "Commercial Security",
-  "Camera Systems (CCTV)",
-  "New Construction Low Voltage",
-  "Home Theater",
-  "Flat Panel TV Installation",
-  "Access Control / Intercom",
-  "Other",
-]);
+const ALLOWED_SERVICES = new Set<string>(FORM_SERVICES);
 
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
 const PHONE_REGEX = /^[\d\s\-().+]{7,20}$/;
@@ -118,6 +109,54 @@ function buildSpamFlags(
   return flags;
 }
 
+// ── Lead attribution ──────────────────────────────────────────────────────────
+// The form sends the page it was submitted from plus first-touch source data
+// (lib/analytics.ts). All of it is client-supplied and only ever displayed in
+// the notification email, so it is length-capped and escaped, never trusted.
+function cleanString(value: unknown, max = 500): string | null {
+  return typeof value === "string" && value.trim() ? value.trim().slice(0, max) : null;
+}
+
+interface LeadSourceInfo {
+  channel: string;
+  landingPage: string | null;
+  referrer: string | null;
+  campaign: string | null;
+}
+
+function readSource(value: unknown): LeadSourceInfo | null {
+  if (typeof value !== "object" || value === null) return null;
+  const v = value as Record<string, unknown>;
+  const landingPage = cleanString(v.landingPage, 300);
+  const referrer = cleanString(v.referrer, 300);
+  const utmSource = cleanString(v.utmSource, 100);
+  const utmMedium = cleanString(v.utmMedium, 100);
+  const utmCampaign = cleanString(v.utmCampaign, 100);
+  const utmTerm = cleanString(v.utmTerm, 100);
+  const gclid = cleanString(v.gclid, 200);
+
+  let referrerHost = "";
+  try {
+    referrerHost = referrer ? new URL(referrer).hostname.replace(/^www\./, "") : "";
+  } catch {
+    referrerHost = "";
+  }
+
+  // A plain-English channel, so whoever reads the lead email doesn't need GA4
+  // to know whether it came from an ad, a search, or the Google Maps listing.
+  let channel: string;
+  if (gclid || utmMedium === "cpc" || utmMedium === "ppc") channel = "Google Ads (paid click)";
+  else if (utmSource === "gbp" || utmSource === "google_business") channel = "Google Business Profile";
+  else if (utmSource) channel = `Campaign: ${utmSource}${utmMedium ? ` / ${utmMedium}` : ""}`;
+  else if (/(^|\.)google\.|bing\.com$|duckduckgo\.com$|yahoo\.com$/.test(referrerHost))
+    channel = `Organic search (${referrerHost})`;
+  else if (referrerHost) channel = `Referral (${referrerHost})`;
+  else channel = "Direct / typed in";
+
+  const campaign = [utmCampaign, utmTerm && `term: ${utmTerm}`].filter(Boolean).join(" · ") || null;
+  return { channel, landingPage, referrer, campaign };
+}
+
 // ── Validation helper ─────────────────────────────────────────────────────────
 function validateFields(
   name: unknown,
@@ -132,8 +171,12 @@ function validateFields(
   if (typeof phone !== "string" || !PHONE_REGEX.test(phone.trim())) {
     return "Phone number is invalid.";
   }
-  if (typeof email !== "string" || !EMAIL_REGEX.test(email.trim())) {
-    return "Email address is invalid.";
+  // Optional — people who would rather get a call often won't type an email,
+  // and requiring one loses them. Validated only when given.
+  if (email !== undefined && email !== null && email !== "") {
+    if (typeof email !== "string" || email.length > 254 || !EMAIL_REGEX.test(email.trim())) {
+      return "Email address is invalid.";
+    }
   }
   if (service !== undefined && service !== null && service !== "") {
     if (typeof service !== "string" || !ALLOWED_SERVICES.has(service)) {
@@ -180,7 +223,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const { name, phone, email, service, message, company, elapsedMs, formToken } =
+  const { name, phone, email, service, message, company, elapsedMs, formToken, page, source } =
     body as Record<string, unknown>;
 
   // ── Honeypot ────────────────────────────────────────────────────────────────
@@ -229,7 +272,10 @@ export async function POST(req: NextRequest) {
   // Sanitize for use in DB and emails
   const safeName = (name as string).trim();
   const safePhone = (phone as string).trim();
-  const safeEmail = (email as string).trim().toLowerCase();
+  const safeEmail =
+    typeof email === "string" && email.trim() ? email.trim().toLowerCase() : null;
+  const safePage = cleanString(page, 200);
+  const leadSource = readSource(source);
   const safeService = service && typeof service === "string" ? service : null;
   const safeMessage = message && typeof message === "string" ? message.trim() : null;
 
@@ -259,7 +305,7 @@ export async function POST(req: NextRequest) {
   // Escaped values for HTML emails
   const eName = escapeHtml(safeName);
   const ePhone = escapeHtml(safePhone);
-  const eEmail = escapeHtml(safeEmail);
+  const eEmail = safeEmail ? escapeHtml(safeEmail) : null;
   const eService = safeService ? escapeHtml(safeService) : "Not specified";
   const eMessage = safeMessage ? escapeHtml(safeMessage) : null;
 
@@ -286,14 +332,31 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // LEAD_COPY_EMAIL (comma-separated) gets a blind copy of every lead, so the
+  // owner sees each one even when the shared inbox is someone else's job.
+  const copyTo = (process.env.LEAD_COPY_EMAIL ?? "")
+    .split(",")
+    .map((a) => a.trim())
+    .filter((a) => EMAIL_REGEX.test(a));
+
+  const sourceRow = (label: string, value: string | null) =>
+    value
+      ? `<tr><td style="padding: 6px 0; color: #9CA3AF; font-size: 12px; width: 120px;">${label}</td><td style="padding: 6px 0; font-size: 13px; color: #D1D5DB; word-break: break-all;">${escapeHtml(value)}</td></tr>`
+      : "";
+
+  const subjectDetail = [safeService, safePage].filter(Boolean).join(" — ");
+
   let emailOk = false;
   try {
     const { error: notifyError } = await resend.emails.send({
       from: "DCSI Website <info@dcsisecurity.com>",
       to: notificationEmail,
-      subject: isFlagged
-        ? `[POSSIBLE SPAM] New Contact Form Submission`
-        : `New Contact Form Submission`,
+      ...(copyTo.length ? { bcc: copyTo } : {}),
+      // Hitting Reply goes to the customer rather than to the website address.
+      ...(safeEmail ? { replyTo: safeEmail } : {}),
+      subject: `${isFlagged ? "[POSSIBLE SPAM] " : ""}New Website Lead: ${safeName}${
+        subjectDetail ? ` (${subjectDetail})` : ""
+      }`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #0A0E1A; color: #F9FAFB; border-radius: 12px;">
           <h2 style="color: #DC2626; font-size: 20px; margin-bottom: 24px;">New Contact Form Submission</h2>
@@ -310,10 +373,20 @@ export async function POST(req: NextRequest) {
           <table style="width: 100%; border-collapse: collapse;">
             <tr><td style="padding: 8px 0; color: #9CA3AF; font-size: 13px; width: 120px;">Name</td><td style="padding: 8px 0; font-size: 14px; color: #EF4444;">${eName}</td></tr>
             <tr><td style="padding: 8px 0; color: #9CA3AF; font-size: 13px;">Phone</td><td style="padding: 8px 0; font-size: 14px;"><a href="tel:${phoneDigits}" style="color: #EF4444;">${ePhone}</a></td></tr>
-            <tr><td style="padding: 8px 0; color: #9CA3AF; font-size: 13px;">Email</td><td style="padding: 8px 0; font-size: 14px;"><a href="mailto:${eEmail}" style="color: #EF4444;">${eEmail}</a></td></tr>
+            <tr><td style="padding: 8px 0; color: #9CA3AF; font-size: 13px;">Email</td><td style="padding: 8px 0; font-size: 14px;">${eEmail ? `<a href="mailto:${eEmail}" style="color: #EF4444;">${eEmail}</a>` : `<span style="color: #9CA3AF;">Not given. Call them back.</span>`}</td></tr>
             <tr><td style="padding: 8px 0; color: #9CA3AF; font-size: 13px;">Service</td><td style="padding: 8px 0; font-size: 14px; color: #EF4444;">${eService}</td></tr>
           </table>
           ${eMessage ? `<div style="margin-top: 16px; padding: 16px; background: #1A2235; border-radius: 8px; border-left: 3px solid #DC2626;"><p style="color: #9CA3AF; font-size: 12px; margin: 0 0 8px;">Message</p><p style="font-size: 14px; margin: 0; line-height: 1.6; color: #EF4444;">${eMessage}</p></div>` : ""}
+          <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #1F2937;">
+            <p style="color: #9CA3AF; font-size: 12px; margin: 0 0 8px; text-transform: uppercase; letter-spacing: 0.08em;">Lead source</p>
+            <table style="width: 100%; border-collapse: collapse;">
+              ${sourceRow("Channel", leadSource?.channel ?? "Unknown")}
+              ${sourceRow("Form on page", safePage)}
+              ${sourceRow("Landing page", leadSource?.landingPage ?? null)}
+              ${sourceRow("Referrer", leadSource?.referrer ?? null)}
+              ${sourceRow("Campaign", leadSource?.campaign ?? null)}
+            </table>
+          </div>
         </div>
       `,
     });
@@ -329,8 +402,9 @@ export async function POST(req: NextRequest) {
   // ── Confirmation to submitter (cosmetic — never fails the request) ──────────
   // Skipped for flagged submissions: those addresses are often harvested or
   // forged, and auto-replying to them is backscatter that would put the
-  // sending domain's Resend reputation at risk.
-  if (!isFlagged) {
+  // sending domain's Resend reputation at risk. And there's nobody to confirm to
+  // when the visitor left email blank.
+  if (!isFlagged && safeEmail) {
     try {
       const { error: confirmError } = await resend.emails.send({
         from: "DCSI Inc. Security & Sound <info@dcsisecurity.com>",

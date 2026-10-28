@@ -9,6 +9,8 @@ import { Shield, Clock, Monitor, Star, Phone, ArrowRight } from "lucide-react";
 import ServiceCard from "@/components/ServiceCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import CTABanner from "@/components/CTABanner";
+import GoogleRating from "@/components/GoogleRating";
+import QuoteSection from "@/components/QuoteSection";
 import { CONTACT, COMPANY, SERVICES, TESTIMONIALS } from "@/lib/constants";
 
 // HeroCanvas removed — GlobalBackground in layout.tsx now provides the fixed particle canvas
@@ -25,7 +27,7 @@ const TRUST_ITEMS = [
   },
   { icon: Clock, label: "Since 2004", sub: "Serving Tampa Bay" },
   { icon: Monitor, label: "24/7 Monitoring", sub: "In-House, Around the Clock" },
-  { icon: Star, label: "White Glove Service", sub: "5-Star Client Experience" },
+  { icon: Star, label: "White Glove Service", sub: "Installed by Our Own Team" },
 ];
 
 export default function HomeClient() {
@@ -198,7 +200,7 @@ export default function HomeClient() {
               className="flex flex-wrap gap-4"
             >
               <Link
-                href="/contact"
+                href="#quote"
                 className="dcsi-btn-pulse bg-accent hover:bg-accent-light text-white font-inter font-semibold uppercase tracking-wider px-8 py-4 rounded-lg text-sm transition-all shadow-xl shadow-accent/25 hover:shadow-accent/40"
               >
                 Get a Free Quote
@@ -338,7 +340,7 @@ export default function HomeClient() {
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
-                href="/contact"
+                href="#quote"
                 className="bg-accent hover:bg-accent-light text-white font-inter font-semibold uppercase tracking-wider px-8 py-4 rounded-lg text-sm transition-all shadow-lg shadow-accent/20"
               >
                 Get a Free Quote
@@ -525,7 +527,7 @@ export default function HomeClient() {
                 {[
                   { value: "20",    dataSuffix: "+",  dataCount: "20",    label: "Years Experience" },
                   { value: "24",    dataSuffix: "/7", dataCount: "24",    label: "Monitoring" },
-                  { value: "100",   dataSuffix: "%",  dataCount: "100",   label: "Client Satisfaction" },
+                  { value: "2004",  dataSuffix: "",   dataCount: "",      label: "Founded in Lutz, FL" },
                   { value: "10000", dataSuffix: "+",  dataCount: "10000", label: "Installs Completed" },
                 ].map((stat) => (
                   <div
@@ -533,13 +535,18 @@ export default function HomeClient() {
                     className="bg-bg-card border border-border rounded-2xl p-8 text-center group hover:border-accent/30 transition-colors dcsi-bento-glow"
                   >
                     <div className="font-bebas text-5xl text-accent mb-2 leading-none">
-                      <span
-                        className="dcsi-stat-counter"
-                        data-count={stat.dataCount}
-                        data-suffix={stat.dataSuffix}
-                      >
-                        {stat.value}{stat.dataSuffix}
-                      </span>
+                      {stat.dataCount ? (
+                        <span
+                          className="dcsi-stat-counter"
+                          data-count={stat.dataCount}
+                          data-suffix={stat.dataSuffix}
+                        >
+                          {stat.value}{stat.dataSuffix}
+                        </span>
+                      ) : (
+                        // A year shouldn't count up from zero.
+                        <span>{stat.value}</span>
+                      )}
                     </div>
                     <div className="font-inter text-text-secondary text-sm">
                       {stat.label}
@@ -567,24 +574,32 @@ export default function HomeClient() {
               Client Reviews
             </span>
           </div>
-          <h2 className="font-montserrat font-bold text-3xl sm:text-4xl text-text-primary">
-            What Our Clients Say
-          </h2>
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
+            <h2 className="font-montserrat font-bold text-3xl sm:text-4xl text-text-primary">
+              What Our Clients Say
+            </h2>
+            <GoogleRating />
+          </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {TESTIMONIALS.map((t, i) => (
             <TestimonialCard key={t.name} {...t} index={i} />
           ))}
         </div>
       </section>
 
+      <QuoteSection
+        heading="Get a Free Quote"
+        body="Tell us what you need and roughly where you are. We'll set up a free on-site visit anywhere in Hillsborough or Pasco and put a fixed price in writing."
+      />
+
       {/* ─── CTA Banner ─── */}
       <CTABanner
         headline="Protecting Tampa Bay Homes & Businesses"
         body="24/7 in-house monitoring, professional installation, and white glove service from a team that cares."
         ctaText="Get a Free Quote"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />

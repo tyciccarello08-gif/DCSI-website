@@ -2,6 +2,8 @@ import Image from "next/image";
 import { Network, Wifi, Server, Lock, Thermometer, Plug } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
+import AreaLinks from "@/components/AreaLinks";
+import QuoteSection from "@/components/QuoteSection";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
 import { CONTACT } from "@/lib/constants";
@@ -102,7 +104,7 @@ export default function StructuredWiringPage() {
         title="Structured Wiring & Smart Home"
         subtitle="The backbone everything else runs on — CAT6 to a central panel, Wi-Fi designed for the house, and smart devices that work with your alarm instead of beside it."
         ctaText="Get a Free Quote"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />
@@ -207,11 +209,20 @@ export default function StructuredWiringPage() {
         </div>
       </section>
 
+      <AreaLinks service="Structured Wiring & Smart Home" />
+
+      <QuoteSection
+        heading="Get a Free Wiring & Wi-Fi Quote"
+        body="Tell us what isn't working (dead Wi-Fi spots, no wired drops, smart devices that drop off) and whether walls are open. We'll quote the fix in writing."
+        defaultService="Structured Wiring / Smart Home"
+        testimonialIndex={9}
+      />
+
       <CTABanner
         headline="Wire It Right the First Time"
         body="Whether you're building in Wesley Chapel or fixing dead Wi-Fi in Carrollwood, we'll walk the property and quote it honestly."
         ctaText="Get a Free Quote"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />

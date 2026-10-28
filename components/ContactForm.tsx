@@ -2,19 +2,29 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Send, CheckCircle, AlertCircle } from "lucide-react";
+import { Send, CheckCircle, AlertCircle, Clock } from "lucide-react";
+import { BUSINESS, CONTACT, FORM_SERVICES } from "@/lib/constants";
+import { readLeadSource, trackEvent } from "@/lib/analytics";
 
-const SERVICES = [
-  "Security Systems & Monitoring",
-  "Monitoring Takeover (Existing System)",
-  "Commercial Security",
-  "Camera Systems (CCTV)",
-  "New Construction Low Voltage",
-  "Home Theater",
-  "Flat Panel TV Installation",
-  "Access Control / Intercom",
-  "Other",
-];
+type FormService = (typeof FORM_SERVICES)[number];
+
+interface ContactFormProps {
+  /**
+   * `full` is the /contact page form. `compact` is the short quote form on
+   * service, city, and home pages: name, phone, what you need, and an optional
+   * note. Same API, same bot checks.
+   */
+  variant?: "full" | "compact";
+  /** Preselects "What do you need?" so a camera-page visitor doesn't have to. */
+  defaultService?: FormService;
+  heading?: string;
+}
+
+const OFFICE_HOURS = BUSINESS.openingHours[0];
+const to12h = (hhmm: string) => {
+  const h = Number(hhmm.split(":")[0]);
+  return `${h % 12 === 0 ? 12 : h % 12} ${h >= 12 ? "PM" : "AM"}`;
+};
 
 interface FormData {
   name: string;
@@ -29,9 +39,15 @@ interface FormData {
 const GENERIC_ERROR =
   "Something went wrong. Please try again or call us directly at (813) 949-6500.";
 
-export default function ContactForm() {
+export default function ContactForm({
+  variant = "full",
+  defaultService,
+  heading,
+}: ContactFormProps) {
+  const compact = variant === "compact";
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState(GENERIC_ERROR);
+  const [submittedWithEmail, setSubmittedWithEmail] = useState(false);
 
   // ── Signed form token ───────────────────────────────────────────────────────
   // Proves this submission came from a browser that actually loaded the page.
@@ -66,7 +82,7 @@ export default function ContactForm() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<FormData>({ defaultValues: { service: defaultService ?? "" } });
 
   const postSubmission = (data: FormData, formToken: string | null) =>
     fetch("/api/contact", {
@@ -76,6 +92,8 @@ export default function ContactForm() {
         ...data,
         formToken,
         elapsedMs: Date.now() - mountedAt.current,
+        page: window.location.pathname,
+        source: readLeadSource(),
       }),
     });
 
@@ -102,8 +120,14 @@ export default function ContactForm() {
         throw new Error(body?.error || GENERIC_ERROR);
       }
 
+      trackEvent("generate_lead", {
+        form_variant: variant,
+        service: data.service || "not specified",
+        page_path: window.location.pathname,
+      });
+      setSubmittedWithEmail(Boolean(data.email?.trim()));
       setStatus("success");
-      reset();
+      reset({ service: defaultService ?? "" });
       mountedAt.current = Date.now();
     } catch (err) {
       console.error("[ContactForm]", err instanceof Error ? err.message : err);
@@ -120,10 +144,15 @@ export default function ContactForm() {
     return (
       <div className="bg-bg-card border border-success/30 rounded-xl p-12 text-center">
         <CheckCircle size={48} className="text-success mx-auto mb-4" />
-        <h3 className="font-montserrat font-bold text-2xl text-text-primary mb-3">Message Sent!</h3>
+        <h3 className="font-montserrat font-bold text-2xl text-text-primary mb-3">Got It. Thank You!</h3>
         <p className="font-inter text-text-secondary leading-relaxed mb-6">
-          Thank you for reaching out. We&apos;ve received your message and will be in touch shortly.
-          Check your email for a confirmation.
+          We&apos;ll call you back during office hours, the next business day if it&apos;s after
+          hours or the weekend.
+          {submittedWithEmail && " Check your email for a confirmation."} Need us sooner? Call{" "}
+          <a href={CONTACT.phoneHref} className="text-accent hover:underline">
+            {CONTACT.phone}
+          </a>
+          .
         </p>
         <button
           onClick={() => setStatus("idle")}
@@ -136,8 +165,15 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="bg-bg-card border border-border rounded-xl p-8">
-      <h2 className="font-montserrat font-bold text-xl text-text-primary mb-8">Send Us a Message</h2>
+    <div className={`bg-bg-card border border-border rounded-xl ${compact ? "p-6 sm:p-8" : "p-8"}`}>
+      <h2 className={`font-montserrat font-bold text-xl text-text-primary ${compact ? "mb-2" : "mb-8"}`}>
+        {heading ?? (compact ? "Get a Free Quote" : "Send Us a Message")}
+      </h2>
+      {compact && (
+        <p className="font-inter text-text-secondary text-sm mb-6">
+          Takes 30 seconds. No email required. We&apos;ll call you.
+        </p>
+      )}
 
       {status === "error" && (
         <div className="flex items-center gap-3 bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-3 mb-6">
@@ -203,14 +239,15 @@ export default function ContactForm() {
           </div>
         </div>
 
-        {/* Email */}
+        {/* Email — optional. Left off the compact form entirely: people who would
+            rather get a call often won't type an email, and asking costs leads. */}
+        {!compact && (
         <div>
           <label className="block font-montserrat font-semibold text-text-secondary text-xs uppercase tracking-wider mb-2">
-            Email Address *
+            Email Address <span className="normal-case tracking-normal font-normal">(optional)</span>
           </label>
           <input
             {...register("email", {
-              required: "Email is required",
               pattern: { value: /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/, message: "Enter a valid email" },
               maxLength: { value: 254, message: "Email must be 254 characters or fewer" },
             })}
@@ -222,18 +259,19 @@ export default function ContactForm() {
             <p className="text-red-400 text-xs mt-1 font-inter">{errors.email.message}</p>
           )}
         </div>
+        )}
 
         {/* Service */}
         <div>
           <label className="block font-montserrat font-semibold text-text-secondary text-xs uppercase tracking-wider mb-2">
-            Service Interest
+            What Do You Need?
           </label>
           <select
             {...register("service")}
             className="w-full bg-bg-secondary border border-border focus:border-accent rounded-lg px-4 py-3 text-text-primary font-inter text-sm outline-none transition-colors appearance-none"
           >
             <option value="">Select a service...</option>
-            {SERVICES.map((s) => (
+            {FORM_SERVICES.map((s) => (
               <option key={s} value={s}>{s}</option>
             ))}
           </select>
@@ -242,15 +280,20 @@ export default function ContactForm() {
         {/* Message */}
         <div>
           <label className="block font-montserrat font-semibold text-text-secondary text-xs uppercase tracking-wider mb-2">
-            Message
+            {compact ? "Details" : "Message"}{" "}
+            <span className="normal-case tracking-normal font-normal">(optional)</span>
           </label>
           <textarea
             {...register("message", {
               maxLength: { value: 2000, message: "Message must be 2000 characters or fewer" },
             })}
-            rows={5}
+            rows={compact ? 3 : 5}
             maxLength={2000}
-            placeholder="Tell us about your project, property size, or any questions you have..."
+            placeholder={
+              compact
+                ? "Optional: address or neighborhood, what's there now, anything we should know"
+                : "Tell us about your project, property size, or any questions you have..."
+            }
             className="w-full bg-bg-secondary border border-border focus:border-accent rounded-lg px-4 py-3 text-text-primary font-inter text-sm outline-none transition-colors placeholder:text-text-secondary/50 resize-none"
           />
         </div>
@@ -268,10 +311,21 @@ export default function ContactForm() {
           ) : (
             <>
               <Send size={14} />
-              Send Message
+              {compact ? "Request My Free Quote" : "Send Message"}
             </>
           )}
         </button>
+
+        {/* After-hours reassurance. The office closes at 5 and on weekends, which
+            is exactly when a lot of people finally get around to this. */}
+        <p className="flex items-start gap-2 font-inter text-text-secondary text-xs leading-relaxed">
+          <Clock size={13} className="text-accent mt-0.5 flex-shrink-0" />
+          <span>
+            Submit anytime. Office hours are Mon–Fri, {to12h(OFFICE_HOURS.opens)}–
+            {to12h(OFFICE_HOURS.closes)}. Requests sent evenings or weekends get a call back the
+            next business day.
+          </span>
+        </p>
       </form>
     </div>
   );

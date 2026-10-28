@@ -197,7 +197,7 @@ export const SERVICE_SCHEMAS = [
     name: "CCTV Camera System Installation",
     serviceType: "Video surveillance and CCTV installation",
     description:
-      "Professional CCTV, DVR, and IP camera installation for homes and businesses, including remote mobile viewing, recorded playback, and video verification of alarm events.",
+      "Professional IP security camera and NVR installation for homes and businesses, including remote mobile viewing, recorded playback, and video verification of alarm events.",
   },
   {
     path: "/services/new-construction",

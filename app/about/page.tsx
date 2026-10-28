@@ -39,11 +39,6 @@ const ALL_TESTIMONIALS = [
   },
   {
     quote:
-      "DCSI Security has helped me with my home security needs. I trust the people at DCSI with not just my security but I have referred many of my family and friends. They have always been prompt, courteous, professional and reliable.",
-    name: "Verified Customer",
-  },
-  {
-    quote:
       "Nelson was extremely knowledgeable and professional with his presentation of the security system. The technician was professional and timely. The system is easy to use and gives my family a feeling of safety and security.",
     name: "Paris",
   },

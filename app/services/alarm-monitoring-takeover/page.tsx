@@ -2,6 +2,8 @@ import Link from "next/link";
 import { ClipboardCheck, Radio, KeyRound, FileText, CheckCircle2, XCircle } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
+import AreaLinks from "@/components/AreaLinks";
+import QuoteSection from "@/components/QuoteSection";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FaqAccordion from "@/components/FaqAccordion";
 import JsonLd from "@/components/JsonLd";
@@ -91,7 +93,7 @@ export default function MonitoringTakeoverPage() {
         title="Alarm Monitoring Takeover"
         subtitle="Keep the system already on your walls. We reprogram the panel, upgrade the communicator if it needs it, and monitor it from our own center in Lutz — no long-term contract."
         ctaText="Check My System"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />
@@ -200,11 +202,20 @@ export default function MonitoringTakeoverPage() {
         </div>
       </section>
 
+      <AreaLinks service="Monitoring Takeovers" />
+
+      <QuoteSection
+        heading="See If We Can Take Over Your System"
+        body="Tell us what panel is on the wall (a photo of the keypad helps) and who monitors it now. We'll tell you whether it can be moved to our monitoring and what it costs per month."
+        defaultService="Monitoring Takeover (Existing System)"
+        testimonialIndex={4}
+      />
+
       <CTABanner
         headline="Send Us a Photo of Your Keypad"
         body="We'll tell you whether it can be taken over, what it costs, and what monthly monitoring runs — before anyone schedules a visit."
         ctaText="Check My System"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />

@@ -45,7 +45,7 @@
   Fob, card, keypad, and mobile-credential access for doors and gates, gate
   operators, telephone-entry and video intercoms, schedules, and audit logs.
 - [CCTV camera systems](https://www.dcsisecurity.com/services/camera-systems):
-  DVR/NVR installation, indoor and outdoor cameras, remote mobile viewing, event
+  IP camera and NVR installation, indoor and outdoor cameras, remote mobile viewing, event
   and continuous recording, and video verification of alarm events.
 - [HOA & CDD community security](https://www.dcsisecurity.com/services/hoa-cdd):
   Gate and entry access control, common area and amenity cameras, perimeter
@@ -81,6 +81,8 @@ Core markets (Hillsborough & Pasco, minutes from the Lutz office):
 - [Temple Terrace](https://www.dcsisecurity.com/service-areas/temple-terrace)
 - [Town 'n' Country](https://www.dcsisecurity.com/service-areas/town-n-country)
 - [South Tampa](https://www.dcsisecurity.com/service-areas/south-tampa)
+- [Tampa](https://www.dcsisecurity.com/service-areas/tampa)
+- [Valrico](https://www.dcsisecurity.com/service-areas/valrico)
 
 Extended markets (24/7 monitoring; installation and service scheduled from Lutz):
 

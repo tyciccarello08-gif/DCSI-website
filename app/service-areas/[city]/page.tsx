@@ -4,6 +4,7 @@ import Link from "next/link";
 import { MapPin, Clock, Phone, ArrowRight, ShieldCheck, Wifi, BellRing } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import CTABanner from "@/components/CTABanner";
+import QuoteSection from "@/components/QuoteSection";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
 import { CITIES, CORE_CITIES, EXTENDED_CITIES, CONTACT, COMPANY } from "@/lib/constants";
@@ -25,9 +26,10 @@ export function generateMetadata({ params }: { params: { city: string } }) {
   // established rankings aren't disturbed.
   return pageMetadata({
     title:
-      city.tier === "extended"
+      city.seoTitle ??
+      (city.tier === "extended"
         ? `Alarm Monitoring & Security Systems in ${city.name}, FL`
-        : `Security Systems & Cameras in ${city.name}, FL`,
+        : `Security Systems & Cameras in ${city.name}, FL`),
     description:
       city.tier === "extended"
         ? `24/7 alarm monitoring in ${city.name}, FL (${city.county}) — handled in house by DCSI Inc., never outsourced. Security systems, cameras & takeovers. ${CONTACT.phone}.`
@@ -112,6 +114,9 @@ export default function CityPage({ params }: { params: { city: string } }) {
 
   const path = `/service-areas/${city.slug}`;
   const extended = city.tier === "extended";
+  const neighborhoods = (city.neighborhoodPages ?? [])
+    .map((slug) => CITIES.find((c) => c.slug === slug))
+    .filter((c): c is (typeof CITIES)[number] => Boolean(c));
 
   const coreFaqs = [
     {
@@ -180,7 +185,7 @@ export default function CityPage({ params }: { params: { city: string } }) {
             : `${COMPANY.name} has installed and monitored security in ${city.county} since 2004. ${city.proximity} — ${city.name} is not a territory we cover from out of town, it's our neighborhood.`
         }
         ctaText="Get a Free Quote"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />
@@ -304,10 +309,29 @@ export default function CityPage({ params }: { params: { city: string } }) {
                 </li>
               ))}
             </ul>
+            {neighborhoods.length > 0 && (
+              <>
+                <h3 className="font-montserrat font-bold text-lg text-text-primary mb-4">
+                  {city.name} Neighborhoods With Their Own Page
+                </h3>
+                <ul className="flex flex-wrap gap-2 mb-8">
+                  {neighborhoods.map((n) => (
+                    <li key={n.slug}>
+                      <Link
+                        href={`/service-areas/${n.slug}`}
+                        className="inline-block font-inter text-text-secondary hover:text-accent text-xs border border-border hover:border-accent/40 rounded-full px-3 py-1.5 transition-colors"
+                      >
+                        {n.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
             <p className="font-inter text-text-secondary text-sm leading-relaxed">
               Not on the list? We cover all of {city.name} and the surrounding{" "}
               {city.county.replace(" Counties", " County area").replace(" County", " County area")}.{" "}
-              <Link href="/contact" className="text-accent hover:underline">
+              <Link href="#quote" className="text-accent hover:underline">
                 Ask us about your address
               </Link>
               .
@@ -425,6 +449,17 @@ export default function CityPage({ params }: { params: { city: string } }) {
         </div>
       </section>
 
+      <QuoteSection
+        heading={`Get a Free Quote in ${city.name}`}
+        body={
+          extended
+            ? `Tell us what's on the wall now, or what you're planning, and roughly where in ${city.name} you are. We'll tell you what monitoring runs monthly, whether a takeover is possible, and when we can be out there.`
+            : `Tell us what you need and roughly where in ${city.name} you are. We'll schedule a free on-site visit and put a fixed price in writing.`
+        }
+        defaultService={extended ? "Security Systems & Monitoring" : undefined}
+        testimonialIndex={CITIES.indexOf(city)}
+      />
+
       <CTABanner
         headline={
           extended ? `Monitoring ${city.name}, FL — 24/7` : `Protecting ${city.name} Since 2004`
@@ -435,7 +470,7 @@ export default function CityPage({ params }: { params: { city: string } }) {
             : `Free on-site consultation anywhere in ${city.name}. We'll walk the property, talk through what it actually needs, and put a fixed number in writing.`
         }
         ctaText="Get a Free Quote"
-        ctaHref="/contact"
+        ctaHref="#quote"
         secondaryCtaText={`Call ${CONTACT.phone}`}
         secondaryCtaHref={CONTACT.phoneHref}
       />
