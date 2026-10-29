@@ -326,6 +326,13 @@ export default function ContactForm({
             next business day.
           </span>
         </p>
+
+        {/* Texting consent. The API texts a confirmation to the number given, and
+            carrier rules (A2P 10DLC) require this disclosure at the point of opt-in. */}
+        <p className="font-inter text-text-secondary/70 text-[11px] leading-relaxed">
+          By submitting, you agree DCSI may call or text you about your request. Msg &amp; data
+          rates may apply. Reply STOP to opt out.
+        </p>
       </form>
     </div>
   );

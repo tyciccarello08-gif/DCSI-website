@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { verifyFormToken } from "@/lib/form-token";
-import { FORM_SERVICES } from "@/lib/constants";
+import { BUSINESS, CONTACT, FORM_SERVICES } from "@/lib/constants";
+import { smsEnabled, isOfficeOpen, sendText, toUsE164 } from "@/lib/sms";
 
 // ── Resend client (server-side only) ─────────────────────────────────────────
 // Built lazily: `new Resend(undefined)` throws, and at module scope that would
@@ -434,6 +435,43 @@ export async function POST(req: NextRequest) {
       { error: "Failed to send your message. Please call us at (813) 949-6500." },
       { status: 500 }
     );
+  }
+
+  // ── Texts (CallRail) ────────────────────────────────────────────────────────
+  // Speed wins jobs: the owner gets a text the moment a lead lands, and the
+  // customer gets an immediate "got it". Both are best-effort — the email above
+  // is the record of the lead, so a failed text never fails the request.
+  if (smsEnabled()) {
+    const texts: Promise<boolean>[] = [];
+
+    // LEAD_ALERT_PHONES: comma-separated cell numbers to alert, e.g. owner + office.
+    const alertPhones = (process.env.LEAD_ALERT_PHONES ?? "")
+      .split(",")
+      .map((p) => toUsE164(p))
+      .filter((p): p is string => p !== null);
+    const alert = `${isFlagged ? "[possible spam] " : ""}New DCSI lead: ${safeName}, ${safePhone}${
+      safeService ? `, ${safeService}` : ""
+    }${safePage ? ` (from ${safePage})` : ""}. Call them back fast.`;
+    for (const to of alertPhones) texts.push(sendText(to, alert.slice(0, 300)));
+
+    // Customer auto-reply only for submissions that passed the signed-token
+    // check and tripped no spam flags. The phone number is visitor-supplied, so
+    // a weaker bar would let bots use this route to text arbitrary numbers.
+    const customerPhone = toUsE164(safePhone);
+    if (customerPhone && !isFlagged && tokenResult.status === "valid") {
+      const firstName = safeName.split(/\s+/)[0].slice(0, 30);
+      const when = isOfficeOpen(BUSINESS.openingHours)
+        ? "We'll call you within the hour"
+        : "Our office is closed right now, so we'll call you first thing next business day";
+      texts.push(
+        sendText(
+          customerPhone,
+          `Hi ${firstName}, this is DCSI Security. We got your request. ${when}. Need us sooner? ${CONTACT.phone}. Reply STOP to opt out.`,
+        ),
+      );
+    }
+
+    await Promise.allSettled(texts);
   }
 
   return NextResponse.json({ success: true });
