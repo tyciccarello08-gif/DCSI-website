@@ -283,7 +283,7 @@ export default function SecuritySystemCostPage() {
         </div>
       </section>
 
-      <RelatedResources slugs={["choosing-a-monitoring-company", "wired-vs-wireless-alarm-systems", "how-many-security-cameras"]} />
+      <RelatedResources slugs={["choosing-a-monitoring-company", "diy-vs-professional-security", "how-many-security-cameras"]} />
 
       <CTABanner
         headline="Get a Real Number, Free"

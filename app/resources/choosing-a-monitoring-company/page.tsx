@@ -199,7 +199,7 @@ export default function ChoosingMonitoringPage() {
         </div>
       </section>
 
-      <RelatedResources slugs={["landline-alarm-upgrade", "security-system-cost", "false-alarm-prevention"]} />
+      <RelatedResources slugs={["switching-alarm-companies", "landline-alarm-upgrade", "security-system-cost"]} />
 
       <CTABanner
         headline="Ask Us the Six Questions"
