@@ -80,7 +80,7 @@ export default function BurglarAlarmFAQPage() {
         </div>
       </section>
 
-      <RelatedResources slugs={["false-alarm-prevention", "landline-alarm-upgrade", "choosing-a-monitoring-company"]} />
+      <RelatedResources slugs={["false-alarm-prevention", "landline-alarm-upgrade", "medical-alert-alarm-systems"]} />
 
       <CTABanner
         headline="Still Have Questions?"

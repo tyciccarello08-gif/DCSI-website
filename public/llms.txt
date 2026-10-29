@@ -83,6 +83,8 @@ Core markets (Hillsborough & Pasco, minutes from the Lutz office):
 - [South Tampa](https://www.dcsisecurity.com/service-areas/south-tampa)
 - [Tampa](https://www.dcsisecurity.com/service-areas/tampa)
 - [Valrico](https://www.dcsisecurity.com/service-areas/valrico)
+- [Citrus Park](https://www.dcsisecurity.com/service-areas/citrus-park)
+- [Seffner](https://www.dcsisecurity.com/service-areas/seffner)
 
 Extended markets (24/7 monitoring; installation and service scheduled from Lutz):
 
@@ -100,6 +102,9 @@ Extended markets (24/7 monitoring; installation and service scheduled from Lutz)
 - [Bradenton](https://www.dcsisecurity.com/service-areas/bradenton)
 - [Sarasota](https://www.dcsisecurity.com/service-areas/sarasota)
 - [Venice](https://www.dcsisecurity.com/service-areas/venice)
+- [Apollo Beach](https://www.dcsisecurity.com/service-areas/apollo-beach)
+- [Sun City Center](https://www.dcsisecurity.com/service-areas/sun-city-center)
+- [New Port Richey](https://www.dcsisecurity.com/service-areas/new-port-richey)
 
 ## Resources
 
@@ -110,6 +115,9 @@ Extended markets (24/7 monitoring; installation and service scheduled from Lutz)
 - [Wired vs. wireless alarm systems](https://www.dcsisecurity.com/resources/wired-vs-wireless-alarm-systems):
   Why Florida concrete block construction favors wireless retrofits, and when
   hardwired or hybrid systems are the better choice.
+- [DIY vs. professional security systems](https://www.dcsisecurity.com/resources/diy-vs-professional-security):
+  Self-install kits vs. professionally installed alarm systems: design, existing
+  wiring, monitoring, cameras, and which homes each one suits.
 - [Choosing a monitoring company](https://www.dcsisecurity.com/resources/choosing-a-monitoring-company):
   In-house vs. wholesale monitoring, contract terms, equipment ownership,
   communication path, response procedure, and licensing.
@@ -119,6 +127,12 @@ Extended markets (24/7 monitoring; installation and service scheduled from Lutz)
 - [False alarm prevention](https://www.dcsisecurity.com/resources/false-alarm-prevention):
   Common causes of false alarms and fixes, and Florida's alarm confirmation
   requirement before police dispatch (section 489.529, Florida Statutes).
+- [Switching alarm companies](https://www.dcsisecurity.com/resources/switching-alarm-companies):
+  Changing monitoring companies without replacing the system: contract term,
+  renewal and cancellation clauses, equipment ownership, locked panels, cutover.
+- [Medical alert through an alarm system](https://www.dcsisecurity.com/resources/medical-alert-alarm-systems):
+  Medical pendants, wall buttons, two-way voice, medical call lists, range
+  limits, and questions to ask before buying.
 - [Hurricane season security checklist](https://www.dcsisecurity.com/resources/hurricane-season-security):
   Keeping alarms and cameras working through power outages, evacuation,
   shutters, and the week after a storm.
@@ -128,6 +142,9 @@ Extended markets (24/7 monitoring; installation and service scheduled from Lutz)
 - [How many security cameras a house needs](https://www.dcsisecurity.com/resources/how-many-security-cameras):
   Counting cameras by approach, typical counts by property type, PoE vs. Wi-Fi,
   resolution, and footage retention.
+- [Security camera footage retention](https://www.dcsisecurity.com/resources/security-camera-footage-retention):
+  Estimating NVR storage from bitrate (1 Mbps ≈ 10.8 GB/day), worked examples,
+  continuous vs. motion recording, and how many days to keep.
 - [HOA & CDD board guide](https://www.dcsisecurity.com/resources/hoa-board-security-guide):
   How association and district boards should scope, budget, and procure community
   gate access and camera projects.
@@ -138,6 +155,9 @@ Extended markets (24/7 monitoring; installation and service scheduled from Lutz)
   How alarm systems work, what happens when one is triggered, what 24/7 monitoring
   covers, remote control, residential vs. commercial systems, Florida alarm
   permits, and power-outage behavior.
+- [Pet-friendly alarm systems](https://www.dcsisecurity.com/resources/pet-friendly-alarm-systems):
+  Pet-immune motion detector weight ratings, placement, climbing pets, and
+  perimeter-first layouts that prevent pet false alarms.
 - [Home security safety tips](https://www.dcsisecurity.com/resources/safety-tips):
   Eight practical steps homeowners can take to reduce burglary risk.
 - [Burglary statistics](https://www.dcsisecurity.com/resources/burglary-statistics):

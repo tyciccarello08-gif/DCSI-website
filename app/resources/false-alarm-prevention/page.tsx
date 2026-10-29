@@ -176,7 +176,7 @@ export default function FalseAlarmPreventionPage() {
         </div>
       </section>
 
-      <RelatedResources slugs={["burglar-alarm-faq", "landline-alarm-upgrade", "how-many-security-cameras"]} />
+      <RelatedResources slugs={["burglar-alarm-faq", "pet-friendly-alarm-systems", "landline-alarm-upgrade"]} />
 
       <CTABanner
         headline="Alarm Keeps Going Off?"

@@ -385,6 +385,28 @@ export const CITIES: City[] = [
     proximity: "About 40 minutes southeast",
     tier: "core",
   },
+  {
+    slug: "citrus-park",
+    name: "Citrus Park",
+    county: "Hillsborough County",
+    zips: ["33625"],
+    communities: ["Fawn Ridge", "Citrus Park Village", "Gunn Highway corridor", "Sheldon Road corridor", "Ehrlich Road corridor"],
+    marketNote:
+      "Citrus Park sits between Carrollwood and Westchase and was built out mostly from the 1980s through the 2000s — subdivisions off Gunn Highway, Sheldon, and Ehrlich Road rather than one master-planned community. A lot of those houses still have the alarm panel the builder or first owner put in, wired to every door and often every window, and reporting over a phone line that no longer exists. The wiring is usually the valuable part; replacing the panel and communicator and keeping the sensors is typically far cheaper than starting over. The retail and office corridor around the Citrus Park mall adds steady small-business camera and alarm work.",
+    proximity: "About 20 minutes southwest",
+    tier: "core",
+  },
+  {
+    slug: "seffner",
+    name: "Seffner",
+    county: "Hillsborough County",
+    zips: ["33584", "33550", "33592", "33527"],
+    communities: ["Mango", "Thonotosassa", "Dover", "Kingsway Road area", "US-92 corridor"],
+    marketNote:
+      "Seffner and the unincorporated areas around it — Mango, Thonotosassa, Dover — are where Hillsborough turns semi-rural between Brandon and Plant City. Lots are larger, a lot of homes have a detached garage, a shop, or a barn, and properties along the US-92 and I-4 corridors include contractors' yards and small light-industrial buildings with equipment and vehicles parked outside overnight. That work is about range and outbuildings: cameras that identify a person at the far end of a driveway at night, and cable or conduit run to the buildings that hold the expensive things.",
+    proximity: "About 35 minutes southeast",
+    tier: "core",
+  },
 
   // ---------------------------------------------------------------------------
   // Extended markets — the Venice ⇄ Winter Haven ⇄ Ocala footprint.
@@ -574,6 +596,45 @@ export const CITIES: City[] = [
     monitoringNote:
       "In Sarasota the monitored system is often the only thing watching the house for half the year. We build those accounts around cellular reporting with supervised check-ins, environmental sensors for water, low temperature, and power loss, and a call list that reaches a local keyholder before it reaches an owner who is out of state. Signals reach our 24/7 center in Lutz in seconds, and installation and service are scheduled from Lutz by our own technicians.",
     proximity: "About 75 minutes south",
+    tier: "extended",
+  },
+  {
+    slug: "apollo-beach",
+    name: "Apollo Beach",
+    county: "Hillsborough County",
+    zips: ["33572"],
+    communities: ["MiraBay", "Waterset", "Symphony Isles", "Andalucia", "Covington Park", "Apollo Beach canal homes"],
+    marketNote:
+      "Apollo Beach is two markets on one peninsula. The original canal neighborhoods are waterfront homes with docks, boat lifts, and seawalls — the back of the lot faces open water, there is no street visibility, and the boat is often worth more than anything inside. Newer master-planned communities like MiraBay and Waterset add gated entries, amenity centers, and association boards. Both sit low and close to Tampa Bay, so storm surge and salt air are design inputs: recorders and power supplies above the flood line, outdoor hardware rated for a marine environment.",
+    monitoringNote:
+      "On a canal home the monitoring that matters most covers what a front-door camera can't: the dock, the lift, and the seawall approach, with cameras that hand a verified intrusion to a person rather than a motion alert to a phone. Our 24/7 center in Lutz handles Apollo Beach accounts directly, and cellular reporting with a supervised backup battery keeps the system talking through the outages that follow a storm, when evacuated neighborhoods are emptiest.",
+    proximity: "About 50 minutes south",
+    tier: "extended",
+  },
+  {
+    slug: "sun-city-center",
+    name: "Sun City Center",
+    county: "Hillsborough County",
+    zips: ["33573", "33570", "33598"],
+    communities: ["Sun City Center", "Kings Point", "Del Webb Southshore Falls", "Valencia Lakes", "Ruskin", "Wimauma"],
+    marketNote:
+      "Sun City Center is one of the largest 55-plus communities in Florida, and the surrounding area around Ruskin and Wimauma has added several more. That shapes the work: a burglar alarm is often the smaller part of the request, and medical alert pendants, wall-mounted emergency buttons, and a system that is simple to arm without a phone app come up just as often. Many homes are also seasonal, which brings the same water, A/C, and power-loss concerns as any empty Florida house.",
+    monitoringNote:
+      "Medical and panic monitoring is the reason a lot of Sun City Center residents call us. A pendant or wall button reaches our own 24/7 center in Lutz on the same account as the burglar alarm, and the call list can put a neighbor or nearby family member ahead of an out-of-town child. We install and service these systems ourselves on a scheduled basis from Lutz, and walk through the panel in person so it gets used rather than left disarmed.",
+    proximity: "About an hour south",
+    tier: "extended",
+  },
+  {
+    slug: "new-port-richey",
+    name: "New Port Richey",
+    county: "Pasco County",
+    zips: ["34652", "34653", "34654", "34668"],
+    communities: ["Downtown New Port Richey", "Gulf Harbors", "Seven Springs", "Magnolia Valley", "Jasmine Estates", "Port Richey"],
+    marketNote:
+      "New Port Richey is west Pasco's older coastal core: a revitalized downtown along the Pithlachascotee River, 1960s-to-1980s block homes with no low voltage wiring in the walls, and canal communities like Gulf Harbors with direct Gulf access. Retrofits here are mostly wireless sensors on a cellular panel, with camera coverage aimed at docks and canal-side yards. The US-19 corridor is a long stretch of small businesses — storefronts, restaurants, and service shops — that need cameras on registers and rear doors and alarms with open and close reporting.",
+    monitoringNote:
+      "A large share of New Port Richey alarm panels were installed decades ago by companies that no longer exist under the same name, and many still try to report over a copper line or a 3G radio that has been shut off. We can usually take those panels over, swap in an LTE communicator, and move the account to our own 24/7 center in Lutz — no long-term contract, and installation and service scheduled from our office.",
+    proximity: "About 45 minutes west",
     tier: "extended",
   },
 ];
@@ -795,6 +856,14 @@ export const RESOURCES: Resource[] = [
     modified: "2026-10-24",
   },
   {
+    slug: "diy-vs-professional-security",
+    title: "DIY vs. Professionally Installed Security Systems",
+    blurb: "What a self-install kit does well, where it falls short, and the questions that decide which one fits.",
+    category: "Buying & Cost",
+    published: "2026-10-29",
+    modified: "2026-10-29",
+  },
+  {
     slug: "choosing-a-monitoring-company",
     title: "How to Choose an Alarm Monitoring Company",
     blurb: "In-house vs. wholesale monitoring, contract length, equipment ownership, and communication path.",
@@ -817,6 +886,22 @@ export const RESOURCES: Resource[] = [
     category: "Monitoring",
     published: "2026-10-24",
     modified: "2026-10-24",
+  },
+  {
+    slug: "switching-alarm-companies",
+    title: "How to Switch Alarm Companies Without Replacing Your System",
+    blurb: "Reading the contract, giving notice, locked panels, and what a monitoring takeover actually involves.",
+    category: "Monitoring",
+    published: "2026-10-29",
+    modified: "2026-10-29",
+  },
+  {
+    slug: "medical-alert-alarm-systems",
+    title: "Medical Alert Through Your Home Alarm System",
+    blurb: "Pendants, wall buttons, and two-way voice on the same monitored system — and what to ask before you buy.",
+    category: "Monitoring",
+    published: "2026-10-29",
+    modified: "2026-10-29",
   },
   {
     slug: "hurricane-season-security",
@@ -843,6 +928,14 @@ export const RESOURCES: Resource[] = [
     modified: "2026-10-24",
   },
   {
+    slug: "security-camera-footage-retention",
+    title: "How Long Do Security Cameras Keep Footage?",
+    blurb: "Working out recorder storage from bitrate, continuous vs. motion recording, and how many days you need.",
+    category: "Cameras",
+    published: "2026-10-29",
+    modified: "2026-10-29",
+  },
+  {
     slug: "hoa-board-security-guide",
     title: "HOA & CDD Board Guide to Community Security",
     blurb: "How association and district boards should scope, budget, and procure gate and camera projects.",
@@ -865,6 +958,14 @@ export const RESOURCES: Resource[] = [
     category: "Basics",
     published: "2026-03-24",
     modified: "2026-08-10",
+  },
+  {
+    slug: "pet-friendly-alarm-systems",
+    title: "Pet-Friendly Alarm Systems: Motion Sensors and Dogs",
+    blurb: "How pet-immune motion detectors work, their weight limits, and layouts that keep pets from tripping the alarm.",
+    category: "Basics",
+    published: "2026-10-29",
+    modified: "2026-10-29",
   },
   {
     slug: "safety-tips",

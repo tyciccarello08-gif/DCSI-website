@@ -198,7 +198,7 @@ export default function HowManyCamerasPage() {
         <FaqAccordion faqs={FAQS} heading="Security Camera Questions" />
       </section>
 
-      <RelatedResources slugs={["security-system-cost", "hurricane-season-security", "wired-vs-wireless-alarm-systems"]} />
+      <RelatedResources slugs={["security-camera-footage-retention", "security-system-cost", "hurricane-season-security"]} />
 
       <CTABanner
         headline="We'll Count Them With You"
