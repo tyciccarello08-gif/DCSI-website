@@ -85,6 +85,7 @@ Core markets (Hillsborough & Pasco, minutes from the Lutz office):
 - [Valrico](https://www.dcsisecurity.com/service-areas/valrico)
 - [Citrus Park](https://www.dcsisecurity.com/service-areas/citrus-park)
 - [Seffner](https://www.dcsisecurity.com/service-areas/seffner)
+- [Lithia & FishHawk](https://www.dcsisecurity.com/service-areas/lithia)
 
 Extended markets (24/7 monitoring; installation and service scheduled from Lutz):
 
@@ -105,6 +106,10 @@ Extended markets (24/7 monitoring; installation and service scheduled from Lutz)
 - [Apollo Beach](https://www.dcsisecurity.com/service-areas/apollo-beach)
 - [Sun City Center](https://www.dcsisecurity.com/service-areas/sun-city-center)
 - [New Port Richey](https://www.dcsisecurity.com/service-areas/new-port-richey)
+- [Lakewood Ranch](https://www.dcsisecurity.com/service-areas/lakewood-ranch)
+- [Oldsmar](https://www.dcsisecurity.com/service-areas/oldsmar)
+- [Hudson](https://www.dcsisecurity.com/service-areas/hudson)
+- [Tarpon Springs](https://www.dcsisecurity.com/service-areas/tarpon-springs)
 
 ## Resources
 
@@ -118,6 +123,9 @@ Extended markets (24/7 monitoring; installation and service scheduled from Lutz)
 - [DIY vs. professional security systems](https://www.dcsisecurity.com/resources/diy-vs-professional-security):
   Self-install kits vs. professionally installed alarm systems: design, existing
   wiring, monitoring, cameras, and which homes each one suits.
+- [Security system insurance discounts](https://www.dcsisecurity.com/resources/security-system-insurance-discount):
+  Which monitored burglary and fire systems Florida homeowners insurers usually
+  credit, alarm certificates, and how to request the discount.
 - [Choosing a monitoring company](https://www.dcsisecurity.com/resources/choosing-a-monitoring-company):
   In-house vs. wholesale monitoring, contract terms, equipment ownership,
   communication path, response procedure, and licensing.
@@ -133,18 +141,30 @@ Extended markets (24/7 monitoring; installation and service scheduled from Lutz)
 - [Medical alert through an alarm system](https://www.dcsisecurity.com/resources/medical-alert-alarm-systems):
   Medical pendants, wall buttons, two-way voice, medical call lists, range
   limits, and questions to ask before buying.
+- [Monitored smoke, heat & CO detectors](https://www.dcsisecurity.com/resources/monitored-smoke-detectors):
+  How monitored life-safety detectors differ from standalone smoke alarms, where
+  heat and CO detectors belong, and supervision.
 - [Hurricane season security checklist](https://www.dcsisecurity.com/resources/hurricane-season-security):
   Keeping alarms and cameras working through power outages, evacuation,
   shutters, and the week after a storm.
 - [Snowbird & vacant home security](https://www.dcsisecurity.com/resources/vacant-home-security):
   Water, temperature, and power-loss monitoring, keyholder call lists, and a
   pre-departure checklist for seasonally empty Florida homes.
+- [Rental property security](https://www.dcsisecurity.com/resources/rental-property-security):
+  Alarm and camera systems for Florida landlords and vacation rental owners: user
+  codes per tenant, tenant privacy, vacancy monitoring, account responsibility.
+- [Video doorbell vs. security system](https://www.dcsisecurity.com/resources/doorbell-camera-vs-security-system):
+  What a doorbell camera covers and misses compared with a monitored alarm, and
+  how the two work together.
 - [How many security cameras a house needs](https://www.dcsisecurity.com/resources/how-many-security-cameras):
   Counting cameras by approach, typical counts by property type, PoE vs. Wi-Fi,
   resolution, and footage retention.
 - [Security camera footage retention](https://www.dcsisecurity.com/resources/security-camera-footage-retention):
   Estimating NVR storage from bitrate (1 Mbps ≈ 10.8 GB/day), worked examples,
   continuous vs. motion recording, and how many days to keep.
+- [Small business security checklist](https://www.dcsisecurity.com/resources/small-business-security-checklist):
+  Monitored alarms with open/close reporting, employee codes, cameras on registers
+  and doors, access control, and after-hours gaps.
 - [HOA & CDD board guide](https://www.dcsisecurity.com/resources/hoa-board-security-guide):
   How association and district boards should scope, budget, and procure community
   gate access and camera projects.
