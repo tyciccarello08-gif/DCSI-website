@@ -21,6 +21,7 @@ const CATEGORY_ORDER: Resource["category"][] = [
   "Monitoring",
   "Florida Homes",
   "Cameras",
+  "Business",
   "Boards & Builders",
   "Basics",
 ];

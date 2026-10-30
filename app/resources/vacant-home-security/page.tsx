@@ -197,7 +197,7 @@ export default function VacantHomeSecurityPage() {
         </div>
       </section>
 
-      <RelatedResources slugs={["hurricane-season-security", "choosing-a-monitoring-company", "how-many-security-cameras"]} />
+      <RelatedResources slugs={["hurricane-season-security", "rental-property-security", "monitored-smoke-detectors"]} />
 
       <CTABanner
         headline="Leaving for the Season?"

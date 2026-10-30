@@ -236,7 +236,7 @@ export default function HoaBoardGuidePage() {
         </div>
       </section>
 
-      <RelatedResources slugs={["builder-prewire-guide", "how-many-security-cameras", "choosing-a-monitoring-company"]} />
+      <RelatedResources slugs={["builder-prewire-guide", "small-business-security-checklist", "choosing-a-monitoring-company"]} />
 
       <CTABanner
         headline="Board-Ready Proposals"

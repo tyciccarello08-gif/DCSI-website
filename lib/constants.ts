@@ -407,6 +407,17 @@ export const CITIES: City[] = [
     proximity: "About 35 minutes southeast",
     tier: "core",
   },
+  {
+    slug: "lithia",
+    name: "Lithia & FishHawk",
+    county: "Hillsborough County",
+    zips: ["33547"],
+    communities: ["FishHawk Ranch", "Channing Park", "Starling at FishHawk", "Alafia River corridor", "Lithia Pinecrest Road corridor"],
+    marketNote:
+      "Lithia is two different places sharing one ZIP code. FishHawk Ranch and the communities around it are large master-planned developments with HOA and CDD boards, amenity centers, gated entries, and homes recent enough that most were prewired for security when they were built — which makes them strong candidates for a takeover or an upgrade rather than a new system. Outside the planned communities, the land along the Alafia River and Lithia Pinecrest Road is acreage, horse property, and homes set well back from the road, where coverage has to reach barns, workshops, and a gate at the end of a long drive.",
+    proximity: "About 45 minutes southeast",
+    tier: "core",
+  },
 
   // ---------------------------------------------------------------------------
   // Extended markets — the Venice ⇄ Winter Haven ⇄ Ocala footprint.
@@ -532,6 +543,7 @@ export const CITIES: City[] = [
       "Coastal Manatee County adds a monitoring case that inland markets don't have: storm season. A monitored system with cellular reporting and a supervised backup battery keeps reporting when the power and the internet are down, which is precisely when an evacuated neighborhood is emptiest. Our center in Lutz is staffed through the storm, and Bradenton accounts are handled by the same team that handles Hillsborough — not handed off to a wholesale center.",
     proximity: "About an hour south",
     tier: "extended",
+    neighborhoodPages: ["lakewood-ranch"],
   },
   {
     slug: "venice",
@@ -634,6 +646,58 @@ export const CITIES: City[] = [
       "New Port Richey is west Pasco's older coastal core: a revitalized downtown along the Pithlachascotee River, 1960s-to-1980s block homes with no low voltage wiring in the walls, and canal communities like Gulf Harbors with direct Gulf access. Retrofits here are mostly wireless sensors on a cellular panel, with camera coverage aimed at docks and canal-side yards. The US-19 corridor is a long stretch of small businesses — storefronts, restaurants, and service shops — that need cameras on registers and rear doors and alarms with open and close reporting.",
     monitoringNote:
       "A large share of New Port Richey alarm panels were installed decades ago by companies that no longer exist under the same name, and many still try to report over a copper line or a 3G radio that has been shut off. We can usually take those panels over, swap in an LTE communicator, and move the account to our own 24/7 center in Lutz — no long-term contract, and installation and service scheduled from our office.",
+    proximity: "About 45 minutes west",
+    tier: "extended",
+  },
+  {
+    slug: "lakewood-ranch",
+    name: "Lakewood Ranch",
+    county: "Manatee & Sarasota Counties",
+    zips: ["34202", "34211", "34212"],
+    communities: ["Lakewood Ranch Main Street", "Lakewood Ranch Country Club", "Waterside", "Greenbrook", "Esplanade", "Del Webb Lakewood Ranch"],
+    marketNote:
+      "Lakewood Ranch is one of the largest master-planned communities in the country, and nearly every part of it is governed by a village association or a community development district. That shapes security work in two ways. Homeowners are usually working inside architectural rules about what can be mounted on the exterior, so camera placement and visible hardware need to be planned rather than improvised. And the associations themselves run gated entries, amenity centers, and common-area cameras, bought through board approval and documented proposals. Construction is still active in the newer villages, which is the window where prewiring before drywall costs a fraction of retrofitting later.",
+    monitoringNote:
+      "Many Lakewood Ranch homes are second residences, and many more are owned by people who travel for months at a time. For those houses monitoring is the whole point: cellular reporting with supervised check-ins, water, low-temperature, and power-loss sensors, and a call list that reaches a local contact before an owner who is out of state. Signals reach our 24/7 center in Lutz in seconds, and installation and service are scheduled from Lutz by our own technicians.",
+    proximity: "About an hour south",
+    tier: "extended",
+  },
+  {
+    slug: "oldsmar",
+    name: "Oldsmar",
+    county: "Pinellas County",
+    zips: ["34677"],
+    communities: ["East Lake Woodlands", "Downtown Oldsmar", "Tampa Road corridor", "Upper Tampa Bay shoreline", "Forest Lakes Boulevard industrial area"],
+    marketNote:
+      "Oldsmar sits at the top of Old Tampa Bay where Pinellas meets Hillsborough, and it is as much a business market as a residential one. The industrial and flex-space buildings off Tampa Road and Forest Lakes Boulevard house manufacturers, distributors, and contractors who need camera coverage on loading doors and yards, access control on employee entrances, and alarms with open and close reporting. On the residential side, gated East Lake Woodlands and the neighborhoods near the bay are mostly 1980s-and-later homes, many with an older hardwired panel that can be taken over rather than replaced.",
+    monitoringNote:
+      "Oldsmar is among the closest Pinellas markets to our Lutz office, a straight run across the county line, so installation and service calls here are routine. For commercial accounts the monitoring value is usually in the record as much as the response — open and close reports by user code, a flag when a building wasn't armed at night, and video verification when an alarm trips — all on one account with our own 24/7 center rather than split across vendors.",
+    proximity: "About 30 minutes west",
+    tier: "extended",
+  },
+  {
+    slug: "hudson",
+    name: "Hudson",
+    county: "Pasco County",
+    zips: ["34667", "34669"],
+    communities: ["Beacon Woods", "Heritage Pines", "Hudson Beach", "Sea Pines", "Aripeka", "US-19 corridor"],
+    marketNote:
+      "Hudson is northwest Pasco's coastal edge: canal homes with Gulf access near Hudson Beach, established 1970s-to-1990s subdivisions like Beacon Woods, and 55-plus communities such as Heritage Pines. Much of the older housing is concrete block with no low voltage wiring in the walls, so retrofits are mostly wireless sensors on a cellular panel. The canal homes need coverage pointed at the water side, and the 55-plus households often want medical alert pendants on the same system as the burglar alarm.",
+    monitoringNote:
+      "Two monitoring situations come up most in Hudson: an older panel still trying to report over a landline that's gone, and a resident who wants a medical pendant reaching a real person. We handle both from our own 24/7 center in Lutz — taking over an existing panel with an LTE communicator where possible, and putting medical, burglary, and environmental signals on one account and one call list. Installation and service are scheduled from our office.",
+    proximity: "About 50 minutes northwest",
+    tier: "extended",
+  },
+  {
+    slug: "tarpon-springs",
+    name: "Tarpon Springs",
+    county: "Pinellas County",
+    zips: ["34688", "34689"],
+    communities: ["Historic Downtown", "Sponge Docks", "Crescent Oaks", "Tarpon Woods", "Anclote River waterfront", "Lake Tarpon shoreline"],
+    marketNote:
+      "Tarpon Springs packs a lot into a small city: the Sponge Docks and historic downtown with their storefronts and restaurants, early-1900s homes near Spring Bayou, golf communities like Crescent Oaks, and waterfront along the Anclote River and the Gulf. The historic homes need wiring run without damaging original plaster and trim. The waterfront needs outdoor hardware rated for salt air and cameras covering docks and the water-side approach. The businesses along the docks need cameras on registers and doors and recorders that keep footage long enough to matter.",
+    monitoringNote:
+      "Many Tarpon Springs alarm panels were installed by companies that have since merged or left, leaving the homeowner with an account at a center they've never spoken to. We can usually take those panels over, replace an aging landline or 3G communicator with LTE cellular, and move monitoring to our own 24/7 center in Lutz with no long-term contract. Storm season matters here too: a supervised backup battery and cellular reporting keep the system talking through outages.",
     proximity: "About 45 minutes west",
     tier: "extended",
   },
@@ -833,7 +897,7 @@ export interface Resource {
   slug: string;
   title: string;
   blurb: string;
-  category: "Buying & Cost" | "Monitoring" | "Florida Homes" | "Cameras" | "Boards & Builders" | "Basics";
+  category: "Buying & Cost" | "Monitoring" | "Florida Homes" | "Cameras" | "Business" | "Boards & Builders" | "Basics";
   published: string;
   modified: string;
 }
@@ -862,6 +926,14 @@ export const RESOURCES: Resource[] = [
     category: "Buying & Cost",
     published: "2026-10-29",
     modified: "2026-10-29",
+  },
+  {
+    slug: "security-system-insurance-discount",
+    title: "Do Security Systems Lower Homeowners Insurance in Florida?",
+    blurb: "Which systems insurers usually credit, the alarm certificate they ask for, and how to request the discount.",
+    category: "Buying & Cost",
+    published: "2026-10-30",
+    modified: "2026-10-30",
   },
   {
     slug: "choosing-a-monitoring-company",
@@ -904,6 +976,14 @@ export const RESOURCES: Resource[] = [
     modified: "2026-10-29",
   },
   {
+    slug: "monitored-smoke-detectors",
+    title: "Monitored Smoke, Heat & CO Detectors for Homes",
+    blurb: "Why a smoke alarm nobody hears protects nothing, and what monitored fire and CO detection adds.",
+    category: "Monitoring",
+    published: "2026-10-30",
+    modified: "2026-10-30",
+  },
+  {
     slug: "hurricane-season-security",
     title: "Hurricane Season Security Checklist for Florida Homes",
     blurb: "Keeping an alarm and cameras working through an outage, an evacuation, and the week after a storm.",
@@ -920,6 +1000,22 @@ export const RESOURCES: Resource[] = [
     modified: "2026-10-24",
   },
   {
+    slug: "rental-property-security",
+    title: "Security Systems for Rental Properties in Florida",
+    blurb: "User codes between tenants, cameras that respect tenant privacy, and monitoring when the unit sits empty.",
+    category: "Florida Homes",
+    published: "2026-10-30",
+    modified: "2026-10-30",
+  },
+  {
+    slug: "doorbell-camera-vs-security-system",
+    title: "Video Doorbell vs. Security System: Do You Need Both?",
+    blurb: "What a doorbell camera covers, what it can't, and how it fits alongside a monitored alarm.",
+    category: "Cameras",
+    published: "2026-10-30",
+    modified: "2026-10-30",
+  },
+  {
     slug: "how-many-security-cameras",
     title: "How Many Security Cameras Does a House Need?",
     blurb: "Counting cameras by approach rather than by wall, plus PoE vs. Wi-Fi, resolution, and retention.",
@@ -934,6 +1030,14 @@ export const RESOURCES: Resource[] = [
     category: "Cameras",
     published: "2026-10-29",
     modified: "2026-10-29",
+  },
+  {
+    slug: "small-business-security-checklist",
+    title: "Small Business Security Checklist",
+    blurb: "Alarms with open/close reporting, cameras on registers and doors, employee codes, and the after-hours gaps.",
+    category: "Business",
+    published: "2026-10-30",
+    modified: "2026-10-30",
   },
   {
     slug: "hoa-board-security-guide",
